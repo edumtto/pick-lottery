@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct CustomLotteryCell: View {
-    @Binding var entry: CustomEntry
+struct LotteryEntryCell: View {
+    @Binding var entry: LotteryEntry
     
     var body: some View {
         HStack {
@@ -23,9 +23,9 @@ struct CustomLotteryCell: View {
     }
 }
 
-struct CustomLotteryCell_Previews: PreviewProvider {
+struct LotteryEntryCell_Previews: PreviewProvider {
     static var previews: some View {
-        CustomLotteryCell(entry:
+        LotteryEntryCell(entry:
                 .constant(.init(name: "Eduardo da Silva", weight: 1, winningCounter: 0))
         )
     }
