@@ -25,6 +25,6 @@ struct LotteryCellView: View {
 struct LotteryCellView_Previews: PreviewProvider {
     static var previews: some View {
         LotteryCellView(lottery: .init(name: "Loteria com nome muito grande, gigantesco para caramba"))
-            .previewLayout(.fixed(width: 200, height: 200))
+            //.previewLayout(.fixed(width: 200, height: 200))
     }
 }

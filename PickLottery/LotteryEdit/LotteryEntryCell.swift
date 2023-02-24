@@ -26,7 +26,7 @@ struct LotteryEntryCell: View {
 struct LotteryEntryCell_Previews: PreviewProvider {
     static var previews: some View {
         LotteryEntryCell(entry:
-                .constant(.init(name: "Eduardo da Silva", weight: 1, winningCounter: 0))
+                .constant(.init("Eduardo da Silva", weight: 1, winningCounter: 0))
         )
     }
 }

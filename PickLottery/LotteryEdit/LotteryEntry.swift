@@ -8,7 +8,7 @@ struct LotteryEntry: Identifiable {
     let winningCounter: UInt
     let color: Color
     
-    init(name: String, weight: Double, winningCounter: UInt) {
+    init(_ name: String, weight: Double = 1, winningCounter: UInt = 0) {
         self.name = name
         self.weight = weight
         self.winningCounter = winningCounter

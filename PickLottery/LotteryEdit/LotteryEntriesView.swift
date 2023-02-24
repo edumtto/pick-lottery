@@ -11,9 +11,6 @@ struct LotteryEntriesView: View {
         }
         .navigationTitle(lottery.name + " Entries")
         .toolbar {
-//            Button("Import") {
-//
-//            }
             Button("Edit") {
                 
             }
@@ -34,10 +31,10 @@ struct LotteryEditView_Previews: PreviewProvider {
                     name: "Lottery 1",
                     entries:
                         [
-                            .init(name: "João", weight: 1, winningCounter: 0),
-                            .init(name: "Maria", weight: 0, winningCounter: 1),
-                            .init(name: "James", weight: 1, winningCounter: 0),
-                            .init(name: "Ana", weight: 1.5, winningCounter: 2)
+                            .init("João", weight: 1, winningCounter: 0),
+                            .init("Maria", weight: 0, winningCounter: 1),
+                            .init("James", weight: 1, winningCounter: 0),
+                            .init("Ana", weight: 1.5, winningCounter: 2)
                         ]
                 )
             )
