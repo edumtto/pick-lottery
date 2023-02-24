@@ -12,11 +12,12 @@ struct LotteryCellView: View {
                 
                 Text(lottery.name)
                     .multilineTextAlignment(.center)
+                    .foregroundColor(.black)
+                    .font(.headline)
                     .padding()
             }
+            .frame(minHeight: 100)
         }
-
-        
         .cornerRadius(8)
     }
 }

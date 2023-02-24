@@ -10,11 +10,14 @@ struct LotteryListView: View {
     
     var body: some View {
         NavigationStack {
-            LazyVGrid(columns: threeColumnGrid) {
-                ForEach(lotteries) { lottery in
-                    LotteryCellView(lottery: lottery)
+            ScrollView {
+                LazyVGrid(columns: threeColumnGrid) {
+                    ForEach(lotteries) { lottery in
+                        LotteryCellView(lottery: lottery)
+                    }
                 }
             }
+            
             .navigationTitle("Lotteries")
             .toolbar {
                 Button(role: .none) {
