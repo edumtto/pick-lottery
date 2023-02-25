@@ -16,12 +16,14 @@ struct LotteryListView: View {
                     }
                 }
             }
+            .padding()
             .navigationTitle("Lotteries")
             .toolbar {
                 Button(role: .none) {
                     presentCreateAlert = true
                 } label: {
                     Image(systemName: "plus.app")
+                        .tint(.accentColor)
                 }
             }
             .sheet(isPresented: $presentCreateAlert) {

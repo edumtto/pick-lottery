@@ -2,44 +2,84 @@ import SwiftUI
 
 struct LotteryDetailView: View {
     @StateObject var lottery: Lottery
-    @State var numberOfTimes: Int = 1
     @State var displayResult: Bool = false
     
     var body: some View {
+        raffleDescription
+            .padding(.bottom, -6)
         List {
-            Section("Last results") {
-                ForEach($lottery.lastResults) { result in
+            Section("Winners") {
+                ForEach($lottery.lastResults.reversed()) { result in
                     LotteryResultCellView(result: result)
                 }
             }
         }
-        .listStyle(.sidebar)
+        .listStyle(.plain)
         
-        Button(action: {
-            //let result = LotteryResult(entry: raffleRandomEntry(), date: Date())
-            //lottery.lastResults.insert(result, at: 0)
-            displayResult = true
-        }, label: {
-            Text("Raffle")
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-        })
-        .padding(EdgeInsets(top: 0, leading: 16, bottom: 16, trailing: 16))
-        .buttonStyle(.borderedProminent)
         
         .alert(isPresented: $displayResult) {
             Alert(title: Text("Congratulations, \(lottery.lastResults.last?.entry.name ?? "_")"))
         }
         .toolbar {
-            Button(role: .none) {
-                print("Info")
-            } label: {
-                Image(systemName: "info.circle")
+            Button("Clear results") {
+                lottery.lastResults.removeAll()
             }
-
         }
         .navigationTitle(lottery.name)
     }
+    
+    var raffleDescription: some View {
+        VStack {
+            NavigationLink {
+                LotteryEntriesView(lotteryName: lottery.name, entries: lottery.entries)
+            } label: {
+                HStack {
+                    Text("\(lottery.entries.count) entries")
+                        .fontWeight(.medium)
+                    Image(systemName: "chevron.right")
+                }
+            }
+            .padding(.bottom)
+            
+            HStack {
+                Text(lottery.raffleMode.rawValue)
+                    .foregroundColor(.accentColor)
+                    .fontWeight(.medium)
+                Button(role: .none) {
+                    print("Info")
+                } label: {
+                    Image(systemName: "info.circle")
+                        .fontWeight(.medium)
+                }
+            }
+            .padding(.bottom)
+            
+            Button(action: {
+                let result = LotteryResult(entry: raffleRandomEntry(), date: Date())
+                lottery.lastResults.append(result)
+                displayResult = true
+            }, label: {
+                Text("Raffle")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+            })
+            .padding(EdgeInsets(top: 0, leading: 16, bottom: 16, trailing: 16))
+            .buttonStyle(.borderedProminent)
+        }
+        .padding()
+        .background(lottery.color.opacity(0.1))
+    }
+    
+    
+    
+//    var pastWinners: [LotteryResult] {
+//        if currentWinner == nil {
+//            return lottery.lastResults
+//        }
+//        var pastWinners = lottery.lastResults
+//        pastWinners.remove(at: 0)
+//        return pastWinners
+//    }
     
     private func raffleRandomEntry() -> LotteryEntry {
         let numberOfEntries = lottery.entries.count

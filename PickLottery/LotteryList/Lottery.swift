@@ -13,10 +13,10 @@ final class Lottery: Identifiable, ObservableObject {
     
     let id: UUID = UUID()
     let name: String
-    var entries: [LotteryEntry]
     let color: Color
-    var lastResults: [LotteryResult]
-    var raffleMode: RaffleMode
+    let raffleMode: RaffleMode
+    @Published var entries: [LotteryEntry]
+    @Published var lastResults: [LotteryResult]
     
     init(name: String,
          entries: [LotteryEntry] = [],

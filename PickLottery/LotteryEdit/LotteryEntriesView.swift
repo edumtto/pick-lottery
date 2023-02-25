@@ -1,15 +1,16 @@
 import SwiftUI
 
 struct LotteryEntriesView: View {
-    @StateObject var lottery: Lottery
+    let lotteryName: String
+    @State var entries: [LotteryEntry]
     
     var body: some View {
         List {
-            ForEach($lottery.entries) { entry in
+            ForEach($entries) { entry in
                 LotteryEntryCell(entry: entry)
             }
         }
-        .navigationTitle(lottery.name + " Entries")
+        .navigationTitle(lotteryName + " Entries")
         .toolbar {
             Button("Edit") {
                 
@@ -26,17 +27,14 @@ struct LotteryEntriesView: View {
 struct LotteryEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            LotteryEntriesView(lottery:
-                Lottery(
-                    name: "Lottery 1",
-                    entries:
-                        [
-                            .init("João", weight: 1, winningCounter: 0),
-                            .init("Maria", weight: 0, winningCounter: 1),
-                            .init("James", weight: 1, winningCounter: 0),
-                            .init("Ana", weight: 1.5, winningCounter: 2)
-                        ]
-                )
+            LotteryEntriesView(
+                lotteryName: "Lottery 1",
+                entries: [
+                    .init("João", weight: 1, winningCounter: 0),
+                    .init("Maria", weight: 0, winningCounter: 1),
+                    .init("James", weight: 1, winningCounter: 0),
+                    .init("Ana", weight: 1.5, winningCounter: 2)
+                ]
             )
         }
     }

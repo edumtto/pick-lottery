@@ -18,8 +18,7 @@ struct LotteryResultCellView: View {
 struct LotteryResultCellView_Previews: PreviewProvider {
     static var previews: some View {
         LotteryResultCellView(
-            result:.constant(.init(entry: .init("Joao"),
-                                   date: Date()))
+            result: .constant( .init(entry: .init("Joao"), date: Date()) )
         )
     }
 }

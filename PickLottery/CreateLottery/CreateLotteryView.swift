@@ -105,7 +105,13 @@ struct CreateLotteryView: View {
             showValidationAlert = true
             return
         }
-        let newLottery = Lottery(name: name, entries: [], raffleMode: raffleMode)
+        
+        let entries: [LotteryEntry] = entriesDescription
+            .components(separatedBy: ",")
+            .map {
+                LotteryEntry($0.trimmingCharacters(in: CharacterSet(charactersIn: " ")))
+            }
+        let newLottery = Lottery(name: name, entries: entries, raffleMode: raffleMode)
         lotteries.append(newLottery)
         dismiss()
     }
