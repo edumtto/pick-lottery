@@ -3,10 +3,17 @@ import SwiftUI
 struct LotteryDetailView: View {
     @StateObject var lottery: Lottery
     @State var displayResult: Bool = false
+    @State var animate: Bool = false
     
     var body: some View {
-        raffleDescription
-            .padding(.bottom, -6)
+        ZStack {
+            raffleDescription
+                .padding(.bottom, -6)
+                .opacity(0.3)
+            VStack {
+                Text("...")
+            }
+        }
         List {
             Section("Winners") {
                 ForEach($lottery.lastResults.reversed()) { result in
@@ -63,7 +70,7 @@ struct LotteryDetailView: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity)
             })
-            .padding(EdgeInsets(top: 0, leading: 16, bottom: 16, trailing: 16))
+            .padding(.bottom)
             .buttonStyle(.borderedProminent)
         }
         .padding()
