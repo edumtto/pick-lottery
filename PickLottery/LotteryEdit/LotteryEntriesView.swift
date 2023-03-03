@@ -9,18 +9,25 @@ struct LotteryEntriesView: View {
             ForEach($entries) { entry in
                 LotteryEntryCell(entry: entry)
             }
+            .onDelete(perform: deleteItems)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                EditButton()
+            }
+            ToolbarItem {
+                Button(role: .none) {
+                    
+                } label: {
+                    Image(systemName: "plus.app")
+                }
+            }
         }
         .navigationTitle(lotteryName + " Entries")
-        .toolbar {
-            Button("Edit") {
-                
-            }
-            Button(role: .none) {
-                
-            } label: {
-                Image(systemName: "plus.app")
-            }
-        }
+    }
+    
+    private func deleteItems(offsets: IndexSet) {
+        
     }
 }
 
