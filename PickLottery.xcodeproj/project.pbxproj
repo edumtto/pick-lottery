@@ -26,7 +26,6 @@
 		34C62A0A29A822FF003D9B54 /* LotteryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C62A0929A822FF003D9B54 /* LotteryDetailView.swift */; };
 		34C62A0C29A827CD003D9B54 /* LotteryResultCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C62A0B29A827CD003D9B54 /* LotteryResultCellView.swift */; };
 		34C62A0E29A82B97003D9B54 /* LotteryResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C62A0D29A82B97003D9B54 /* LotteryResult.swift */; };
-		34C872DA29B01F24002CBE94 /* RaffleAnimationView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C872D929B01F24002CBE94 /* RaffleAnimationView2.swift */; };
 		34C872DC29B03D9F002CBE94 /* ConfettiAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C872DB29B03D9F002CBE94 /* ConfettiAnimationView.swift */; };
 		34D92E0029AECD6000B22FF9 /* RaffleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D92DFF29AECD6000B22FF9 /* RaffleAnimationView.swift */; };
 /* End PBXBuildFile section */
@@ -71,7 +70,6 @@
 		34C62A0929A822FF003D9B54 /* LotteryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDetailView.swift; sourceTree = "<group>"; };
 		34C62A0B29A827CD003D9B54 /* LotteryResultCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResultCellView.swift; sourceTree = "<group>"; };
 		34C62A0D29A82B97003D9B54 /* LotteryResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResult.swift; sourceTree = "<group>"; };
-		34C872D929B01F24002CBE94 /* RaffleAnimationView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaffleAnimationView2.swift; sourceTree = "<group>"; };
 		34C872DB29B03D9F002CBE94 /* ConfettiAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiAnimationView.swift; sourceTree = "<group>"; };
 		34D92DFF29AECD6000B22FF9 /* RaffleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RaffleAnimationView.swift; path = PickLottery/LotteryDetail/RaffleAnimationView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -176,7 +174,6 @@
 		3451C1FB29B19586002FBD38 /* RaffleAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				34C872D929B01F24002CBE94 /* RaffleAnimationView2.swift */,
 				34D92DFF29AECD6000B22FF9 /* RaffleAnimationView.swift */,
 				34C872DB29B03D9F002CBE94 /* ConfettiAnimationView.swift */,
 			);
@@ -357,7 +354,6 @@
 				346C37D2299F0FB2000F993C /* LotteryEntryCell.swift in Sources */,
 				34D92E0029AECD6000B22FF9 /* RaffleAnimationView.swift in Sources */,
 				346C37D0299F0F2F000F993C /* LotteryEntriesView.swift in Sources */,
-				34C872DA29B01F24002CBE94 /* RaffleAnimationView2.swift in Sources */,
 				346C37CE299F0E11000F993C /* LotteryEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

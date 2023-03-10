@@ -1,20 +1,6 @@
 import SwiftUI
 
 struct ConfettiAnimationView: View {
-    var body: some View {
-        ConfettiView()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black)
-    }
-}
-
-struct ConfettiAnimationView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConfettiAnimationView()
-    }
-}
-
-struct ConfettiView: View {
     @State private var confetti: [Confetti] = .init(repeating: Confetti(), count: 10)
     @State private var timer: Timer?
     @State var counter: Int = 0
@@ -27,15 +13,13 @@ struct ConfettiView: View {
                     Rectangle()
                         .fill(confetti.color)
                         .frame(width: confetti.size, height: 2 * confetti.size)
-                        //.rotationEffect(.degrees(confetti.rotationAngle))
                         .rotationEffect(.degrees(confetti.rotationInitial2D))
-                        .rotation3DEffect(.degrees(confetti.rotationIncremental3D), axis: confetti.rotationAxis, perspective: 0.5)
-//                        .onAppear {
-//                            animate(.linear(duration: 1).repeatCount(100, autoreverses: false))
-//                        }
+                        .rotation3DEffect(
+                            .degrees(confetti.rotationIncremental3D),
+                            axis: confetti.rotationAxis, perspective: 0.5
+                        )
                 }
                 .position(confetti.position)
-                
             }
         }
         .onChange(of: counter) { _ in
@@ -66,17 +50,20 @@ struct ConfettiView: View {
     }
 }
 
-struct Confetti: Identifiable {
+struct ConfettiAnimationView_Previews: PreviewProvider {
+    static var previews: some View {
+        ConfettiAnimationView()
+    }
+}
+
+fileprivate struct Confetti: Identifiable {
     let id: UUID = UUID()
-    
     let color: Color
     let size: CGFloat
-    
     var position: CGPoint
     var rotationInitial2D: Double
     var rotationIncremental3D: Double = 0
     let yIncrementalDistance: Double
-    
     let rotationAxis: (x: CGFloat, y: CGFloat, z: CGFloat)
     
     init() {

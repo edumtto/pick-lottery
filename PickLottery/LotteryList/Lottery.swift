@@ -13,6 +13,7 @@ final class Lottery: Identifiable, ObservableObject {
     
     let id: UUID = UUID()
     let name: String
+    // let description: String
     let color: Color
     let raffleMode: RaffleMode
     @Published var entries: [LotteryEntry]

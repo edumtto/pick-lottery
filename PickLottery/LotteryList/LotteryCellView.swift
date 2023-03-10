@@ -6,6 +6,7 @@ struct LotteryCellView: View {
     var body: some View {
         NavigationLink {
             LotteryDetailView(lottery: lottery)
+            //RaffleAnimationView(entries: lottery.entries, targetEntry: lottery.entries[0])
         } label: {
             ZStack {
                 lottery.color.opacity(0.2)

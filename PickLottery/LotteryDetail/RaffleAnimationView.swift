@@ -16,15 +16,17 @@ struct RaffleItem: Identifiable {
 }
 
 struct RaffleAnimationView: View {
-    let entries: [LotteryEntry]
-    let targetEntry: LotteryEntry
+    @Environment(\.dismiss) var dismiss
     
-    @Binding var isRaffleFinished: Bool
+    let entries: [LotteryEntry]
+    let targetEntry: LotteryEntry?
+    
+    @Binding var isRaffleAnimationFinished: Bool
     
     @State private var nextEntryIndex: Int = 0
     @State private var displayedItem: RaffleItem = .init(.init(""))
     @State private var timer: Timer?
-    @State private var raffleFinishedAnimation = false
+    @State private var winnerAnimation = false
     
     var body: some View {
         ZStack {
@@ -32,12 +34,10 @@ struct RaffleAnimationView: View {
                 .font(.headline)
                 .padding()
                 .frame(width: UIScreen.main.bounds.width - 32, height: 52)
-
-                .offset(.init(width: 0, height: displayedItem.offset))
-                .scaleEffect(raffleFinishedAnimation ? 1.4 : 1)
+                .scaleEffect(winnerAnimation ? 1.5 : 1, anchor: .center)
             resultTextView
-
         }
+        .background(.white)
         .onAppear {
             animateRaffle(times: 50, interval: 0.02)
         }
@@ -45,14 +45,22 @@ struct RaffleAnimationView: View {
     
     var resultTextView: some View {
         VStack {
-            Text("Congratulations!")
-                
+            Text("Congratulations!🏆")
             RoundedRectangle(cornerRadius: 8)
                 .stroke(lineWidth: 1)
                 .stroke(displayedItem.color)
-            Spacer()
-        }.opacity(raffleFinishedAnimation ? 1 : 0)
-            .padding()
+                .frame(height: 128)
+            HStack {
+                ShareLink(item: "The lottery winner is \"\(displayedItem.name)\".")
+                .buttonStyle(.borderedProminent)
+                Button("Close") {
+                    dismiss()
+                }
+                .buttonStyle(.bordered)
+            }
+        }
+        .opacity(winnerAnimation ? 1 : 0)
+        .padding()
     }
     
     func animateRaffle(times: Int, interval: Double) {
@@ -76,13 +84,13 @@ struct RaffleAnimationView: View {
     private func endAnimation() {
         timer?.invalidate()
         timer = nil
-        if displayedItem.id != targetEntry.id {
+        if let targetEntry = targetEntry, displayedItem.id != targetEntry.id {
             displayedItem = .init(targetEntry)
         }
         withAnimation {
-            raffleFinishedAnimation = true
+            winnerAnimation = true
         }
-        isRaffleFinished = true
+        isRaffleAnimationFinished = true
     }
     
     private func moveOneItem() {
@@ -90,6 +98,10 @@ struct RaffleAnimationView: View {
     }
     
     private func nextEntry() -> LotteryEntry {
+        if entries.isEmpty {
+            return .init("")
+        }
+        
         let entry = entries[nextEntryIndex]
         nextEntryIndex += 1
         if nextEntryIndex >= entries.count {
@@ -108,6 +120,6 @@ struct RaffleAnimationView_Previews: PreviewProvider {
     ]
     
     static var previews: some View {
-        RaffleAnimationView(entries: entriesMock, targetEntry: entriesMock[1], isRaffleFinished: .constant(false))
+        RaffleAnimationView(entries: entriesMock, targetEntry: entriesMock[1], isRaffleAnimationFinished: .constant(false))
     }
 }

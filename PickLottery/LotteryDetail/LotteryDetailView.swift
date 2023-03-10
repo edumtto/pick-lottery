@@ -5,28 +5,40 @@ struct LotteryDetailView: View {
     @State var displayResult: Bool = false
     @State var animate: Bool = false
     
+    @State var presentRaffleAnimation = false
+    @State var selectedLotteryEntry: LotteryEntry? {
+        didSet {
+            presentRaffleAnimation = true
+        }
+    }
+    @State var isRaffleAnimationFinished = false
+    
     var body: some View {
         ZStack {
-            raffleDescription
-                .padding(.bottom, -6)
-                .opacity(0.3)
             VStack {
-                Text("...")
+                raffleDescription
+                    .padding(.bottom, -6)
+                List {
+                    Section("Winners") {
+                        ForEach($lottery.lastResults.reversed()) { result in
+                            LotteryResultCellView(result: result)
+                        }
+                    }
+                }
+                .listStyle(.plain)
             }
         }
-        List {
-            Section("Winners") {
-                ForEach($lottery.lastResults.reversed()) { result in
-                    LotteryResultCellView(result: result)
+        .sheet(isPresented: $presentRaffleAnimation, content: {
+            ZStack {
+                RaffleAnimationView(
+                    entries: lottery.entries,
+                    targetEntry: selectedLotteryEntry,
+                    isRaffleAnimationFinished: $isRaffleAnimationFinished)
+                if isRaffleAnimationFinished {
+                    ConfettiAnimationView()
                 }
             }
-        }
-        .listStyle(.plain)
-        
-        
-        .alert(isPresented: $displayResult) {
-            Alert(title: Text("Congratulations, \(lottery.lastResults.last?.entry.name ?? "_")"))
-        }
+        })
         .toolbar {
             Button("Clear results") {
                 lottery.lastResults.removeAll()
@@ -62,7 +74,12 @@ struct LotteryDetailView: View {
             .padding(.bottom)
             
             Button(action: {
-                let result = LotteryResult(entry: raffleRandomEntry(), date: Date())
+                selectedLotteryEntry = nil
+                isRaffleAnimationFinished = false
+                
+                let selectedEntry = raffleRandomEntry()
+                selectedLotteryEntry = selectedEntry
+                let result = LotteryResult(entry: selectedEntry, date: Date())
                 lottery.lastResults.append(result)
                 displayResult = true
             }, label: {
@@ -129,7 +146,7 @@ struct LotteryDetailView_Previews: PreviewProvider {
         NavigationStack {
             LotteryDetailView(lottery: Lottery(
                 name: "Lottery 1",
-                entries: [],
+                entries: [.init("Marcos"), .init("Miguel"), .init("Samantha")],
                 lastResults: [
                     .init(entry: .init("João", weight: 1, winningCounter: 0), date: Date()),
                     .init(entry: .init("Maria", weight: 0, winningCounter: 1), date: Date()),
