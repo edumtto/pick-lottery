@@ -31,25 +31,27 @@ struct RaffleAnimationView: View {
     var body: some View {
         ZStack {
             Text(displayedItem.name)
-                .font(.headline)
+                .font(.system(size: winnerAnimation ? 36 : 28))
                 .padding()
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(lineWidth: 1)
+                .stroke(displayedItem.color)
+                .frame(height: 128)
                 .frame(width: UIScreen.main.bounds.width - 32, height: 52)
-                .scaleEffect(winnerAnimation ? 1.5 : 1, anchor: .center)
             resultTextView
         }
         .background(.white)
         .onAppear {
-            animateRaffle(times: 50, interval: 0.02)
+            animateRaffle(times: 20, interval: 0.08)
         }
     }
     
     var resultTextView: some View {
         VStack {
             Text("Congratulations!🏆")
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(lineWidth: 1)
-                .stroke(displayedItem.color)
-                .frame(height: 128)
+                .font(.title)
+                .padding()
+            Spacer()
             HStack {
                 ShareLink(item: "The lottery winner is \"\(displayedItem.name)\".")
                 .buttonStyle(.borderedProminent)
@@ -76,7 +78,7 @@ struct RaffleAnimationView: View {
             moveOneItem()
             
             if counter == 0 {
-                animateRaffle(times: times - times / 2, interval: 1.2 * interval)
+                animateRaffle(times: Int(Double(times) * 0.2), interval: 1.3 * interval)
             }
         }
     }
