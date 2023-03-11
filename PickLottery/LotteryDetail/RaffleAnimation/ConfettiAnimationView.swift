@@ -43,7 +43,10 @@ struct ConfettiAnimationView: View {
         withAnimation(animation) {
             for i in 0..<confetti.count {
                 let c = confetti[i]
-                confetti[i].position = CGPoint(x: c.position.x, y: c.position.y + c.yIncrementalDistance)
+                confetti[i].position = CGPoint(
+                    x: c.position.x + c.incrementalDistance.x,
+                    y: c.position.y + c.incrementalDistance.y
+                )
                 confetti[i].rotationIncremental3D += 30
             }
         }
@@ -63,7 +66,7 @@ fileprivate struct Confetti: Identifiable {
     var position: CGPoint
     var rotationInitial2D: Double
     var rotationIncremental3D: Double = 0
-    let yIncrementalDistance: Double
+    let incrementalDistance: (x: Double, y: Double)
     let rotationAxis: (x: CGFloat, y: CGFloat, z: CGFloat)
     
     init() {
@@ -77,8 +80,8 @@ fileprivate struct Confetti: Identifiable {
             x: CGFloat.random(in: 0...UIScreen.main.bounds.width),
             y: -20
         )
-        yIncrementalDistance = Double.random(in: 15...45)
-        size = yIncrementalDistance / 3
+        incrementalDistance = (x: Double.random(in: -6...6), y: Double.random(in: 15...45))
+        size = incrementalDistance.y / 3
         rotationInitial2D = Double.random(in: 5...40) / 3
         
         switch Int.random(in: 0...2) {
