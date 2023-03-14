@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct LotteryDetailView: View {
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var lotteryStore: LotteryStore
+    
     @StateObject var lottery: Lottery
     @State var displayResult: Bool = false
     @State var animate: Bool = false
@@ -40,8 +43,18 @@ struct LotteryDetailView: View {
             }
         })
         .toolbar {
-            Button("Clear results") {
-                lottery.lastResults.removeAll()
+            ToolbarItem {
+                Menu("Options") {
+                    Button("Clear results") {
+                        lottery.lastResults.removeAll()
+                    }
+                    Button {
+                        lotteryStore.removeLottery(lottery)
+                        dismiss()
+                    } label: {
+                        Label("Delete lottery", systemImage: "trash")
+                    }
+                }
             }
         }
         .navigationTitle(lottery.name)
@@ -89,6 +102,7 @@ struct LotteryDetailView: View {
             })
             .padding(.bottom)
             .buttonStyle(.borderedProminent)
+            .disabled(lottery.entries.isEmpty)
         }
         .padding()
         .background(lottery.color.opacity(0.1))

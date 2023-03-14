@@ -35,44 +35,62 @@ class LotteryStore: ObservableObject {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
-    func save() {
+    private func save() throws {
         let context = container.viewContext
 
         if context.hasChanges {
-            do {
-                try context.save()
-                print("Context saved")
-            } catch {
-                print(error)
-                // Show some error here
-            }
+            try context.save()
+            print("Context saved")
         }
     }
-}
-
-extension LotteryStore: LotteryStoring {
-    func fetchLotteries() -> [Lottery] {
-        let lotteryFetch: NSFetchRequest<LotteryMO> = LotteryMO.fetchRequest()
+    
+    private func fetchLotteriesMO() -> [LotteryMO] {
+        let fetchRequest: NSFetchRequest<LotteryMO> = LotteryMO.fetchRequest()
         let sortByDate = NSSortDescriptor(key: #keyPath(LotteryMO.name), ascending: false)
-        lotteryFetch.sortDescriptors = [sortByDate]
+        fetchRequest.sortDescriptors = [sortByDate]
         do {
             let managedContext = container.viewContext
-            let results = try managedContext.fetch(lotteryFetch)
+            let results = try managedContext.fetch(fetchRequest)
             print("Context loaded")
-            return results.map(Lottery.init)
+            return results
         } catch let error as NSError {
             print("Fetch error: \(error) description: \(error.userInfo)")
         }
         return []
     }
+}
+
+extension LotteryStore: LotteryStoring {
+    func fetchLotteries() -> [Lottery] {
+        fetchLotteriesMO().map(Lottery.init)
+    }
     
     func addLottery(_ lottery: Lottery) {
-        let _ = lottery.lotteryMO(context: container.viewContext)
-        save()
+        let managedContext = container.viewContext
+        let _ = lottery.lotteryMO(context: managedContext)
+        
+        do {
+            try managedContext.save()
+        } catch {
+            debugPrint("Error adding lottery \"\(lottery.name)\".\nDescription: \(error)")
+        }
     }
     
     func removeLottery(_ lottery: Lottery) {
+        guard let lotteryMO = fetchLotteriesMO().first(where: { $0.id == lottery.id }) else {
+            return
+        }
         
+        let managedContext = container.viewContext
+        
+        do {
+            lotteryMO.results.forEach { managedContext.delete($0 as! LotteryResultMO) }
+            lotteryMO.entries.forEach { managedContext.delete($0 as! LotteryEntryMO) }
+            managedContext.delete(lotteryMO)
+            try managedContext.save()
+        } catch {
+            debugPrint("Error removing lottery \"\(lottery.name)\".\nDescription: \(error)")
+        }
     }
     
     func addEntry(_ entry: LotteryEntry, in lottery: Lottery) {

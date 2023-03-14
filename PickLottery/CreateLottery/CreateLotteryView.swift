@@ -84,7 +84,7 @@ struct CreateLotteryView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(lineWidth: 1)
-                        .stroke(Color.accentColor)
+                        .stroke(entriesDescription == "" ? Color.gray : Color.accentColor)
                 )
         }
         .padding()
