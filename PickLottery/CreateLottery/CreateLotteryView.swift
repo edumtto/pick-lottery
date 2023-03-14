@@ -110,13 +110,15 @@ struct CreateLotteryView: View {
         
         let entries: [LotteryEntry] = entriesDescription
             .components(separatedBy: ",")
-            .map {
-                LotteryEntry($0.trimmingCharacters(in: CharacterSet(charactersIn: " ")))
+            .compactMap {
+                let entryName = $0.trimmingCharacters(in: CharacterSet(charactersIn: " "))
+                return entryName.isEmpty ? nil : LotteryEntry(entryName)
             }
+        
         let newLottery = Lottery(name: name, entries: entries, raffleMode: raffleMode)
         
-        lotteries.append(newLottery)
         lotteryStore.addLottery(newLottery)
+        lotteries = lotteryStore.fetchLotteries()
         
         dismiss()
     }
