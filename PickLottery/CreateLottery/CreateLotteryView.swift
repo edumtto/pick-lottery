@@ -9,6 +9,8 @@ struct CreateLotteryView: View {
     @State var entriesDescription: String = ""
     @State var showValidationAlert = false
     
+    @EnvironmentObject var lotteryStore: LotteryStore
+    
     var body: some View {
         nameInput
         modeInput
@@ -57,7 +59,7 @@ struct CreateLotteryView: View {
             HStack {
                 Picker("Raffle mode", selection: $raffleMode) {
                     ForEach(Lottery.RaffleMode.options) {
-                        Text($0.rawValue)
+                        Text($0.description)
                     }
                 }
                 Spacer()
@@ -112,7 +114,10 @@ struct CreateLotteryView: View {
                 LotteryEntry($0.trimmingCharacters(in: CharacterSet(charactersIn: " ")))
             }
         let newLottery = Lottery(name: name, entries: entries, raffleMode: raffleMode)
+        
         lotteries.append(newLottery)
+        lotteryStore.addLottery(newLottery)
+        
         dismiss()
     }
 }

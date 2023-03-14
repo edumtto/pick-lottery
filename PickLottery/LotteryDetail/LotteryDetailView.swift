@@ -61,7 +61,7 @@ struct LotteryDetailView: View {
             .padding(.bottom)
             
             HStack {
-                Text(lottery.raffleMode.rawValue)
+                Text(lottery.raffleMode.description)
                     .foregroundColor(.accentColor)
                     .fontWeight(.medium)
                 Button(role: .none) {

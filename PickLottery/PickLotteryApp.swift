@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct PickLotteryApp: App {
     //let persistenceController = PersistenceController.shared
+    @StateObject private var lotteryStore = LotteryStore()
 
     var body: some Scene {
         WindowGroup {
@@ -39,7 +40,9 @@ struct PickLotteryApp: App {
 //                    .init(name: "Lottery 5"),
 //                    .init(name: "Lottery 6"),
                 ]
-            )
+                )
+                .environmentObject(lotteryStore)
+                .environment(\.managedObjectContext, lotteryStore.container.viewContext)
             //ContentView()
             //    .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
