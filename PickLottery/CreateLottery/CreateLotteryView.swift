@@ -2,8 +2,8 @@ import SwiftUI
 
 struct CreateLotteryView: View {
     enum FocusedField {
-            case name, entries
-        }
+        case name, entries
+    }
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var lotteryStore: LotteryStore

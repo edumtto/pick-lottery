@@ -13,7 +13,6 @@ public class LotteryMO: NSManagedObject {
 }
 
 extension LotteryMO {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<LotteryMO> {
         return NSFetchRequest<LotteryMO>(entityName: "Lottery")
     }
@@ -29,7 +28,6 @@ extension LotteryMO {
 
 // MARK: Generated accessors for entries
 extension LotteryMO {
-
     @objc(addEntriesObject:)
     @NSManaged public func addToEntries(_ value: LotteryEntryMO)
 
@@ -46,7 +44,6 @@ extension LotteryMO {
 
 // MARK: Generated accessors for results
 extension LotteryMO {
-
     @objc(addResultsObject:)
     @NSManaged public func addToResults(_ value: LotteryResultMO)
 
@@ -62,5 +59,4 @@ extension LotteryMO {
 }
 
 extension LotteryMO : Identifiable {
-
 }

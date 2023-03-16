@@ -1,7 +1,7 @@
 import SwiftUI
 import Foundation
 
-struct RaffleItem: Identifiable {
+fileprivate struct RaffleItem: Identifiable {
     let id: UUID
     let name: String
     let color: Color
@@ -94,7 +94,7 @@ struct RaffleAnimationView: View {
         timer?.invalidate()
         timer = nil
         if let targetEntry = targetEntry, displayedItem.id != targetEntry.id {
-            displayedItem = .init(targetEntry)//id: targetEntry.id, name: targetEntry.name, color: targetEntry.color)
+            displayedItem = .init(targetEntry)
         }
         withAnimation {
             winnerAnimation = true
@@ -120,15 +120,14 @@ struct RaffleAnimationView: View {
     }
 }
 
-//struct RaffleAnimationView_Previews: PreviewProvider {
-//    static let entriesMock: [LotteryEntry] = [
-//        .init("João", weight: 1, winningCounter: 0),
-//        .init("Maria", weight: 0, winningCounter: 1),
-//        .init("James", weight: 1, winningCounter: 0),
-//        .init("Ana", weight: 1.5, winningCounter: 2)
-//    ]
-//    
-//    static var previews: some View {
-//        RaffleAnimationView(entries: entriesMock, targetEntry: entriesMock[1], isRaffleAnimationFinished: .constant(false))
-//    }
-//}
+struct RaffleAnimationView_Previews: PreviewProvider {
+    static let entries = LotteryMO.example.entries.allObjects as! [LotteryEntryMO]
+    
+    static var previews: some View {
+        RaffleAnimationView(
+            entries: entries,
+            targetEntry: entries[1],
+            isRaffleAnimationFinished: .constant(false)
+        )
+    }
+}

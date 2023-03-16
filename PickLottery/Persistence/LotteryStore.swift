@@ -3,20 +3,19 @@ import Foundation
 import SwiftUI
 
 protocol LotteryStorageProvider {
-    //func fetchLotteries() -> [Lottery]
     func addLottery(_ lottery: Lottery)
     func removeLottery(_ lottery: LotteryMO)
+    
     @discardableResult
     func addEntry(_ entry: Lottery.Entry, in lottery: LotteryMO) -> LotteryEntryMO
     func removeEntries(_ entries: [LotteryEntryMO], from lottery: LotteryMO)
+    
     @discardableResult
     func addResult(id: UUID, date: Date, entry: LotteryEntryMO, in lottery: LotteryMO) -> LotteryResultMO
     func clearResults(in lottery: LotteryMO)
 }
 
 class LotteryStore: ObservableObject {
-    //@Published var lotteries: [LotteryMO] = .init()
-    
     let container = NSPersistentContainer(name: "LotteryDataModel")
     
     var context: NSManagedObjectContext {
@@ -25,18 +24,24 @@ class LotteryStore: ObservableObject {
     
     static var preview: LotteryStore = {
         let storage = LotteryStore(inMemory: true)
-        let entries: [Lottery.Entry] = [
+        
+        let entries1: [Lottery.Entry] = [
             .init("João", weight: 1, wins: 0),
             .init("Maria", weight: 0, wins: 1),
             .init("James", weight: 1, wins: 0),
             .init("Ana", weight: 1.5, wins: 2)
         ]
-        let results: [Lottery.Result] = [
-            .init(entryID: entries[2].id, date: Date.init(timeIntervalSinceNow: -32)),
-            .init(entryID: entries[0].id, date: Date())
+        let results1: [Lottery.Result] = [
+            .init(entryID: entries1[2].id, date: Date.init(timeIntervalSinceNow: -32)),
+            .init(entryID: entries1[0].id, date: Date())
         ]
-        let lottery = Lottery(name: "Supper Lottery 1", entries: entries, results: results)
-        storage.addLottery(lottery)
+        let lottery1 = Lottery(name: "Supper Lottery 1", entries: entries1, results: results1)
+        storage.addLottery(lottery1)
+        
+        let entries2: [Lottery.Entry] = [1, 2, 3, 4, 5, 6].map { Lottery.Entry.init(String($0)) }
+        let lottery2 = Lottery(name: "🎲\nDice", entries: entries2, results: .init())
+        storage.addLottery(lottery2)
+        
         return storage
     }()
 
@@ -60,52 +65,8 @@ class LotteryStore: ObservableObject {
         do {
             try context.save()
         } catch let error as NSError {
-            print("Error saving contest: \(error) description: \(error.userInfo)")
+            print("Error saving context: \(error) description: \(error.userInfo)")
         }
-    }
-    
-    private func fetchLotteriesMO() -> [LotteryMO] {
-        let fetchRequest: NSFetchRequest<LotteryMO> = LotteryMO.fetchRequest()
-        let sortByDate = NSSortDescriptor(key: #keyPath(LotteryMO.name), ascending: false)
-        fetchRequest.sortDescriptors = [sortByDate]
-        do {
-            let results = try context.fetch(fetchRequest)
-            print("Context loaded")
-            return results
-        } catch let error as NSError {
-            print("Fetch error: \(error) description: \(error.userInfo)")
-        }
-        return []
-    }
-    
-    private func fetchLottery(id: UUID) -> LotteryMO? {
-        let fetchRequest: NSFetchRequest<LotteryMO> = LotteryMO.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "id = %@", id.uuidString)
-        fetchRequest.fetchLimit = 1
-        
-        do {
-            let result = try context.fetch(fetchRequest)
-            print("Context loaded")
-            return result.first
-        } catch let error as NSError {
-            print("Fetch error: \(error) description: \(error.userInfo)")
-        }
-        return nil
-    }
-    
-    private func fetchEntriesMO(for lottery: Lottery) -> [LotteryEntryMO] {
-        let fetchRequest: NSFetchRequest<LotteryEntryMO> = LotteryEntryMO.fetchRequest()
-        let sortByDate = NSSortDescriptor(key: #keyPath(LotteryMO.name), ascending: false)
-        fetchRequest.sortDescriptors = [sortByDate]
-        fetchRequest.predicate = NSPredicate(format: "lottery.id = %@", lottery.id.uuidString)
-        do {
-            let results = try context.fetch(fetchRequest)
-            print("Context loaded")
-            return results
-        } catch let error as NSError {
-            print("Fetch error: \(error) description: \(error.userInfo)")
-        }
-        return []
     }
     
     private func fetchEntry(id: UUID) -> LotteryEntryMO? {
@@ -116,7 +77,7 @@ class LotteryStore: ObservableObject {
             print("Context loaded")
             return results.first
         } catch let error as NSError {
-            print("Fetch error: \(error) description: \(error.userInfo)")
+            print("Fetch entry error: \(error) description: \(error.userInfo)")
         }
         return nil
     }
@@ -142,15 +103,10 @@ extension LotteryStore: LotteryStorageProvider {
     }
     
     func removeLottery(_ lottery: LotteryMO) {
-        let context = context
-        do {
-            lottery.results.forEach { context.delete($0 as! LotteryResultMO) }
-            lottery.entries.forEach { context.delete($0 as! LotteryEntryMO) }
-            context.delete(lottery)
-            try context.save()
-        } catch {
-            debugPrint("Error removing lottery \"\(lottery.name)\".\nDescription: \(error)")
-        }
+        lottery.results.forEach { context.delete($0 as! LotteryResultMO) }
+        lottery.entries.forEach { context.delete($0 as! LotteryEntryMO) }
+        context.delete(lottery)
+        saveContext()
     }
     
     @discardableResult
@@ -162,9 +118,7 @@ extension LotteryStore: LotteryStorageProvider {
         entryMO.weight = entry.weight
         entryMO.wins = entry.wins
         entryMO.lottery = lottery
-        
         saveContext()
-        
         return entryMO
     }
     

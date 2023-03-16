@@ -29,9 +29,8 @@ struct LotteryCellView: View {
 
 struct LotteryCellView_Previews: PreviewProvider {
     static var previews: some View {
-        let lottery = LotteryMO()
-        lottery.name = "Teste 1 2 3"
-        
-        return LotteryCellView(lottery: lottery)
+        LotteryCellView(lottery: .example)
+            .previewLayout(.fixed(width: 150, height: 150))
+            .padding()
     }
 }

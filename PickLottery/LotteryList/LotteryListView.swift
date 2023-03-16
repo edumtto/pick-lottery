@@ -2,13 +2,12 @@ import SwiftUI
 import CoreData
 
 struct LotteryListView: View {
-    @FetchRequest(sortDescriptors: []) var lotteries: FetchedResults<LotteryMO>
-    
+    @EnvironmentObject var lotteryStore: LotteryStore
     @State var presentCreateAlert = false
     @State var newLotteryName = ""
-    @EnvironmentObject var lotteryStore: LotteryStore
+    @FetchRequest(sortDescriptors: []) var lotteries: FetchedResults<LotteryMO>
     
-    let threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    private let threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         NavigationStack {
@@ -39,14 +38,11 @@ struct LotteryListView: View {
 }
 
 struct LotteryList_Previews: PreviewProvider {
+    static let storage = LotteryStore.preview
+    
     static var previews: some View {
-        LotteryListView(
-//            lotteries: [
-//                .init(
-//                    name: "🎲 Dice",
-//                    entries:  [.init("1"), .init("2"), .init("3"), .init("4"), .init("5"), .init("6")]
-//                )
-//            ]
-        )
+        LotteryListView()
+            .environmentObject(storage)
+            .environment(\.managedObjectContext, storage.container.viewContext)
     }
 }

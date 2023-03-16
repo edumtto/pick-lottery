@@ -6,7 +6,6 @@ public class LotteryResultMO: NSManagedObject {
 }
 
 extension LotteryResultMO {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<LotteryResultMO> {
         return NSFetchRequest<LotteryResultMO>(entityName: "LotteryResult")
     }
@@ -19,5 +18,4 @@ extension LotteryResultMO {
 }
 
 extension LotteryResultMO : Identifiable {
-
 }

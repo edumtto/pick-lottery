@@ -27,5 +27,6 @@ struct LotteryEntryCell: View {
 struct LotteryEntryCell_Previews: PreviewProvider {
     static var previews: some View {
         return LotteryEntryCell(entry: .example)
+            .previewLayout(.sizeThatFits)
     }
 }

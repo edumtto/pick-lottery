@@ -125,8 +125,6 @@ struct LotteryDetailView: View {
         .background(color.opacity(0.1))
     }
     
-    
-    
 //    var pastWinners: [LotteryResult] {
 //        if currentWinner == nil {
 //            return lottery.lastResults
@@ -173,19 +171,10 @@ struct LotteryDetailView: View {
     }
 }
 
-//struct LotteryDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationStack {
-//            LotteryDetailView(lottery: Lottery(
-//                name: "Lottery 1",
-//                entries: [.init("Marcos"), .init("Miguel"), .init("Samantha")],
-//                lastResults: [
-//                    .init(entry: .init("João", weight: 1, winningCounter: 0), date: Date()),
-//                    .init(entry: .init("Maria", weight: 0, winningCounter: 1), date: Date()),
-//                    .init(entry: .init("James", weight: 1, winningCounter: 0), date: Date()),
-//                    .init(entry: .init("Ana", weight: 1, winningCounter: 0), date: Date())
-//                ]
-//            ))
-//        }
-//    }
-//}
+struct LotteryDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            LotteryDetailView(lottery: .example)
+        }
+    }
+}
