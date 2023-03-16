@@ -4,17 +4,29 @@ struct LotteryDetailView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var lotteryStore: LotteryStore
     
-    @StateObject var lottery: Lottery
+    @StateObject var lottery: LotteryMO
     @State var displayResult: Bool = false
     @State var animate: Bool = false
     
     @State var presentRaffleAnimation = false
-    @State var selectedLotteryEntry: LotteryEntry? {
+    @State var selectedLotteryEntry: LotteryEntryMO? {
         didSet {
             presentRaffleAnimation = true
         }
     }
     @State var isRaffleAnimationFinished = false
+    
+    var lastResults: [LotteryResultMO] {
+        Array(lottery.results)
+            .compactMap { $0 as? LotteryResultMO }
+            .sorted { $0.date > $1.date }
+    }
+    
+    var entries: [LotteryEntryMO] {
+        Array(lottery.entries)
+            .compactMap { $0 as? LotteryEntryMO }
+            .sorted { $0.name < $1.name }
+    }
     
     var body: some View {
         ZStack {
@@ -23,7 +35,7 @@ struct LotteryDetailView: View {
                     .padding(.bottom, -6)
                 List {
                     Section("Winners") {
-                        ForEach($lottery.lastResults.reversed()) { result in
+                        ForEach(lastResults) { result in
                             LotteryResultCellView(result: result)
                         }
                     }
@@ -34,7 +46,7 @@ struct LotteryDetailView: View {
         .sheet(isPresented: $presentRaffleAnimation, content: {
             ZStack {
                 RaffleAnimationView(
-                    entries: lottery.entries,
+                    entries: entries,
                     targetEntry: selectedLotteryEntry,
                     isRaffleAnimationFinished: $isRaffleAnimationFinished)
                 if isRaffleAnimationFinished {
@@ -46,7 +58,7 @@ struct LotteryDetailView: View {
             ToolbarItem {
                 Menu("Options") {
                     Button("Clear results") {
-                        lottery.lastResults.removeAll()
+                        lotteryStore.clearResults(in: lottery)
                     }
                     Button {
                         lotteryStore.removeLottery(lottery)
@@ -63,7 +75,7 @@ struct LotteryDetailView: View {
     var raffleDescription: some View {
         VStack {
             NavigationLink {
-                LotteryEntriesView(lotteryName: lottery.name, entries: lottery.entries)
+                LotteryEntriesView(lottery: lottery, entriesSet: $lottery.entries)
             } label: {
                 HStack {
                     Text("\(lottery.entries.count) entries")
@@ -74,7 +86,7 @@ struct LotteryDetailView: View {
             .padding(.bottom)
             
             HStack {
-                Text(lottery.raffleMode.description)
+                Text(Lottery.RaffleMode(rawValue: lottery.raffleMode)?.description ?? "")
                     .foregroundColor(.accentColor)
                     .fontWeight(.medium)
                 Button(role: .none) {
@@ -93,7 +105,8 @@ struct LotteryDetailView: View {
                 let selectedEntry = raffleRandomEntry()
                 selectedLotteryEntry = selectedEntry
                 let result = LotteryResult(entry: selectedEntry, date: Date())
-                lottery.lastResults.append(result)
+                //lottery.lastResults.append(result)
+                lotteryStore.addResult(result, in: lottery)
                 displayResult = true
             }, label: {
                 Text("Raffle")
@@ -102,10 +115,10 @@ struct LotteryDetailView: View {
             })
             .padding(.bottom)
             .buttonStyle(.borderedProminent)
-            .disabled(lottery.entries.isEmpty)
+            //.disabled(lottery.entries.isEmpty)
         }
         .padding()
-        .background(lottery.color.opacity(0.1))
+        //.background(lottery.color.opacity(0.1))
     }
     
     
@@ -119,29 +132,30 @@ struct LotteryDetailView: View {
 //        return pastWinners
 //    }
     
-    private func raffleRandomEntry() -> LotteryEntry {
+    private func raffleRandomEntry() -> LotteryEntryMO {
         let numberOfEntries = lottery.entries.count
         var entryIndexes = [Int]()
+        let raffleMode = Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom
         
-        switch lottery.raffleMode {
+        switch raffleMode {
         case .balancedVictories:
             var biggerVictoryNumber: UInt = 0
-            lottery.entries.forEach { entry in
-                if entry.winningCounter > biggerVictoryNumber {
-                    biggerVictoryNumber = entry.winningCounter
+            entries.forEach { entry in
+                if entry.wins > biggerVictoryNumber {
+                    biggerVictoryNumber = UInt(entry.wins)
                 }
             }
             
             for i in 0..<numberOfEntries {
-                let entry = lottery.entries[i]
-                if entry.winningCounter < biggerVictoryNumber {
+                let entry = entries[i]
+                if entry.wins < biggerVictoryNumber {
                     entryIndexes.append(i)
                 }
             }
             
         case .weightedEntries:
             for i in 0..<numberOfEntries {
-                let entry = lottery.entries[i]
+                let entry = entries[i]
                 entryIndexes.append(contentsOf: [Int](repeating: i, count: Int(entry.weight)))
             }
         case .fullRandom:
@@ -151,23 +165,23 @@ struct LotteryDetailView: View {
         let randomNum = Int(arc4random_uniform(UInt32(entryIndexes.count)))
         let randomIndex = entryIndexes.index(entryIndexes.startIndex, offsetBy: randomNum)
         let randomEntryIndex = entryIndexes[randomIndex]
-        return lottery.entries[randomEntryIndex]
+        return entries[randomEntryIndex]
     }
 }
 
-struct LotteryDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            LotteryDetailView(lottery: Lottery(
-                name: "Lottery 1",
-                entries: [.init("Marcos"), .init("Miguel"), .init("Samantha")],
-                lastResults: [
-                    .init(entry: .init("João", weight: 1, winningCounter: 0), date: Date()),
-                    .init(entry: .init("Maria", weight: 0, winningCounter: 1), date: Date()),
-                    .init(entry: .init("James", weight: 1, winningCounter: 0), date: Date()),
-                    .init(entry: .init("Ana", weight: 1, winningCounter: 0), date: Date())
-                ]
-            ))
-        }
-    }
-}
+//struct LotteryDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            LotteryDetailView(lottery: Lottery(
+//                name: "Lottery 1",
+//                entries: [.init("Marcos"), .init("Miguel"), .init("Samantha")],
+//                lastResults: [
+//                    .init(entry: .init("João", weight: 1, winningCounter: 0), date: Date()),
+//                    .init(entry: .init("Maria", weight: 0, winningCounter: 1), date: Date()),
+//                    .init(entry: .init("James", weight: 1, winningCounter: 0), date: Date()),
+//                    .init(entry: .init("Ana", weight: 1, winningCounter: 0), date: Date())
+//                ]
+//            ))
+//        }
+//    }
+//}

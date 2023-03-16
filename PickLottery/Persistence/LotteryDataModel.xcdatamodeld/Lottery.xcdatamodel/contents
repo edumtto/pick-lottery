@@ -19,8 +19,8 @@
         <relationship name="results" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LotteryResult" inverseName="entry" inverseEntity="LotteryResult"/>
     </entity>
     <entity name="LotteryResult" representedClassName="LotteryResultMO" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="entry" maxCount="1" deletionRule="Nullify" destinationEntity="LotteryEntry" inverseName="results" inverseEntity="LotteryEntry"/>
         <relationship name="lottery" maxCount="1" deletionRule="Nullify" destinationEntity="Lottery" inverseName="results" inverseEntity="Lottery"/>
     </entity>

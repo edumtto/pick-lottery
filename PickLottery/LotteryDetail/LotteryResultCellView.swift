@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LotteryResultCellView: View {
-    @Binding var result: LotteryResult
+    let result: LotteryResultMO
     
     var body: some View {
         HStack {
@@ -15,10 +15,10 @@ struct LotteryResultCellView: View {
     }
 }
 
-struct LotteryResultCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        LotteryResultCellView(
-            result: .constant( .init(entry: .init("Joao"), date: Date()) )
-        )
-    }
-}
+//struct LotteryResultCellView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LotteryResultCellView(
+//            result: .constant( .init(entry: .init("Joao"), date: Date()) )
+//        )
+//    }
+//}

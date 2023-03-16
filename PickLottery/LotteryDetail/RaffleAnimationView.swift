@@ -7,10 +7,17 @@ struct RaffleItem: Identifiable {
     let color: Color
     let offset: CGFloat
     
-    init(_ entry: LotteryEntry, offset: CGFloat = 0) {
+    init(_ entry: LotteryEntryMO, offset: CGFloat = 0) {
         id = entry.id
         name = entry.name
         color = entry.color
+        self.offset = offset
+    }
+    
+    init(id: UUID = .init(), name: String = "", color: Color = .white, offset: CGFloat = 0) {
+        self.id = id
+        self.name = name
+        self.color = color
         self.offset = offset
     }
 }
@@ -18,13 +25,13 @@ struct RaffleItem: Identifiable {
 struct RaffleAnimationView: View {
     @Environment(\.dismiss) var dismiss
     
-    let entries: [LotteryEntry]
-    let targetEntry: LotteryEntry?
+    let entries: [LotteryEntryMO]
+    let targetEntry: LotteryEntryMO?
     
     @Binding var isRaffleAnimationFinished: Bool
     
     @State private var nextEntryIndex: Int = 0
-    @State private var displayedItem: RaffleItem = .init(.init(""))
+    @State private var displayedItem: RaffleItem = .init()
     @State private var timer: Timer?
     @State private var winnerAnimation = false
     
@@ -87,7 +94,7 @@ struct RaffleAnimationView: View {
         timer?.invalidate()
         timer = nil
         if let targetEntry = targetEntry, displayedItem.id != targetEntry.id {
-            displayedItem = .init(targetEntry)
+            displayedItem = .init(targetEntry)//id: targetEntry.id, name: targetEntry.name, color: targetEntry.color)
         }
         withAnimation {
             winnerAnimation = true
@@ -99,9 +106,9 @@ struct RaffleAnimationView: View {
         displayedItem = .init(nextEntry())
     }
     
-    private func nextEntry() -> LotteryEntry {
+    private func nextEntry() -> LotteryEntryMO {
         if entries.isEmpty {
-            return .init("")
+            return .init()
         }
         
         let entry = entries[nextEntryIndex]
@@ -113,15 +120,15 @@ struct RaffleAnimationView: View {
     }
 }
 
-struct RaffleAnimationView_Previews: PreviewProvider {
-    static let entriesMock: [LotteryEntry] = [
-        .init("João", weight: 1, winningCounter: 0),
-        .init("Maria", weight: 0, winningCounter: 1),
-        .init("James", weight: 1, winningCounter: 0),
-        .init("Ana", weight: 1.5, winningCounter: 2)
-    ]
-    
-    static var previews: some View {
-        RaffleAnimationView(entries: entriesMock, targetEntry: entriesMock[1], isRaffleAnimationFinished: .constant(false))
-    }
-}
+//struct RaffleAnimationView_Previews: PreviewProvider {
+//    static let entriesMock: [LotteryEntry] = [
+//        .init("João", weight: 1, winningCounter: 0),
+//        .init("Maria", weight: 0, winningCounter: 1),
+//        .init("James", weight: 1, winningCounter: 0),
+//        .init("Ana", weight: 1.5, winningCounter: 2)
+//    ]
+//    
+//    static var previews: some View {
+//        RaffleAnimationView(entries: entriesMock, targetEntry: entriesMock[1], isRaffleAnimationFinished: .constant(false))
+//    }
+//}

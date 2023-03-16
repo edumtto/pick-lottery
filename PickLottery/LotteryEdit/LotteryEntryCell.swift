@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LotteryEntryCell: View {
-    @Binding var entry: LotteryEntry
+    var entry: LotteryEntryMO
     
     var body: some View {
         HStack {
@@ -16,17 +16,17 @@ struct LotteryEntryCell: View {
                 
             }
             HStack(spacing: 0) {
-                Image(systemName: entry.winningCounter == 0 ? "trophy": "trophy.fill")
-                Text("\(entry.winningCounter)")
+                Image(systemName: entry.wins == 0 ? "trophy": "trophy.fill")
+                Text("\(entry.wins)")
             }
         }.opacity(entry.weight == 0 ? 0.5 : 1)
     }
 }
 
-struct LotteryEntryCell_Previews: PreviewProvider {
-    static var previews: some View {
-        LotteryEntryCell(entry:
-                .constant(.init("Eduardo da Silva", weight: 1, winningCounter: 0))
-        )
-    }
-}
+//struct LotteryEntryCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LotteryEntryCell(entry:
+//                .constant(.init("Eduardo da Silva", weight: 1, winningCounter: 0))
+//        )
+//    }
+//}

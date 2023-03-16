@@ -1,6 +1,10 @@
 import Foundation
 import CoreData
 
+@objc(LotteryMO)
+public class LotteryMO: NSManagedObject {
+
+}
 
 extension LotteryMO {
 
@@ -9,13 +13,33 @@ extension LotteryMO {
     }
 
     @NSManaged public var descriptionText: String?
-    @NSManaged public var hexColor: String?
+    @NSManaged public var hexColor: String
     @NSManaged public var id: UUID
     @NSManaged public var name: String
     @NSManaged public var raffleMode: Int16
     @NSManaged public var entries: NSSet
     @NSManaged public var results: NSSet
 
+    convenience init(_ lottery: Lottery, context: NSManagedObjectContext) {
+        self.init(context: context)
+        id = lottery.id
+        name = lottery.name
+        hexColor = lottery.color.toHex() ?? ""
+        raffleMode = lottery.raffleMode.rawValue
+        entries = NSSet(
+            array:
+                lottery.entries.map { entry in
+                    let entryMO = LotteryEntryMO(context: context)
+                    entryMO.id = entry.id
+                    entryMO.name = entry.name
+                    entryMO.hexColor = entry.color.toHex() ?? "FFFFFF"
+                    entryMO.weight = Float(entry.weight)
+                    entryMO.wins = Int32(entry.winningCounter)
+                    return entryMO
+                }
+        )
+        results = .init()
+    }
 }
 
 // MARK: Generated accessors for entries

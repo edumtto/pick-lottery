@@ -2,8 +2,7 @@ import SwiftUI
 import CoreData
 
 struct LotteryListView: View {
-    @State var lotteries: [Lottery]
-//    @FetchRequest(sortDescriptors: []) var lotteries: FetchedResults<LotteryMO>
+    @FetchRequest(sortDescriptors: []) var lotteries: FetchedResults<LotteryMO>
     
     @State var presentCreateAlert = false
     @State var newLotteryName = ""
@@ -32,11 +31,8 @@ struct LotteryListView: View {
             }
             .sheet(isPresented: $presentCreateAlert) {
                 NavigationStack {
-                    CreateLotteryView(lotteries: $lotteries)
+                    CreateLotteryView()
                 }
-            }
-            .onAppear {
-                lotteries = lotteryStore.fetchLotteries()
             }
         }
     }
@@ -45,12 +41,12 @@ struct LotteryListView: View {
 struct LotteryList_Previews: PreviewProvider {
     static var previews: some View {
         LotteryListView(
-            lotteries: [
-                .init(
-                    name: "🎲 Dice",
-                    entries:  [.init("1"), .init("2"), .init("3"), .init("4"), .init("5"), .init("6")]
-                )
-            ]
+//            lotteries: [
+//                .init(
+//                    name: "🎲 Dice",
+//                    entries:  [.init("1"), .init("2"), .init("3"), .init("4"), .init("5"), .init("6")]
+//                )
+//            ]
         )
     }
 }

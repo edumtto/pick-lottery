@@ -16,10 +16,10 @@ extension LotteryResultMO {
         return NSFetchRequest<LotteryResultMO>(entityName: "LotteryResult")
     }
 
-    @NSManaged public var date: Date?
-    @NSManaged public var id: UUID?
-    @NSManaged public var entry: LotteryEntryMO?
-    @NSManaged public var lottery: LotteryMO?
+    @NSManaged public var date: Date
+    @NSManaged public var id: UUID
+    @NSManaged public var entry: LotteryEntryMO
+    @NSManaged public var lottery: LotteryMO
 
 }
 

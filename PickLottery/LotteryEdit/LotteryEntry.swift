@@ -1,18 +1,18 @@
 import SwiftUI
 
 struct LotteryEntry: Identifiable {
-    let id: UUID = UUID()
-    
+    let id: UUID
     let name: String
-    let weight: Double
+    let weight: Float
     let winningCounter: UInt
     let color: Color
     
-    init(_ name: String, weight: Double = 1, winningCounter: UInt = 0) {
+    init(_ name: String, id: UUID = UUID(), weight: Float = 1, winningCounter: UInt = 0, color: Color = .random) {
+        self.id = id
         self.name = name
         self.weight = weight
         self.winningCounter = winningCounter
-        self.color = .random
+        self.color = color
     }
 }
 

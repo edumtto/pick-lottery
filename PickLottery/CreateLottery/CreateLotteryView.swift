@@ -2,14 +2,12 @@ import SwiftUI
 
 struct CreateLotteryView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var lotteryStore: LotteryStore
     
-    @Binding var lotteries: [Lottery]
     @State var name: String = ""
     @State var raffleMode: Lottery.RaffleMode = .fullRandom
     @State var entriesDescription: String = ""
     @State var showValidationAlert = false
-    
-    @EnvironmentObject var lotteryStore: LotteryStore
     
     var body: some View {
         nameInput
@@ -118,7 +116,7 @@ struct CreateLotteryView: View {
         let newLottery = Lottery(name: name, entries: entries, raffleMode: raffleMode)
         
         lotteryStore.addLottery(newLottery)
-        lotteries = lotteryStore.fetchLotteries()
+        //lotteries = lotteryStore.fetchLotteries()
         
         dismiss()
     }
@@ -127,7 +125,7 @@ struct CreateLotteryView: View {
 struct CreateLotteryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            CreateLotteryView(lotteries: .constant([]))
+            CreateLotteryView()//lotteries: .constant([]))
         }
     }
 }

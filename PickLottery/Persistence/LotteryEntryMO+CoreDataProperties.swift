@@ -1,12 +1,5 @@
-//
-//  LotteryEntryMO+CoreDataProperties.swift
-//  PickLottery
-//
-//  Created by Eduardo Motta de Oliveira on 3/13/23.
-//
-//
-
 import Foundation
+import SwiftUI
 import CoreData
 
 
@@ -16,7 +9,7 @@ extension LotteryEntryMO {
         return NSFetchRequest<LotteryEntryMO>(entityName: "LotteryEntry")
     }
 
-    @NSManaged public var hexColor: String?
+    @NSManaged public var hexColor: String
     @NSManaged public var name: String
     @NSManaged public var weight: Float
     @NSManaged public var wins: Int32
@@ -24,6 +17,9 @@ extension LotteryEntryMO {
     @NSManaged public var lottery: LotteryMO?
     @NSManaged public var results: NSSet?
 
+    var color: Color {
+        Color(hex: hexColor) ?? Color.primary
+    }
 }
 
 // MARK: Generated accessors for results
@@ -45,4 +41,10 @@ extension LotteryEntryMO {
 
 extension LotteryEntryMO : Identifiable {
 
+}
+
+extension LotteryEntryMO {
+    var lotteryEntry: LotteryEntry {
+        LotteryEntry(name, id: id, weight: weight, winningCounter: UInt(wins))
+    }
 }

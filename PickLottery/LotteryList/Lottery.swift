@@ -55,30 +55,8 @@ final class Lottery: Identifiable, ObservableObject {
                 }
                 return nil
             }),
-            color: Color(hex: lotteryMO.hexColor ?? "") ?? .red,
+            color: Color(hex: lotteryMO.hexColor) ?? .red,
             raffleMode: RaffleMode(rawValue: lotteryMO.raffleMode) ?? .fullRandom
         )
-    }
-    
-    func lotteryMO(context: NSManagedObjectContext) -> LotteryMO {
-        let lotteryMO = LotteryMO(context: context)
-        lotteryMO.id = id
-        lotteryMO.name = name
-        lotteryMO.hexColor = color.toHex() ?? ""
-        lotteryMO.raffleMode = raffleMode.rawValue
-        lotteryMO.entries = NSSet(
-            array:
-                entries.map { entry in
-                    let entryMO = LotteryEntryMO(context: context)
-                    entryMO.id = entry.id
-                    entryMO.name = entry.name
-                    entryMO.hexColor = entry.color.toHex()
-                    entryMO.weight = Float(entry.weight)
-                    entryMO.wins = Int32(entry.winningCounter)
-                    return entryMO
-                }
-        )
-        lotteryMO.results = .init()
-        return lotteryMO
     }
 }
