@@ -1,6 +1,10 @@
 import SwiftUI
 
 struct CreateLotteryView: View {
+    enum FocusedField {
+            case name, entries
+        }
+    
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var lotteryStore: LotteryStore
     
@@ -8,24 +12,31 @@ struct CreateLotteryView: View {
     @State var raffleMode: Lottery.RaffleMode = .fullRandom
     @State var entriesDescription: String = ""
     @State var showValidationAlert = false
+    @FocusState private var focusedField: FocusedField?
     
     var body: some View {
-        nameInput
-        modeInput
-        entriesInput
+        VStack {
+            nameInput
+            modeInput
+            entriesInput
+        }
+            .padding()
         Spacer()
         createButton
-        .navigationTitle("New lottery")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
-                    dismiss()
+            .navigationTitle("New lottery")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
                 }
             }
-        }
-        .alert(isPresented: $showValidationAlert) {
-            Alert(title: Text("Enter with a name for the lottery"))
-        }
+            .alert(isPresented: $showValidationAlert) {
+                Alert(title: Text("Enter with a name for the lottery"))
+            }
+            .onAppear {
+                focusedField = .name
+            }
     }
     
     var nameInput: some View {
@@ -37,6 +48,7 @@ struct CreateLotteryView: View {
             }
             .padding(.bottom, -4)
             TextField("New lottery", text: $name)
+                .focused($focusedField, equals: .name)
                 .padding(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
@@ -44,7 +56,7 @@ struct CreateLotteryView: View {
                         .stroke(Color.accentColor)
                 )
         }
-        .padding()
+        .padding(.bottom)
     }
     
     var modeInput: some View {
@@ -65,7 +77,7 @@ struct CreateLotteryView: View {
             .padding(.top, -12)
             .padding(.leading, -12)
         }
-        .padding()
+        .padding(.bottom)
     }
     
     var entriesInput: some View {
@@ -78,6 +90,7 @@ struct CreateLotteryView: View {
             .padding(.bottom, -4)
             
             TextField("John, Ana, ...", text: $entriesDescription, axis: .vertical)
+                .focused($focusedField, equals: .entries)
                 .padding(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
@@ -85,7 +98,6 @@ struct CreateLotteryView: View {
                         .stroke(entriesDescription == "" ? Color.gray : Color.accentColor)
                 )
         }
-        .padding()
     }
     
     var createButton: some View {
@@ -106,17 +118,15 @@ struct CreateLotteryView: View {
             return
         }
         
-        let entries: [LotteryEntry] = entriesDescription
+        let entries: [Lottery.Entry] = entriesDescription
             .components(separatedBy: ",")
             .compactMap {
                 let entryName = $0.trimmingCharacters(in: CharacterSet(charactersIn: " "))
-                return entryName.isEmpty ? nil : LotteryEntry(entryName)
+                return entryName.isEmpty ? nil : Lottery.Entry(entryName)
             }
         
         let newLottery = Lottery(name: name, entries: entries, raffleMode: raffleMode)
-        
         lotteryStore.addLottery(newLottery)
-        //lotteries = lotteryStore.fetchLotteries()
         
         dismiss()
     }
@@ -125,7 +135,7 @@ struct CreateLotteryView: View {
 struct CreateLotteryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            CreateLotteryView()//lotteries: .constant([]))
+            CreateLotteryView()
         }
     }
 }

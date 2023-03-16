@@ -2,6 +2,16 @@ import Foundation
 import SwiftUI
 import CoreData
 
+@objc(LotteryEntryMO)
+public class LotteryEntryMO: NSManagedObject {
+    static var example: LotteryEntryMO {
+        let context = LotteryStore.preview.container.viewContext
+        let fetchRequest: NSFetchRequest<LotteryEntryMO> = LotteryEntryMO.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        let results = try! context.fetch(fetchRequest)
+        return results.first!
+    }
+}
 
 extension LotteryEntryMO {
 
@@ -41,10 +51,4 @@ extension LotteryEntryMO {
 
 extension LotteryEntryMO : Identifiable {
 
-}
-
-extension LotteryEntryMO {
-    var lotteryEntry: LotteryEntry {
-        LotteryEntry(name, id: id, weight: weight, winningCounter: UInt(wins))
-    }
 }

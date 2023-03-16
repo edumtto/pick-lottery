@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 struct LotteryEntryCell: View {
@@ -23,10 +24,8 @@ struct LotteryEntryCell: View {
     }
 }
 
-//struct LotteryEntryCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LotteryEntryCell(entry:
-//                .constant(.init("Eduardo da Silva", weight: 1, winningCounter: 0))
-//        )
-//    }
-//}
+struct LotteryEntryCell_Previews: PreviewProvider {
+    static var previews: some View {
+        return LotteryEntryCell(entry: .example)
+    }
+}

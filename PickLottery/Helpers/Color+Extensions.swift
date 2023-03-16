@@ -1,20 +1,5 @@
+import Foundation
 import SwiftUI
-
-struct LotteryEntry: Identifiable {
-    let id: UUID
-    let name: String
-    let weight: Float
-    let winningCounter: UInt
-    let color: Color
-    
-    init(_ name: String, id: UUID = UUID(), weight: Float = 1, winningCounter: UInt = 0, color: Color = .random) {
-        self.id = id
-        self.name = name
-        self.weight = weight
-        self.winningCounter = winningCounter
-        self.color = color
-    }
-}
 
 extension Double {
     static var random: Double {
@@ -90,4 +75,3 @@ extension Color {
         self.init(red: r, green: g, blue: b, opacity: a)
     }
 }
-

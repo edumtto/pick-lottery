@@ -7,14 +7,13 @@ struct LotteryDetailView: View {
     @StateObject var lottery: LotteryMO
     @State var displayResult: Bool = false
     @State var animate: Bool = false
-    
     @State var presentRaffleAnimation = false
+    @State var isRaffleAnimationFinished = false
     @State var selectedLotteryEntry: LotteryEntryMO? {
         didSet {
             presentRaffleAnimation = true
         }
     }
-    @State var isRaffleAnimationFinished = false
     
     var lastResults: [LotteryResultMO] {
         Array(lottery.results)
@@ -26,6 +25,10 @@ struct LotteryDetailView: View {
         Array(lottery.entries)
             .compactMap { $0 as? LotteryEntryMO }
             .sorted { $0.name < $1.name }
+    }
+    
+    var color: Color {
+        Color(hex: lottery.hexColor) ?? Color.primary
     }
     
     var body: some View {
@@ -75,7 +78,7 @@ struct LotteryDetailView: View {
     var raffleDescription: some View {
         VStack {
             NavigationLink {
-                LotteryEntriesView(lottery: lottery, entriesSet: $lottery.entries)
+                LotteryEntriesView(entries: $lottery.entries, lottery: lottery)
             } label: {
                 HStack {
                     Text("\(lottery.entries.count) entries")
@@ -104,9 +107,10 @@ struct LotteryDetailView: View {
                 
                 let selectedEntry = raffleRandomEntry()
                 selectedLotteryEntry = selectedEntry
-                let result = LotteryResult(entry: selectedEntry, date: Date())
-                //lottery.lastResults.append(result)
-                lotteryStore.addResult(result, in: lottery)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    lotteryStore.addResult(id: .init(), date: Date(), entry: selectedEntry, in: lottery)
+                }
+                
                 displayResult = true
             }, label: {
                 Text("Raffle")
@@ -115,10 +119,10 @@ struct LotteryDetailView: View {
             })
             .padding(.bottom)
             .buttonStyle(.borderedProminent)
-            //.disabled(lottery.entries.isEmpty)
+            .disabled(lottery.entries.count == .zero)
         }
         .padding()
-        //.background(lottery.color.opacity(0.1))
+        .background(color.opacity(0.1))
     }
     
     

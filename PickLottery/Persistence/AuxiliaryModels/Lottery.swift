@@ -23,40 +23,47 @@ final class Lottery: Identifiable, ObservableObject {
         }
     }
     
+    struct Entry: Identifiable {
+        let id: UUID
+        let name: String
+        let weight: Float
+        let wins: Int32
+        let color: String
+        
+        init(_ name: String, id: UUID = UUID(), weight: Float = 1, wins: Int32 = 0, color: Color = .random) {
+            self.id = id
+            self.name = name
+            self.weight = weight
+            self.wins = wins
+            self.color = color.toHex() ?? "FFFFFF"
+        }
+    }
+    
+    struct Result: Identifiable {
+        let id: UUID = UUID()
+        let entryID: UUID
+        let date: Date
+    }
+    
     let id: UUID
     let name: String
-    let color: Color
+    let color: String
     let raffleMode: RaffleMode
-    @Published var entries: [LotteryEntry]
-    @Published var lastResults: [LotteryResult]
+    let entries: [Entry]
+    let results: [Result]
     
     init(id: UUID = .init(),
          name: String,
-         entries: [LotteryEntry] = [],
+         entries: [Entry] = [],
          color: Color = .random,
-         lastResults: [LotteryResult] = [],
+         results: [Result] = [],
          raffleMode: RaffleMode = .fullRandom
     ) {
         self.id = id
         self.name = name
         self.entries = entries
-        self.color = color
-        self.lastResults = lastResults
+        self.color = color.toHex() ?? "FFFFFF"
+        self.results = results
         self.raffleMode = raffleMode
-    }
-    
-    convenience init(_ lotteryMO: LotteryMO) {
-        self.init(
-            id: lotteryMO.id,
-            name: lotteryMO.name,
-            entries: Array(lotteryMO.entries).compactMap({
-                if let entryMO = $0 as? LotteryEntryMO {
-                    return LotteryEntry(entryMO.name)
-                }
-                return nil
-            }),
-            color: Color(hex: lotteryMO.hexColor) ?? .red,
-            raffleMode: RaffleMode(rawValue: lotteryMO.raffleMode) ?? .fullRandom
-        )
     }
 }

@@ -3,7 +3,13 @@ import CoreData
 
 @objc(LotteryMO)
 public class LotteryMO: NSManagedObject {
-
+    static var example: LotteryMO {
+        let context = LotteryStore.preview.container.viewContext
+        let fetchRequest: NSFetchRequest<LotteryMO> = LotteryMO.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        let results = try! context.fetch(fetchRequest)
+        return results.first!
+    }
 }
 
 extension LotteryMO {
@@ -19,27 +25,6 @@ extension LotteryMO {
     @NSManaged public var raffleMode: Int16
     @NSManaged public var entries: NSSet
     @NSManaged public var results: NSSet
-
-    convenience init(_ lottery: Lottery, context: NSManagedObjectContext) {
-        self.init(context: context)
-        id = lottery.id
-        name = lottery.name
-        hexColor = lottery.color.toHex() ?? ""
-        raffleMode = lottery.raffleMode.rawValue
-        entries = NSSet(
-            array:
-                lottery.entries.map { entry in
-                    let entryMO = LotteryEntryMO(context: context)
-                    entryMO.id = entry.id
-                    entryMO.name = entry.name
-                    entryMO.hexColor = entry.color.toHex() ?? "FFFFFF"
-                    entryMO.weight = Float(entry.weight)
-                    entryMO.wins = Int32(entry.winningCounter)
-                    return entryMO
-                }
-        )
-        results = .init()
-    }
 }
 
 // MARK: Generated accessors for entries
