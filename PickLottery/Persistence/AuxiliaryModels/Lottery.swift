@@ -30,7 +30,7 @@ final class Lottery: Identifiable, ObservableObject {
         let wins: Int32
         let color: String
         
-        init(_ name: String, id: UUID = UUID(), weight: Float = 1, wins: Int32 = 0, color: Color = .random) {
+        init(_ name: String, id: UUID = UUID(), weight: Float = 1, wins: Int32 = 0, color: Color = .entryRandom) {
             self.id = id
             self.name = name
             self.weight = weight
@@ -55,7 +55,7 @@ final class Lottery: Identifiable, ObservableObject {
     init(id: UUID = .init(),
          name: String,
          entries: [Entry] = [],
-         color: Color = .random,
+         color: Color = .lotteryRandom,
          results: [Result] = [],
          raffleMode: RaffleMode = .fullRandom
     ) {

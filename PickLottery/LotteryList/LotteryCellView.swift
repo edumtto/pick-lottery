@@ -3,17 +3,17 @@ import SwiftUI
 struct LotteryCellView: View {
     let lottery: LotteryMO
     
-    private var headerColor: Color {
+    private var backgroundColor: Color {
         (Color(hex: lottery.hexColor) ?? .primary)
-            .opacity(0.2)
     }
+    
     
     var body: some View {
         NavigationLink {
-            LotteryDetailView(lottery: lottery)
+            LotteryDetailView(viewModel: .init(lottery: lottery))
         } label: {
             ZStack {
-                headerColor
+                backgroundColor
                 
                 Text(lottery.name)
                     .multilineTextAlignment(.center)

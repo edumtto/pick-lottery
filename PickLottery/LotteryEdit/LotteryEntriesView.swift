@@ -12,11 +12,14 @@ struct LotteryEntriesView: View {
     }
     
     var body: some View {
-        List {
-            ForEach(entryList) { entry in
-                LotteryEntryCell(entry: entry)
+        ScrollView {
+            LazyVStack {
+                ForEach(entryList) { entry in
+                    LotteryEntryCell(entry: entry)
+                }
+                .onDelete(perform: deleteItems)
             }
-            .onDelete(perform: deleteItems)
+            .padding()
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

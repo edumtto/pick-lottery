@@ -60,10 +60,14 @@ class LotteryStore: ObservableObject {
     }
     
     private func saveContext() {
-        guard context.hasChanges else { return }
+        guard context.hasChanges else {
+            print("No context changes to save")
+            return
+        }
         
         do {
             try context.save()
+            print("Context saved")
         } catch let error as NSError {
             print("Error saving context: \(error) description: \(error.userInfo)")
         }
@@ -134,12 +138,25 @@ extension LotteryStore: LotteryStorageProvider {
         resultMO.entry = entry
         resultMO.date = date
         resultMO.lottery = lottery
+        
+        entry.wins += 1
+        
         saveContext()
         return resultMO
     }
     
     func clearResults(in lottery: LotteryMO) {
-        lottery.results.forEach { context.delete($0 as! LotteryResultMO) }
+//        let resultsCopy = lottery.results
+//        lottery.results = []
+        
+        lottery.results.forEach {
+            if let result = $0 as? LotteryResultMO {
+                result.entry.results = nil
+                result.entry.wins = .zero
+                context.delete(result)
+            }
+        }
+        
         saveContext()
     }
 }

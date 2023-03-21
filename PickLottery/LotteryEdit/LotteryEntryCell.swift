@@ -4,6 +4,10 @@ import SwiftUI
 struct LotteryEntryCell: View {
     var entry: LotteryEntryMO
     
+    var wins: Int {
+        entry.results?.count ?? .zero
+    }
+    
     var body: some View {
         HStack {
             Circle()
@@ -11,16 +15,26 @@ struct LotteryEntryCell: View {
                 .foregroundColor(entry.color)
             Text(entry.name)
             Spacer()
+            if wins == 1 {
+                trophyImage
+            } else if wins > 1 {
+                HStack(spacing: 0) {
+                    Text("\(wins)x")
+                    trophyImage
+                }
+            }
             HStack(spacing: 0) {
-                Image(systemName: entry.weight == 0 ? "scalemass" : "scalemass.fill")
+                Image(systemName: "scalemass.fill")
+                    .foregroundColor(.gray)
                 Text(String(format: "%.1f", entry.weight))
-                
             }
-            HStack(spacing: 0) {
-                Image(systemName: entry.wins == 0 ? "trophy": "trophy.fill")
-                Text("\(entry.wins)")
-            }
+            .padding(.leading, 8)
         }.opacity(entry.weight == 0 ? 0.5 : 1)
+    }
+    
+    var trophyImage: some View {
+        Image(systemName: "trophy.fill")
+            .foregroundColor(.yellow)
     }
 }
 
