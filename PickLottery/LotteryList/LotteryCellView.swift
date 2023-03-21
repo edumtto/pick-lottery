@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LotteryCellView: View {
+    @EnvironmentObject var lotteryStore: LotteryStore
     let lottery: LotteryMO
     
     private var backgroundColor: Color {
@@ -10,11 +11,13 @@ struct LotteryCellView: View {
     
     var body: some View {
         NavigationLink {
-            LotteryDetailView(viewModel: .init(lottery: lottery))
+            LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
         } label: {
             ZStack {
                 RoundedRectangle(cornerSize: .init(width: 16, height: 16))
                     .stroke(backgroundColor, lineWidth: 2)
+                    .background(backgroundColor.opacity(0.2))
+                    .cornerRadius(16)
                     .padding(2)
                 
                 HStack {

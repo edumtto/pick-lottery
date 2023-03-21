@@ -42,11 +42,10 @@ class LotteryStore: ObservableObject {
         let lottery2 = Lottery(name: "Dice", description: "Roll a tradicional six face dice", illustration: "🎲", entries: entries2, results: .init())
         
         let lottery3 = Lottery(name: "Questions", description: "Pick a question to ask someone", entries: entries2, results: .init())
-        
         let lottery4 = Lottery(name: "Names", entries: entries1, results: .init())
         
-        storage.addLottery(lottery2)
         storage.addLottery(lottery1)
+        storage.addLottery(lottery2)
         storage.addLottery(lottery3)
         storage.addLottery(lottery4)
         

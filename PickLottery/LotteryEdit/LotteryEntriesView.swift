@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LotteryEntriesView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var lotteryStore: LotteryStore
     @Binding var entries: NSSet
     let lottery: LotteryMO
@@ -33,7 +34,14 @@ struct LotteryEntriesView: View {
                 }
             }
         }
-        .navigationTitle(lottery.name + " Entries")
+        .navigationTitle("Entries")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Cancel") {
+                    dismiss()
+                }
+            }
+        }
     }
     
     private func deleteItems(offsets: IndexSet) {

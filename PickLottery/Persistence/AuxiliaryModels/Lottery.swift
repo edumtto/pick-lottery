@@ -16,7 +16,7 @@ final class Lottery: Identifiable, ObservableObject {
         var description: String {
             switch self {
             case .fullRandom:
-                return "Fully randomized (default)"
+                return "Default"
             case .weightedEntries:
                 return "Weighted entries"
             case .balancedVictories:

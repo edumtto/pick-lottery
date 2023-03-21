@@ -1,97 +1,15 @@
 import SwiftUI
 import Combine
 
-final class LotteryDetailViewModel: ObservableObject {
-    @Published var lottery: LotteryMO
-    @Published var animate: Bool = false
-    @Published var presentRaffleAnimation = false
-    @Published var isRaffleAnimationFinished = false
-    var selectedLotteryEntry: LotteryEntryMO? {
-        didSet {
-            presentRaffleAnimation = true
-        }
-    }
-    
-    var lastResults: [LotteryResultMO] {
-        Array(lottery.results)
-            .compactMap { $0 as? LotteryResultMO }
-            .sorted { $0.date > $1.date }
-    }
-    
-    var entries: [LotteryEntryMO] {
-        Array(lottery.entries)
-            .compactMap { $0 as? LotteryEntryMO }
-            .sorted { $0.name < $1.name }
-    }
-    
-    init(lottery: LotteryMO) {
-        self.lottery = lottery
-    }
-    
-    func raffleRandomEntry() -> LotteryEntryMO {
-        let numberOfEntries = lottery.entries.count
-        var entryIndexes = [Int]()
-        let raffleMode = Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom
-        
-        switch raffleMode {
-        case .balancedVictories:
-            var biggerVictoryNumber: UInt = 0
-            entries.forEach { entry in
-                if entry.wins > biggerVictoryNumber {
-                    biggerVictoryNumber = UInt(entry.wins)
-                }
-            }
-            
-            for i in 0..<numberOfEntries {
-                let entry = entries[i]
-                if entry.wins < biggerVictoryNumber {
-                    entryIndexes.append(i)
-                }
-            }
-            
-        case .weightedEntries:
-            for i in 0..<numberOfEntries {
-                let entry = entries[i]
-                entryIndexes.append(contentsOf: [Int](repeating: i, count: Int(entry.weight)))
-            }
-        case .fullRandom:
-            entryIndexes = [Int](0..<numberOfEntries)
-        }
-        
-        let randomNum = Int(arc4random_uniform(UInt32(entryIndexes.count)))
-        let randomIndex = entryIndexes.index(entryIndexes.startIndex, offsetBy: randomNum)
-        let randomEntryIndex = entryIndexes[randomIndex]
-        return entries[randomEntryIndex]
-    }
-}
-
 struct LotteryDetailView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var lotteryStore: LotteryStore
-    
     @StateObject var viewModel: LotteryDetailViewModel
     
-    var color: Color {
-        Color(hex: viewModel.lottery.hexColor) ?? Color.primary
-    }
-    
     var body: some View {
-        ZStack {
-            VStack {
-                raffleDescription
-                    .padding(.bottom, -6)
-                ScrollView {
-                    LazyVStack {
-                        Text("Winners")
-                            .font(.headline)
-                        ForEach(viewModel.lastResults) { result in
-                            LotteryResultCellView(result: result)
-                        }
-                    }
-                    .padding()
-                }
-                Spacer()
-            }
+        VStack {
+            raffleResults
+            Spacer()
+            raffleDescription
         }
         .sheet(isPresented: $viewModel.presentRaffleAnimation) {
             ZStack {
@@ -104,17 +22,28 @@ struct LotteryDetailView: View {
                 }
             }
         }
+        .sheet(isPresented: $viewModel.presentEntryEditor) {
+            NavigationStack {
+                LotteryEntriesView(entries: $viewModel.lottery.entries, lottery: viewModel.lottery)
+            }
+        }
+        .sheet(isPresented: $viewModel.presentRaffleModeDescription) {
+            NavigationStack {
+                Text("Explanation...")
+            }
+            .presentationDetents([.medium])
+            .presentationDragIndicator(.visible)
+        }
         .toolbar {
             ToolbarItem {
                 Menu("Options") {
                     Button("Clear results") {
-                        lotteryStore.clearResults(in: viewModel.lottery)
-                        viewModel.selectedLotteryEntry = nil
+                        viewModel.clearResults()
                     }
                     Button {
                         dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                            lotteryStore.removeLottery(viewModel.lottery)
+                            viewModel.deleteLottery()
                         }
                     } label: {
                         Label("Delete lottery", systemImage: "trash")
@@ -125,61 +54,86 @@ struct LotteryDetailView: View {
         .navigationTitle(viewModel.lottery.name)
     }
     
-    var raffleDescription: some View {
-        VStack {
-            NavigationLink {
-                LotteryEntriesView(entries: $viewModel.lottery.entries, lottery: viewModel.lottery)
-            } label: {
-                HStack {
-                    Text("\(viewModel.lottery.entries.count) entries")
-                        .fontWeight(.medium)
-                        .foregroundColor(.black)
-                    Image(systemName: "chevron.right")
-                        .tint(.black)
-                }
+    var raffleResults: some View {
+        VStack(alignment: .leading) {
+            Text("Last winners:")
+                .font(.headline)
+            ScrollView {
+//                if viewModel.lastResults.isEmpty {
+//                    Text("No results yet! Tap \"Raffle\" to run the lottery.")
+//                } else {
+                    LazyVStack {
+                        ForEach(viewModel.lastResults) { result in
+                            LotteryResultCellView(result: result)
+                        }
+                    }
+//                }
             }
-            .padding(.bottom)
-            
-            HStack {
-                Text(Lottery.RaffleMode(rawValue: viewModel.lottery.raffleMode)?.description ?? "")
-                    .foregroundColor(.black)
-                    .fontWeight(.medium)
-                Button(role: .none) {
-                    print("Info")
-                } label: {
-                    Image(systemName: "info.circle")
-                        .fontWeight(.medium)
-                        .tint(.black)
-                }
-            }
-            .padding(.bottom)
-            
-            Button(action: {
-                viewModel.isRaffleAnimationFinished = false
-                
-                let selectedEntry = viewModel.raffleRandomEntry()
-                viewModel.selectedLotteryEntry = selectedEntry
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    lotteryStore.addResult(id: .init(), date: Date(), entry: selectedEntry, in: viewModel.lottery)
-                }
-            }, label: {
-                Text("Raffle")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-            })
-            .padding(.bottom)
-            .buttonStyle(.borderedProminent)
-            .disabled(viewModel.lottery.entries.count == .zero)
         }
         .padding()
-        .background(color)
+    }
+    
+    var raffleDescription: some View {
+        VStack {
+            Divider()
+                .frame(height: 2)
+                .overlay(viewModel.color)
+            
+            HStack {
+                VStack(alignment: .leading) {
+                    raffleProperty(title: "Entries", description: String(viewModel.lottery.entries.count), action: {
+                        viewModel.presentEntryEditor.toggle()
+                    })
+                    
+                    raffleProperty(title: "Mode", description: viewModel.modeDescription, action: {
+                        viewModel.presentRaffleModeDescription.toggle()
+                    })
+                }
+                .padding()
+                raffleButton
+                    .padding()
+            }
+        }
+        .background(viewModel.color.opacity(0.2))
+    }
+    
+    var raffleButton: some View {
+        Button(action: {
+            viewModel.raffleButtonAction()
+        }, label: {
+            Text("Raffle")
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(minWidth: 70, minHeight: 70)
+                .background(Color.accentColor)
+                .cornerRadius(16)
+            
+        })
+        .disabled(viewModel.lottery.entries.count == .zero)
+    }
+    
+    func raffleProperty(title: String, description: String, action: @escaping () -> Void) -> some View {
+        Button {
+            action()
+        } label: {
+            HStack {
+                Text(title + ":")
+                    .foregroundColor(.black)
+                Text(description)
+                    .foregroundColor(Color.accentColor)
+                    .fontWeight(.medium)
+                    .underline()
+                    .padding(2)
+                Spacer()
+            }
+        }
     }
 }
 
 struct LotteryDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            LotteryDetailView(viewModel: LotteryDetailViewModel(lottery: .example))
+            LotteryDetailView(viewModel: LotteryDetailViewModel(lottery: .example, lotteryStore: LotteryStore.preview))
         }
     }
 }
