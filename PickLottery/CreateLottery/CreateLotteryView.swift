@@ -15,12 +15,14 @@ struct CreateLotteryView: View {
     @FocusState private var focusedField: FocusedField?
     
     var body: some View {
-        VStack {
-            nameInput
-            modeInput
-            entriesInput
-        }
+        ScrollView {
+            VStack {
+                nameInput
+                modeInput
+                entriesInput
+            }
             .padding()
+        }
         Spacer()
         createButton
             .navigationTitle("New lottery")

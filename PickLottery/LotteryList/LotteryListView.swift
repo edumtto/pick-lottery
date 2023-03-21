@@ -12,7 +12,7 @@ struct LotteryListView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: threeColumnGrid) {
+                LazyVStack {
                     ForEach(lotteries) { lottery in
                         LotteryCellView(lottery: lottery)
                     }
@@ -26,6 +26,7 @@ struct LotteryListView: View {
                 } label: {
                     Image(systemName: "plus.app")
                         .tint(.accentColor)
+                        .font(.title2)
                 }
             }
             .sheet(isPresented: $presentCreateAlert) {

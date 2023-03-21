@@ -17,10 +17,12 @@ extension LotteryMO {
         return NSFetchRequest<LotteryMO>(entityName: "Lottery")
     }
 
-    @NSManaged public var descriptionText: String?
+    
     @NSManaged public var hexColor: String
     @NSManaged public var id: UUID
     @NSManaged public var name: String
+    @NSManaged public var descriptionText: String?
+    @NSManaged public var illustration: String?
     @NSManaged public var raffleMode: Int16
     @NSManaged public var entries: NSSet
     @NSManaged public var results: NSSet

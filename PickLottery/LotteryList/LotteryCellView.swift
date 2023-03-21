@@ -13,24 +13,48 @@ struct LotteryCellView: View {
             LotteryDetailView(viewModel: .init(lottery: lottery))
         } label: {
             ZStack {
-                backgroundColor
+                RoundedRectangle(cornerSize: .init(width: 16, height: 16))
+                    .stroke(backgroundColor, lineWidth: 2)
+                    .padding(2)
                 
-                Text(lottery.name)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.black)
-                    .font(.headline)
-                    .padding()
+                HStack {
+                    if let emojiText = lottery.illustration {
+                        Text(emojiText)
+                            .font(.largeTitle)
+                    }
+                    VStack {
+                        HStack {
+                            Text(lottery.name)
+                                .multilineTextAlignment(.leading)
+                                .foregroundColor(.black)
+                                .font(.headline)
+                            Spacer()
+                        }
+                        if let description = lottery.descriptionText {
+                            HStack {
+                                Text(description)
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundColor(.black)
+                                    .font(.caption)
+                                Spacer()
+                            }
+                        }
+                    }
+                    Image(systemName: "chevron.right")
+                        .foregroundColor(backgroundColor)
+                }
+                .padding(12)
             }
-            .frame(minHeight: 100)
         }
-        .cornerRadius(8)
+        
+        
     }
 }
 
 struct LotteryCellView_Previews: PreviewProvider {
     static var previews: some View {
         LotteryCellView(lottery: .example)
-            .previewLayout(.fixed(width: 150, height: 150))
+            .previewLayout(.fixed(width: 350, height: 100))
             .padding()
     }
 }

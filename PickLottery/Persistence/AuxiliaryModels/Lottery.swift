@@ -2,6 +2,8 @@ import CoreData
 import SwiftUI
 
 final class Lottery: Identifiable, ObservableObject {
+    typealias Illustration = String // Represents an emoji
+    
     enum RaffleMode: Int16, Identifiable, Codable {
         case fullRandom = 0
         case weightedEntries = 1
@@ -47,6 +49,8 @@ final class Lottery: Identifiable, ObservableObject {
     
     let id: UUID
     let name: String
+    let description: String?
+    let illustration: Illustration?
     let color: String
     let raffleMode: RaffleMode
     let entries: [Entry]
@@ -54,6 +58,8 @@ final class Lottery: Identifiable, ObservableObject {
     
     init(id: UUID = .init(),
          name: String,
+         description: String? = nil,
+         illustration: Illustration? = nil,
          entries: [Entry] = [],
          color: Color = .lotteryRandom,
          results: [Result] = [],
@@ -61,6 +67,8 @@ final class Lottery: Identifiable, ObservableObject {
     ) {
         self.id = id
         self.name = name
+        self.description = description
+        self.illustration = illustration
         self.entries = entries
         self.color = color.toHex() ?? "FFFFFF"
         self.results = results
