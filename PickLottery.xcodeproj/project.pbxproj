@@ -128,10 +128,7 @@
 			children = (
 				3460F9DB29C2A22400A40BD6 /* Helpers */,
 				34D967C929C01FB4006D2559 /* Persistence */,
-				343D2CA029A053E9006ECD38 /* LotteryList */,
-				3496368629A933AE00CDEFB3 /* CreateLottery */,
-				346C37CB299F0DA9000F993C /* LotteryDetail */,
-				34C62A0829A82269003D9B54 /* LotteryEdit */,
+				3462932829D6637F00471C7A /* Scenes */,
 				340BB397299355BF00B336AA /* Assets.xcassets */,
 				340BB393299355BE00B336AA /* PickLotteryApp.swift */,
 				340BB399299355BF00B336AA /* Preview Content */,
@@ -164,13 +161,13 @@
 			path = PickLotteryUITests;
 			sourceTree = "<group>";
 		};
-		343D2CA029A053E9006ECD38 /* LotteryList */ = {
+		343D2CA029A053E9006ECD38 /* Loteries */ = {
 			isa = PBXGroup;
 			children = (
 				343D2CA129A05407006ECD38 /* LotteryListView.swift */,
 				343D2CA529A056DE006ECD38 /* LotteryCellView.swift */,
 			);
-			path = LotteryList;
+			path = Loteries;
 			sourceTree = "<group>";
 		};
 		3451C1FB29B19586002FBD38 /* RaffleAnimation */ = {
@@ -208,6 +205,17 @@
 			path = AuxiliaryModels;
 			sourceTree = "<group>";
 		};
+		3462932829D6637F00471C7A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				34C62A0829A82269003D9B54 /* Entries */,
+				346C37CB299F0DA9000F993C /* LotteryDetail */,
+				343D2CA029A053E9006ECD38 /* Loteries */,
+				3496368629A933AE00CDEFB3 /* CreateLottery */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
 		346C37CB299F0DA9000F993C /* LotteryDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,13 +235,13 @@
 			path = CreateLottery;
 			sourceTree = "<group>";
 		};
-		34C62A0829A82269003D9B54 /* LotteryEdit */ = {
+		34C62A0829A82269003D9B54 /* Entries */ = {
 			isa = PBXGroup;
 			children = (
 				346C37CF299F0F2F000F993C /* LotteryEntriesView.swift */,
 				346C37D1299F0FB2000F993C /* LotteryEntryCell.swift */,
 			);
-			path = LotteryEdit;
+			path = Entries;
 			sourceTree = "<group>";
 		};
 		34D967C929C01FB4006D2559 /* Persistence */ = {
