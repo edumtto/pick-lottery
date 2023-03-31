@@ -23,7 +23,7 @@ extension LotteryEntryMO {
     @NSManaged public var weight: Float
     @NSManaged public var wins: Int32
     @NSManaged public var id: UUID
-    @NSManaged public var lottery: LotteryMO?
+    @NSManaged public var lottery: LotteryMO
     @NSManaged public var results: NSSet?
 
     var color: Color {

@@ -13,9 +13,9 @@
     <entity name="LotteryEntry" representedClassName="LotteryEntryMO" syncable="YES">
         <attribute name="hexColor" attributeType="String" minValueString="0" maxValueString="8" defaultValueString="0xFFFFFF"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" attributeType="String"/>
+        <attribute name="name" attributeType="String" defaultValueString="&quot;&quot;"/>
         <attribute name="weight" attributeType="Float" minValueString="0" defaultValueString="1" usesScalarValueType="YES"/>
-        <attribute name="wins" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="wins" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="lottery" maxCount="1" deletionRule="Nullify" destinationEntity="Lottery" inverseName="entries" inverseEntity="Lottery"/>
         <relationship name="results" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LotteryResult" inverseName="entry" inverseEntity="LotteryResult"/>
     </entity>

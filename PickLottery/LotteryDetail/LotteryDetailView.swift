@@ -24,7 +24,7 @@ struct LotteryDetailView: View {
         }
         .sheet(isPresented: $viewModel.presentEntryEditor) {
             NavigationStack {
-                LotteryEntriesView(entries: $viewModel.lottery.entries, lottery: viewModel.lottery)
+                LotteryEntriesView(lottery: viewModel.lottery)
             }
         }
         .sheet(isPresented: $viewModel.presentRaffleModeDescription) {

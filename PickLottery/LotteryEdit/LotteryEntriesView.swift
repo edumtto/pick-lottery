@@ -3,24 +3,18 @@ import SwiftUI
 struct LotteryEntriesView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var lotteryStore: LotteryStore
-    @Binding var entries: NSSet
+    //@Binding var entries: NSSet
+    @State var updateView = true
     let lottery: LotteryMO
     
-    var entryList: [LotteryEntryMO] {
-        Array(entries)
-            .compactMap { $0 as? LotteryEntryMO }
-            .sorted { $0.name < $1.name }
-    }
+    @FetchRequest var entries: FetchedResults<LotteryEntryMO>
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(entryList) { entry in
-                    LotteryEntryCell(entry: entry)
-                }
-                .onDelete(perform: deleteItems)
+        List {
+            ForEach(entries) { entry in
+                LotteryEntryCell(entry: entry)
             }
-            .padding()
+            .onDelete(perform: deleteItems)
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -37,7 +31,7 @@ struct LotteryEntriesView: View {
         .navigationTitle("Entries")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button("Cancel") {
+                Button("Close") {
                     dismiss()
                 }
             }
@@ -45,8 +39,14 @@ struct LotteryEntriesView: View {
     }
     
     private func deleteItems(offsets: IndexSet) {
-        let selectedEntries = offsets.map { entryList[$0] }
+        let selectedEntries = offsets.map { entries[$0] }
         lotteryStore.removeEntries(selectedEntries, from: lottery)
+    }
+    
+    init(lottery: LotteryMO) {
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        self._entries = FetchRequest(sortDescriptors: [sortDescriptor], predicate: NSPredicate(format: "lottery.id = %@", lottery.id.uuidString))
+        self.lottery = lottery
     }
 }
 
@@ -54,7 +54,6 @@ struct LotteryEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             LotteryEntriesView(
-                entries: .constant(LotteryMO.example.entries),
                 lottery: .example
             )
         }

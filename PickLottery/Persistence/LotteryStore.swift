@@ -16,11 +16,7 @@ protocol LotteryStorageProvider {
 }
 
 class LotteryStore: ObservableObject {
-    let container = NSPersistentContainer(name: "LotteryDataModel")
-    
-    var context: NSManagedObjectContext {
-        container.viewContext
-    }
+    static let shared = LotteryStore(inMemory: false)
     
     static var preview: LotteryStore = {
         let storage = LotteryStore(inMemory: true)
@@ -51,6 +47,12 @@ class LotteryStore: ObservableObject {
         
         return storage
     }()
+    
+    let container = NSPersistentContainer(name: "LotteryDataModel")
+    
+    var context: NSManagedObjectContext {
+        container.viewContext
+    }
 
     init(inMemory: Bool = false) {
         if inMemory {
