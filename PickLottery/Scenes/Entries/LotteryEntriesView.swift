@@ -5,6 +5,7 @@ struct LotteryEntriesView: View {
     @EnvironmentObject var lotteryStore: LotteryStore
     //@Binding var entries: NSSet
     @State var updateView = true
+    @State var showCreateEntry = false
     let lottery: LotteryMO
     
     @FetchRequest var entries: FetchedResults<LotteryEntryMO>
@@ -22,7 +23,7 @@ struct LotteryEntriesView: View {
             }
             ToolbarItem {
                 Button(role: .none) {
-                    lotteryStore.addEntry(.init("abc"), in: lottery)
+                    showCreateEntry.toggle()
                 } label: {
                     Image(systemName: "plus.app")
                 }
@@ -34,6 +35,11 @@ struct LotteryEntriesView: View {
                 Button("Close") {
                     dismiss()
                 }
+            }
+        }
+        .sheet(isPresented: $showCreateEntry) {
+            NavigationStack {
+                CreateEntryView(viewModel: .init(lotteryStore: lotteryStore, lottery: lottery))
             }
         }
     }
