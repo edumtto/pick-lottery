@@ -22,11 +22,6 @@ struct LotteryDetailView: View {
                 }
             }
         }
-        .sheet(isPresented: $viewModel.presentEntryEditor) {
-            NavigationStack {
-                LotteryEntriesView(lottery: viewModel.lottery)
-            }
-        }
         .sheet(isPresented: $viewModel.presentRaffleModeDescription) {
             NavigationStack {
                 Text("Explanation...")
@@ -81,13 +76,17 @@ struct LotteryDetailView: View {
             
             HStack {
                 VStack(alignment: .leading) {
-                    raffleProperty(title: "Entries", description: String(viewModel.lottery.entries.count), action: {
-                        viewModel.presentEntryEditor.toggle()
-                    })
+                    NavigationLink {
+                        LotteryEntriesView(lottery: $viewModel.lottery)
+                    } label: {
+                        rafflePropertyLabel(title: "Entries", description: String(viewModel.lottery.entries.count))
+                    }
                     
-                    raffleProperty(title: "Mode", description: viewModel.modeDescription, action: {
+                    Button {
                         viewModel.presentRaffleModeDescription.toggle()
-                    })
+                    } label: {
+                        rafflePropertyLabel(title: "Mode", description: viewModel.modeDescription)
+                    }
                 }
                 .padding()
                 raffleButton
@@ -112,10 +111,7 @@ struct LotteryDetailView: View {
         .disabled(viewModel.lottery.entries.count == .zero)
     }
     
-    func raffleProperty(title: String, description: String, action: @escaping () -> Void) -> some View {
-        Button {
-            action()
-        } label: {
+    func rafflePropertyLabel(title: String, description: String) -> some View {
             HStack {
                 Text(title + ":")
                     .foregroundColor(.black)
@@ -126,7 +122,6 @@ struct LotteryDetailView: View {
                     .padding(2)
                 Spacer()
             }
-        }
     }
 }
 
