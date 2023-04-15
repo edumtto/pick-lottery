@@ -2,8 +2,6 @@ import CoreData
 import SwiftUI
 
 final class Lottery: Identifiable, ObservableObject {
-    typealias Illustration = String // Represents an emoji
-    
     enum RaffleMode: Int16, Identifiable, Codable {
         case fullRandom = 0
         case weightedEntries = 1

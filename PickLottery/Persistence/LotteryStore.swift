@@ -32,10 +32,10 @@ class LotteryStore: ObservableObject {
             .init(entryID: entries1[2].id, date: Date.init(timeIntervalSinceNow: -32)),
             .init(entryID: entries1[0].id, date: Date())
         ]
-        let lottery1 = Lottery(name: "Supper Week Lottery", description: "Raffle a random week day", illustration: "📆", entries: entries1, results: results1)
+        let lottery1 = Lottery(name: "Supper Week Lottery", description: "Raffle a random week day", illustration: .callendar, entries: entries1, results: results1)
         
         let entries2: [Lottery.Entry] = [1, 2, 3, 4, 5, 6].map { Lottery.Entry.init(String($0)) }
-        let lottery2 = Lottery(name: "Dice", description: "Roll a tradicional six face dice", illustration: "🎲", entries: entries2, results: .init())
+        let lottery2 = Lottery(name: "Dice", description: "Roll a tradicional six face dice", illustration: .dice, entries: entries2, results: .init())
         
         let lottery3 = Lottery(name: "Questions", description: "Pick a question to ask someone", entries: entries2, results: .init())
         let lottery4 = Lottery(name: "Names", entries: entries1, results: .init())
@@ -102,7 +102,7 @@ extension LotteryStore: LotteryStorageProvider {
         lotteryMO.id = lottery.id
         lotteryMO.name = lottery.name
         lotteryMO.descriptionText = lottery.description
-        lotteryMO.illustration = lottery.illustration
+        lotteryMO.illustration = lottery.illustration?.rawValue
         lotteryMO.hexColor = lottery.color
         lotteryMO.raffleMode = lottery.raffleMode.rawValue
         let entiesList = lottery.entries.map { entry in

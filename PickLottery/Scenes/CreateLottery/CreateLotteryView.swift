@@ -1,29 +1,32 @@
 import SwiftUI
 
 struct CreateLotteryView: View {
-    enum FocusedField {
-        case name, entries
+    private enum FocusedField {
+        case name
     }
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var lotteryStore: LotteryStore
     
-    @State var name: String = ""
-    @State var color: Color = .lotteryRandom
-    @State var raffleMode: Lottery.RaffleMode = .fullRandom
-    @State var entriesDescription: String = ""
-    @State var showValidationAlert = false
+    @State private var name: String = ""
+    @State private var description: String = ""
+    @State private var color: Color = .lotteryRandom
+    @State private var emoji: String = Lottery.Illustration.random.rawValue
+    @State private var raffleMode: Lottery.RaffleMode = .fullRandom
+    @State private var entriesDescription: String = ""
+    @State private var showValidationAlert = false
     @FocusState private var focusedField: FocusedField?
     
     var body: some View {
         ScrollView {
             VStack {
                 nameInput
+                descriptionInput
                     .padding(.bottom)
                 HStack {
                     modeInput
+                    emojiInput
                     colorInput
-
                 }
                     .padding(.bottom)
                 entriesInput
@@ -53,16 +56,27 @@ struct CreateLotteryView: View {
             .textFieldStyle(PrimaryTextFieldStyle())
             .focused($focusedField, equals: .name)
     }
-
-//    TODO:
-//    var emojiInput: some View {
-//
-//    }
+    
+    var descriptionInput: some View {
+        TextField("Description (opcional)", text: $description)
+            .textFieldStyle(
+                PrimaryTextFieldStyle(strokeColor: description.isEmpty ? Color.gray : Color.accentColor)
+            )
+    }
     
     var modeInput: some View {
         Picker("Raffle mode", selection: $raffleMode) {
             ForEach(Lottery.RaffleMode.options) {
                 Text($0.description)
+            }
+        }
+        .frame(minWidth: 100)
+    }
+    
+    var emojiInput: some View {
+        Picker(emoji, selection: $emoji) {
+            ForEach(Lottery.Illustration.allCases) {
+                Text($0.rawValue)
             }
         }
     }
@@ -73,12 +87,16 @@ struct CreateLotteryView: View {
     }
     
     var entriesInput: some View {
-        TextField("Entries (ex: John, Ana, San ...)", text: $entriesDescription, axis: .vertical)
-            .focused($focusedField, equals: .entries)
-            .textFieldStyle(
-                PrimaryTextFieldStyle(strokeColor: entriesDescription.isEmpty ? Color.gray : Color.accentColor)
-            )
-            
+        VStack(alignment: .leading) {
+            TextField("Entries (opcional)", text: $entriesDescription, axis: .vertical)
+                .textFieldStyle(
+                    PrimaryTextFieldStyle(strokeColor: entriesDescription.isEmpty ? Color.gray : Color.accentColor)
+                )
+                .textInputAutocapitalization(.never)
+            Text("  Ex: John, Mary, San ...")
+                .font(.caption)
+        }
+        
     }
     
     var createButton: some View {
@@ -102,7 +120,14 @@ struct CreateLotteryView: View {
                 return entryName.isEmpty ? nil : Lottery.Entry(entryName)
             }
         
-        let newLottery = Lottery(name: name, entries: entries, color: color, raffleMode: raffleMode)
+        let newLottery = Lottery(
+            name: name,
+            description: description,
+            illustration: .init(rawValue: emoji),
+            entries: entries,
+            color: color,
+            raffleMode: raffleMode
+        )
         lotteryStore.addLottery(newLottery)
         
         dismiss()
