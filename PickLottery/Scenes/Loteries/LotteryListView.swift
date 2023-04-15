@@ -31,7 +31,7 @@ struct LotteryListView: View {
             }
             .sheet(isPresented: $presentCreateAlert) {
                 NavigationStack {
-                    CreateLotteryView()
+                    CreateLotteryView(viewModel: .init(lotteryStore: lotteryStore))
                 }
             }
         }

@@ -2,8 +2,8 @@ import Foundation
 import SwiftUI
 
 final class CreateEntryViewModel: ObservableObject {
-    let lotteryStore: LotteryStore
-    let lottery: LotteryMO
+    private let lotteryStore: LotteryStore
+    private let lottery: LotteryMO
     
     @Published var name: String = ""
     @Published var weight: Float = 1
