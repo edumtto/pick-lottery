@@ -6,4 +6,4 @@ An app to make random choices, with weighted entries and different forms of pick
 <img src="https://user-images.githubusercontent.com/9659453/232248282-47e2c03f-506f-4e8c-856b-0ee1cd6a2552.png" width="250"></img>
 
 <img src="https://user-images.githubusercontent.com/9659453/232248138-c4969e3a-6c1c-4f54-8889-54931082b3fe.png" width="250"></img>
-<img src="https://user-images.githubusercontent.com/9659453/232248143-ca32e07d-c682-42b9-9a6b-3da12c5aa373.png" width="250"></img>
+<img src="https://user-images.githubusercontent.com/9659453/232248620-97195a03-fa30-436d-b356-1a6707fb54a4.png" width="250"></img>
