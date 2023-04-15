@@ -7,7 +7,6 @@ struct LotteryEntriesView: View {
     @State private var updateView = true
     @State private var showCreateEntry = false
     
-    
     private var entries: [LotteryEntryMO] {
         Array(lottery.entries)
             .compactMap { $0 as? LotteryEntryMO }

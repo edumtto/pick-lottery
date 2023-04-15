@@ -31,9 +31,12 @@ extension Color {
 // Source: https://cocoacasts.com/from-hex-to-uicolor-and-back-in-swift
 //
 extension Color {
+    var cgColor: CGColor {
+        UIColor(self).cgColor
+    }
+    
     func toHex() -> String? {
-        let uic = UIColor(self)
-        guard let components = uic.cgColor.components, components.count >= 3 else {
+        guard let components = cgColor.components, components.count >= 3 else {
             return nil
         }
         let r = Float(components[0])

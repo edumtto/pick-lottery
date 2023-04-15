@@ -7,6 +7,7 @@ final class CreateEntryViewModel: ObservableObject {
     
     @Published var name: String = ""
     @Published var weight: Float = 1
+    @Published var color: CGColor = Color.entryRandom.cgColor
     @Published var showValidationAlert = false
     
     init(lotteryStore: LotteryStore, lottery: LotteryMO) {
@@ -19,7 +20,7 @@ final class CreateEntryViewModel: ObservableObject {
             showValidationAlert = true
             return
         }
-        let newEntry = Lottery.Entry(name, weight: weight)
+        let newEntry = Lottery.Entry(name, weight: weight, color: Color(cgColor: color))
         lotteryStore.addEntry(newEntry, in: lottery)
     }
 }

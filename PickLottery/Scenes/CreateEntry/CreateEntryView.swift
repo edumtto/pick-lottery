@@ -4,78 +4,79 @@ struct CreateEntryView: View {
     enum FocusedField {
         case name, weight
     }
-    @FocusState private var focusedField: FocusedField?
     
     @Environment(\.dismiss) var dismiss
-    //@EnvironmentObject var lotteryStore: LotteryStore
-    
+    @FocusState private var focusedField: FocusedField?
     @StateObject var viewModel: CreateEntryViewModel
-    //@FocusState private var focusedField: FocusedField?
     
     var body: some View {
         ScrollView {
             VStack {
-                nameInput
+                HStack(alignment: .center) {
+                    TextField("Entry name", text: $viewModel.name)
+                        .textFieldStyle(PrimaryTextFieldStyle())
+                    colorInput
+                }
                 weightInput
             }
             .padding()
         }
         Spacer()
-        createButton
-            .navigationTitle("New entry")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
+        Button("Create"){
+            viewModel.createEntry()
+            dismiss()
+        }
+        .buttonStyle(PrimaryButtonStyle())
+        .navigationTitle("New entry")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Cancel") {
+                    dismiss()
                 }
             }
-            .alert(isPresented: $viewModel.showValidationAlert) {
-                Alert(title: Text("Enter with a name for the lottery"))
-            }
-            .onAppear {
-                focusedField = .name
-            }
+        }
+        .alert(isPresented: $viewModel.showValidationAlert) {
+            Alert(title: Text("Enter with a name for the lottery"))
+        }
+        .onAppear {
+            focusedField = .name
+        }
     }
     
     var nameInput: some View {
         VStack {
             TextField("Entry name", text: $viewModel.name)
+                .frame(height: 38)
                 .focused($focusedField, equals: .name)
                 .padding(8)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(lineWidth: 1)
-                        .stroke(Color.accentColor)
+                    RoundedRectangle(cornerRadius: 2)
+                        .stroke(Color.accentColor, lineWidth: 1)
                 )
         }
-        .padding(.bottom)
     }
     
     var weightInput: some View {
         VStack {
-            Slider(
-                value: $viewModel.weight,
-                in: 0...10
-            )
-            Text("Weight: \(viewModel.weight.description)")
+            HStack {
+                Image(systemName: "scalemass.fill")
+                    .foregroundColor(.gray)
+                Text(String(format: "%.1f", viewModel.weight))
+                Slider(
+                    value: $viewModel.weight,
+                    in: 0...10
+                )
+            }
+            Text("* Define the chance of wining. 1.0 is the default.")
+                .font(.caption)
         }
+        .padding(.top)
     }
     
-    var createButton: some View {
-        Button {
-            viewModel.createEntry()
-            dismiss()
-        } label: {
-            Text("Create")
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-        }
-        .padding()
-        .buttonStyle(.borderedProminent)
+    var colorInput: some View {
+        ColorPicker("", selection: $viewModel.color, supportsOpacity: false)
+            .frame(width: 38)
     }
-    
-    
 }
 
 struct CreateEntryView_Previews: PreviewProvider {

@@ -9,6 +9,7 @@ struct CreateLotteryView: View {
     @EnvironmentObject var lotteryStore: LotteryStore
     
     @State var name: String = ""
+    @State var color: Color = .lotteryRandom
     @State var raffleMode: Lottery.RaffleMode = .fullRandom
     @State var entriesDescription: String = ""
     @State var showValidationAlert = false
@@ -18,7 +19,13 @@ struct CreateLotteryView: View {
         ScrollView {
             VStack {
                 nameInput
-                modeInput
+                    .padding(.bottom)
+                HStack {
+                    modeInput
+                    colorInput
+
+                }
+                    .padding(.bottom)
                 entriesInput
             }
             .padding()
@@ -42,81 +49,49 @@ struct CreateLotteryView: View {
     }
     
     var nameInput: some View {
-        VStack {
-            HStack {
-                Text("Name:")
-                    .font(.subheadline)
-                Spacer()
-            }
-            .padding(.bottom, -4)
-            TextField("New lottery", text: $name)
-                .focused($focusedField, equals: .name)
-                .padding(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(lineWidth: 1)
-                        .stroke(Color.accentColor)
-                )
-        }
-        .padding(.bottom)
+        TextField("Name", text: $name)
+            .textFieldStyle(PrimaryTextFieldStyle())
+            .focused($focusedField, equals: .name)
     }
+
+//    TODO:
+//    var emojiInput: some View {
+//
+//    }
     
     var modeInput: some View {
-        VStack {
-            HStack {
-                Text("Rule:")
-                    .font(.subheadline)
-                Spacer()
+        Picker("Raffle mode", selection: $raffleMode) {
+            ForEach(Lottery.RaffleMode.options) {
+                Text($0.description)
             }
-            HStack {
-                Picker("Raffle mode", selection: $raffleMode) {
-                    ForEach(Lottery.RaffleMode.options) {
-                        Text($0.description)
-                    }
-                }
-                Spacer()
-            }
-            .padding(.top, -12)
-            .padding(.leading, -12)
         }
-        .padding(.bottom)
+    }
+    
+    var colorInput: some View {
+        ColorPicker("", selection: $color, supportsOpacity: false)
+            .frame(width: 38)
     }
     
     var entriesInput: some View {
-        VStack {
-            HStack {
-                Text("Entries (opcional):")
-                    .font(.subheadline)
-                Spacer()
-            }
-            .padding(.bottom, -4)
+        TextField("Entries (ex: John, Ana, San ...)", text: $entriesDescription, axis: .vertical)
+            .focused($focusedField, equals: .entries)
+            .textFieldStyle(
+                PrimaryTextFieldStyle(strokeColor: entriesDescription.isEmpty ? Color.gray : Color.accentColor)
+            )
             
-            TextField("John, Ana, ...", text: $entriesDescription, axis: .vertical)
-                .focused($focusedField, equals: .entries)
-                .padding(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(lineWidth: 1)
-                        .stroke(entriesDescription == "" ? Color.gray : Color.accentColor)
-                )
-        }
     }
     
     var createButton: some View {
-        Button {
+        Button("Create"){
             createLottery()
-        } label: {
-            Text("Create")
-                .font(.headline)
-                .frame(maxWidth: .infinity)
         }
-        .padding()
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(PrimaryButtonStyle())
     }
     
     private func createLottery() {
         if name.isEmpty {
             showValidationAlert = true
+            focusedField = .name
             return
         }
         
@@ -127,7 +102,7 @@ struct CreateLotteryView: View {
                 return entryName.isEmpty ? nil : Lottery.Entry(entryName)
             }
         
-        let newLottery = Lottery(name: name, entries: entries, raffleMode: raffleMode)
+        let newLottery = Lottery(name: name, entries: entries, color: color, raffleMode: raffleMode)
         lotteryStore.addLottery(newLottery)
         
         dismiss()
