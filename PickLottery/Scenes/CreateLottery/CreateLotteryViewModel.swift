@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 final class CreateLotteryViewModel: ObservableObject {
-    var lotteryStore: LotteryStore
+    var lotteryStore: LotteryStorageProvider
     
     @Published var name: String = ""
     @Published var description: String = ""
@@ -44,7 +44,7 @@ final class CreateLotteryViewModel: ObservableObject {
         lotteryStore.addLottery(newLottery)
     }
     
-    init(lotteryStore: LotteryStore) {
+    init(lotteryStore: LotteryStorageProvider) {
         self.lotteryStore = lotteryStore
     }
 }

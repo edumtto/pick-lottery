@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 final class CreateEntryViewModel: ObservableObject {
-    private let lotteryStore: LotteryStore
+    private let lotteryStore: LotteryStorageProvider
     private let lottery: LotteryMO
     
     @Published var name: String = ""
@@ -10,7 +10,7 @@ final class CreateEntryViewModel: ObservableObject {
     @Published var color: CGColor = Color.entryRandom.cgColor
     @Published var showValidationAlert = false
     
-    init(lotteryStore: LotteryStore, lottery: LotteryMO) {
+    init(lotteryStore: LotteryStorageProvider, lottery: LotteryMO) {
         self.lotteryStore = lotteryStore
         self.lottery = lottery
     }

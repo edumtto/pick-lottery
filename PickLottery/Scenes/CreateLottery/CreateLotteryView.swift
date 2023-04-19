@@ -105,7 +105,7 @@ struct CreateLotteryView: View {
 struct CreateLotteryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            CreateLotteryView(viewModel: .init(lotteryStore: .preview))
+            CreateLotteryView(viewModel: .init(lotteryStore: LotteryStore.preview))
         }
     }
 }

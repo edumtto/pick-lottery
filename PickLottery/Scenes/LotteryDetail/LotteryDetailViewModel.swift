@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 final class LotteryDetailViewModel: ObservableObject {
-    let lotteryStore: LotteryStore
+    let lotteryStore: LotteryStorageProvider
     @Published var lottery: LotteryMO
     @Published var animate: Bool = false
     @Published var presentRaffleAnimation = false

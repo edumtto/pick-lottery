@@ -10,7 +10,7 @@
 		340BB394299355BE00B336AA /* PickLotteryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB393299355BE00B336AA /* PickLotteryApp.swift */; };
 		340BB398299355BF00B336AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 340BB397299355BF00B336AA /* Assets.xcassets */; };
 		340BB39B299355BF00B336AA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 340BB39A299355BF00B336AA /* Preview Assets.xcassets */; };
-		340BB3AA299355C000B336AA /* PickLotteryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3A9299355C000B336AA /* PickLotteryTests.swift */; };
+		340BB3AA299355C000B336AA /* CreateLotteryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3A9299355C000B336AA /* CreateLotteryViewModelTests.swift */; };
 		340BB3B4299355C000B336AA /* PickLotteryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3B3299355C000B336AA /* PickLotteryUITests.swift */; };
 		340BB3B6299355C000B336AA /* PickLotteryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3B5299355C000B336AA /* PickLotteryUITestsLaunchTests.swift */; };
 		343D2CA229A05407006ECD38 /* LotteryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343D2CA129A05407006ECD38 /* LotteryListView.swift */; };
@@ -36,6 +36,7 @@
 		34D967BF29BFE519006D2559 /* LotteryMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D967BD29BFE519006D2559 /* LotteryMO.swift */; };
 		34D967C329C018E2006D2559 /* LotteryEntryMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D967C129C018E2006D2559 /* LotteryEntryMO.swift */; };
 		34D967C729C01905006D2559 /* LotteryResultMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D967C529C01905006D2559 /* LotteryResultMO.swift */; };
+		34E1C13B29EF87AB0033D41E /* LotteryStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E1C13A29EF87AB0033D41E /* LotteryStoreSpy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +62,7 @@
 		340BB397299355BF00B336AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		340BB39A299355BF00B336AA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		340BB3A5299355C000B336AA /* PickLotteryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PickLotteryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		340BB3A9299355C000B336AA /* PickLotteryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLotteryTests.swift; sourceTree = "<group>"; };
+		340BB3A9299355C000B336AA /* CreateLotteryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLotteryViewModelTests.swift; sourceTree = "<group>"; };
 		340BB3AF299355C000B336AA /* PickLotteryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PickLotteryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		340BB3B3299355C000B336AA /* PickLotteryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLotteryUITests.swift; sourceTree = "<group>"; };
 		340BB3B5299355C000B336AA /* PickLotteryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLotteryUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 		34D967BD29BFE519006D2559 /* LotteryMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryMO.swift; sourceTree = "<group>"; };
 		34D967C129C018E2006D2559 /* LotteryEntryMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryEntryMO.swift; sourceTree = "<group>"; };
 		34D967C529C01905006D2559 /* LotteryResultMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResultMO.swift; sourceTree = "<group>"; };
+		34E1C13A29EF87AB0033D41E /* LotteryStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryStoreSpy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,7 +162,8 @@
 		340BB3A8299355C000B336AA /* PickLotteryTests */ = {
 			isa = PBXGroup;
 			children = (
-				340BB3A9299355C000B336AA /* PickLotteryTests.swift */,
+				34E1C13929EF85820033D41E /* Scenes */,
+				34E1C13A29EF87AB0033D41E /* LotteryStoreSpy.swift */,
 			);
 			path = PickLotteryTests;
 			sourceTree = "<group>";
@@ -287,6 +290,14 @@
 				3460F9DC29C2A23000A40BD6 /* ManagedObjects */,
 			);
 			path = Persistence;
+			sourceTree = "<group>";
+		};
+		34E1C13929EF85820033D41E /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				340BB3A9299355C000B336AA /* CreateLotteryViewModelTests.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,7 +463,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				340BB3AA299355C000B336AA /* PickLotteryTests.swift in Sources */,
+				34E1C13B29EF87AB0033D41E /* LotteryStoreSpy.swift in Sources */,
+				340BB3AA299355C000B336AA /* CreateLotteryViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
