@@ -35,13 +35,13 @@ final class LotteryDetailViewModel: ObservableObject {
         (Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom).description
     }
     
-    init(lottery: LotteryMO, lotteryStore: LotteryStore) {
+    init(lottery: LotteryMO, lotteryStore: LotteryStorageProvider) {
         self.lottery = lottery
         self.lotteryStore = lotteryStore
         isResultsEmpty = lottery.results.count == 0
     }
     
-    func raffleButtonAction() {
+    func raffleButtonAction(completion: @escaping () -> Void = {}) {
         isRaffleAnimationFinished = false
         
         let selectedEntry = raffleRandomEntry()
@@ -49,6 +49,7 @@ final class LotteryDetailViewModel: ObservableObject {
         presentRaffleAnimation.toggle()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.lotteryStore.addResult(id: .init(), date: Date(), entry: selectedEntry, in: self.lottery)
+            completion()
         }
     }
     
@@ -56,6 +57,7 @@ final class LotteryDetailViewModel: ObservableObject {
         lotteryStore.clearResults(in: lottery)
         isResultsEmpty = true
     }
+    
     func deleteLottery() {
         lotteryStore.removeLottery(lottery)
     }

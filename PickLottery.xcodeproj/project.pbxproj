@@ -37,6 +37,7 @@
 		34D967C329C018E2006D2559 /* LotteryEntryMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D967C129C018E2006D2559 /* LotteryEntryMO.swift */; };
 		34D967C729C01905006D2559 /* LotteryResultMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D967C529C01905006D2559 /* LotteryResultMO.swift */; };
 		34E1C13B29EF87AB0033D41E /* LotteryStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E1C13A29EF87AB0033D41E /* LotteryStoreSpy.swift */; };
+		34F9ECC129F0AC5A0064E331 /* LotteryDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F9ECC029F0AC5A0064E331 /* LotteryDetailViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		34D967C129C018E2006D2559 /* LotteryEntryMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryEntryMO.swift; sourceTree = "<group>"; };
 		34D967C529C01905006D2559 /* LotteryResultMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResultMO.swift; sourceTree = "<group>"; };
 		34E1C13A29EF87AB0033D41E /* LotteryStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryStoreSpy.swift; sourceTree = "<group>"; };
+		34F9ECC029F0AC5A0064E331 /* LotteryDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDetailViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				340BB3A9299355C000B336AA /* CreateLotteryViewModelTests.swift */,
+				34F9ECC029F0AC5A0064E331 /* LotteryDetailViewModelTests.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34F9ECC129F0AC5A0064E331 /* LotteryDetailViewModelTests.swift in Sources */,
 				34E1C13B29EF87AB0033D41E /* LotteryStoreSpy.swift in Sources */,
 				340BB3AA299355C000B336AA /* CreateLotteryViewModelTests.swift in Sources */,
 			);
