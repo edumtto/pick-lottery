@@ -1,24 +1,14 @@
 import SwiftUI
 
 struct LotteryEntriesView: View {
-    @EnvironmentObject var lotteryStore: LotteryStore
-    @Binding var lottery: LotteryMO
-    
-    @State private var updateView = true
-    @State private var showCreateEntry = false
-    
-    private var entries: [LotteryEntryMO] {
-        Array(lottery.entries)
-            .compactMap { $0 as? LotteryEntryMO }
-            .sorted { $0.name < $1.name }
-    }
+    @StateObject var viewModel: LotteryEntriesViewModel
     
     var body: some View {
         List {
-            ForEach(entries) { entry in
+            ForEach(viewModel.entries) { entry in
                 LotteryEntryCell(entry: entry)
             }
-            .onDelete(perform: deleteItems)
+            .onDelete(perform: viewModel.deleteItems)
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -26,23 +16,23 @@ struct LotteryEntriesView: View {
             }
             ToolbarItem {
                 Button(role: .none) {
-                    showCreateEntry.toggle()
+                    viewModel.showCreateEntry.toggle()
                 } label: {
                     Image(systemName: "plus.app")
                 }
             }
         }
         .navigationTitle("Entries")
-        .sheet(isPresented: $showCreateEntry) {
+        .sheet(isPresented: $viewModel.showCreateEntry) {
             NavigationStack {
-                CreateEntryView(viewModel: .init(lotteryStore: lotteryStore, lottery: lottery))
+                CreateEntryView(
+                    viewModel: .init(
+                        lotteryStore: viewModel.lotteryStore,
+                        lottery: viewModel.lottery
+                    )
+                )
             }
         }
-    }
-    
-    private func deleteItems(offsets: IndexSet) {
-        let selectedEntries = offsets.map { entries[$0] }
-        lotteryStore.removeEntries(selectedEntries, from: lottery)
     }
 }
 
@@ -50,7 +40,10 @@ struct LotteryEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             LotteryEntriesView(
-                lottery: .constant(.example)
+                viewModel: .init(
+                    lottery: .constant(.example),
+                    lotteryStore: LotteryStore.preview
+                )
             )
         }
     }

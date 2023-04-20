@@ -2,6 +2,7 @@ import SwiftUI
 import Combine
 
 struct LotteryDetailView: View {
+    @EnvironmentObject var lotteryStore: LotteryStore
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel: LotteryDetailViewModel
     
@@ -77,7 +78,12 @@ struct LotteryDetailView: View {
             HStack {
                 VStack(alignment: .leading) {
                     NavigationLink {
-                        LotteryEntriesView(lottery: $viewModel.lottery)
+                        LotteryEntriesView(
+                            viewModel: .init(
+                                lottery: $viewModel.lottery,
+                                lotteryStore: lotteryStore
+                            )
+                        )
                     } label: {
                         rafflePropertyLabel(title: "Entries", description: String(viewModel.lottery.entries.count))
                     }
