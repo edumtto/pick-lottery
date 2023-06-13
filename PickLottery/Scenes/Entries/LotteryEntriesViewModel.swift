@@ -2,8 +2,8 @@ import Foundation
 import SwiftUI
 
 final class LotteryEntriesViewModel: ObservableObject {
-    let lotteryStore: LotteryStorageProvider
-    @Binding var lottery: LotteryMO
+    private(set) var lotteryStore: LotteryStorageProvider
+    @Binding private(set) var lottery: LotteryMO
     
     @Published var updateView = true
     @Published var showCreateEntry = false
@@ -17,10 +17,14 @@ final class LotteryEntriesViewModel: ObservableObject {
     init(lottery: Binding<LotteryMO>, lotteryStore: LotteryStorageProvider) {
         self._lottery = lottery
         self.lotteryStore = lotteryStore
+        
+        //lottery.didChange().assign
     }
     
     func deleteItems(offsets: IndexSet) {
         let selectedEntries = offsets.map { entries[$0] }
         lotteryStore.removeEntries(selectedEntries, from: lottery)
+        
+        //objectWillChange.send()
     }
 }

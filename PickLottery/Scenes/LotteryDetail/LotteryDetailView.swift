@@ -18,9 +18,6 @@ struct LotteryDetailView: View {
                     entries: viewModel.entries,
                     targetEntry: viewModel.selectedLotteryEntry,
                     isRaffleAnimationFinished: $viewModel.isRaffleAnimationFinished)
-                if viewModel.isRaffleAnimationFinished {
-                    ConfettiAnimationView()
-                }
             }
         }
         .sheet(isPresented: $viewModel.presentRaffleModeDescription) {
@@ -72,7 +69,7 @@ struct LotteryDetailView: View {
     var raffleDescription: some View {
         VStack {
             Divider()
-                .frame(height: 2)
+                .frame(height: 0.5)
                 .overlay(viewModel.color)
             
             HStack {
@@ -99,7 +96,7 @@ struct LotteryDetailView: View {
                     .padding()
             }
         }
-        .background(viewModel.color.opacity(0.2))
+        .background(viewModel.color.opacity(0.1))
     }
     
     var raffleButton: some View {

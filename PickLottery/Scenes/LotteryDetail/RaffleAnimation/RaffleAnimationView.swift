@@ -55,7 +55,7 @@ struct RaffleAnimationView: View {
     
     var resultTextView: some View {
         VStack {
-            Text("Congratulations!🏆")
+            Text("Picked:")
                 .font(.title)
                 .padding()
             Spacer()

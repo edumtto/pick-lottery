@@ -8,14 +8,13 @@ struct LotteryCellView: View {
         (Color(hex: lottery.hexColor) ?? .primary)
     }
     
-    
     var body: some View {
         NavigationLink {
             LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
         } label: {
             ZStack {
                 RoundedRectangle(cornerSize: .init(width: 16, height: 16))
-                    .stroke(backgroundColor, lineWidth: 2)
+                    .stroke(backgroundColor, lineWidth: 0.5)
                     .background(backgroundColor.opacity(0.2))
                     .cornerRadius(16)
                     .padding(2)
@@ -49,8 +48,6 @@ struct LotteryCellView: View {
                 .padding(12)
             }
         }
-        
-        
     }
 }
 
