@@ -22,6 +22,7 @@
 		3462932F29D6658600471C7A /* RaffleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3462932E29D6658600471C7A /* RaffleAnimationView.swift */; };
 		346C37D0299F0F2F000F993C /* LotteryEntriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346C37CF299F0F2F000F993C /* LotteryEntriesView.swift */; };
 		346C37D2299F0FB2000F993C /* LotteryEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346C37D1299F0FB2000F993C /* LotteryEntryCell.swift */; };
+		346FF1322A4AAEB2009C921D /* AddLotteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346FF1312A4AAEB2009C921D /* AddLotteryView.swift */; };
 		347E753D29CA69A900C30392 /* LotteryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347E753C29CA69A900C30392 /* LotteryDetailViewModel.swift */; };
 		348EB98C29EB200B0043AFD7 /* LotteryIllustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348EB98B29EB200B0043AFD7 /* LotteryIllustration.swift */; };
 		348EB98E29EB21200043AFD7 /* CreateLotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348EB98D29EB21200043AFD7 /* CreateLotteryViewModel.swift */; };
@@ -37,6 +38,8 @@
 		34D967C329C018E2006D2559 /* LotteryEntryMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D967C129C018E2006D2559 /* LotteryEntryMO.swift */; };
 		34D967C729C01905006D2559 /* LotteryResultMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D967C529C01905006D2559 /* LotteryResultMO.swift */; };
 		34E1C13B29EF87AB0033D41E /* LotteryStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E1C13A29EF87AB0033D41E /* LotteryStoreSpy.swift */; };
+		34F45F892A5E474200761903 /* LotterySuggestionsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F45F882A5E474200761903 /* LotterySuggestionsCellView.swift */; };
+		34F45F8B2A5E4A7800761903 /* AddLotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F45F8A2A5E4A7800761903 /* AddLotteryViewModel.swift */; };
 		34F9ECC129F0AC5A0064E331 /* LotteryDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F9ECC029F0AC5A0064E331 /* LotteryDetailViewModelTests.swift */; };
 		34F9ECC329F0B5250064E331 /* CreateEntryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F9ECC229F0B5250064E331 /* CreateEntryViewModelTests.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +80,7 @@
 		3462932E29D6658600471C7A /* RaffleAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaffleAnimationView.swift; sourceTree = "<group>"; };
 		346C37CF299F0F2F000F993C /* LotteryEntriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryEntriesView.swift; sourceTree = "<group>"; };
 		346C37D1299F0FB2000F993C /* LotteryEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryEntryCell.swift; sourceTree = "<group>"; };
+		346FF1312A4AAEB2009C921D /* AddLotteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLotteryView.swift; sourceTree = "<group>"; };
 		347E753C29CA69A900C30392 /* LotteryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDetailViewModel.swift; sourceTree = "<group>"; };
 		348EB98B29EB200B0043AFD7 /* LotteryIllustration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryIllustration.swift; sourceTree = "<group>"; };
 		348EB98D29EB21200043AFD7 /* CreateLotteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLotteryViewModel.swift; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 		34D967C129C018E2006D2559 /* LotteryEntryMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryEntryMO.swift; sourceTree = "<group>"; };
 		34D967C529C01905006D2559 /* LotteryResultMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResultMO.swift; sourceTree = "<group>"; };
 		34E1C13A29EF87AB0033D41E /* LotteryStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryStoreSpy.swift; sourceTree = "<group>"; };
+		34F45F882A5E474200761903 /* LotterySuggestionsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySuggestionsCellView.swift; sourceTree = "<group>"; };
+		34F45F8A2A5E4A7800761903 /* AddLotteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLotteryViewModel.swift; sourceTree = "<group>"; };
 		34F9ECC029F0AC5A0064E331 /* LotteryDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDetailViewModelTests.swift; sourceTree = "<group>"; };
 		34F9ECC229F0B5250064E331 /* CreateEntryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEntryViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -228,6 +234,7 @@
 		3462932829D6637F00471C7A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				346FF1302A4AAE2F009C921D /* AddLottery */,
 				3462932929D6640300471C7A /* CreateEntry */,
 				34C62A0829A82269003D9B54 /* Entries */,
 				346C37CB299F0DA9000F993C /* LotteryDetail */,
@@ -255,6 +262,16 @@
 				34C62A0B29A827CD003D9B54 /* LotteryResultCellView.swift */,
 			);
 			path = LotteryDetail;
+			sourceTree = "<group>";
+		};
+		346FF1302A4AAE2F009C921D /* AddLottery */ = {
+			isa = PBXGroup;
+			children = (
+				346FF1312A4AAEB2009C921D /* AddLotteryView.swift */,
+				34F45F8A2A5E4A7800761903 /* AddLotteryViewModel.swift */,
+				34F45F882A5E474200761903 /* LotterySuggestionsCellView.swift */,
+			);
+			path = AddLottery;
 			sourceTree = "<group>";
 		};
 		3496368629A933AE00CDEFB3 /* CreateLottery */ = {
@@ -456,10 +473,13 @@
 				343D2CA629A056DE006ECD38 /* LotteryCellView.swift in Sources */,
 				343D2CA229A05407006ECD38 /* LotteryListView.swift in Sources */,
 				340BB394299355BE00B336AA /* PickLotteryApp.swift in Sources */,
+				34F45F8B2A5E4A7800761903 /* AddLotteryViewModel.swift in Sources */,
 				3460F9DF29C2A28D00A40BD6 /* Color+Extensions.swift in Sources */,
 				346C37D2299F0FB2000F993C /* LotteryEntryCell.swift in Sources */,
+				34F45F892A5E474200761903 /* LotterySuggestionsCellView.swift in Sources */,
 				346C37D0299F0F2F000F993C /* LotteryEntriesView.swift in Sources */,
 				347E753D29CA69A900C30392 /* LotteryDetailViewModel.swift in Sources */,
+				346FF1322A4AAEB2009C921D /* AddLotteryView.swift in Sources */,
 				348EB98C29EB200B0043AFD7 /* LotteryIllustration.swift in Sources */,
 				34A6A1FD29E1DFF100B9964D /* PrimaryTextFieldStyle.swift in Sources */,
 			);

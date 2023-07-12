@@ -18,7 +18,7 @@ final class Lottery: Identifiable, ObservableObject {
             case .weightedEntries:
                 return "Weighted entries"
             case .balancedVictories:
-                return "Balanced victories"
+                return "Non repetition"
             }
         }
     }

@@ -14,7 +14,7 @@ struct PrimaryButtonStyle: ButtonStyle {
 }
 
 
-struct PLButton_Previews: PreviewProvider {
+struct PrimaryButtonStyle_Previews: PreviewProvider {
     static var previews: some View {
         Button("Create") {
             print("created")

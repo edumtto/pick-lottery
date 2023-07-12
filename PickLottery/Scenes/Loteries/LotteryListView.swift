@@ -7,8 +7,6 @@ struct LotteryListView: View {
     @State var newLotteryName = ""
     @FetchRequest(sortDescriptors: []) var lotteries: FetchedResults<LotteryMO>
     
-    private let threeColumnGrid = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -31,6 +29,7 @@ struct LotteryListView: View {
             }
             .sheet(isPresented: $presentCreateAlert) {
                 NavigationStack {
+//                    AddLotteryView(viewModel: AddLotteryViewModel())
                     CreateLotteryView(viewModel: .init(lotteryStore: lotteryStore))
                 }
             }
