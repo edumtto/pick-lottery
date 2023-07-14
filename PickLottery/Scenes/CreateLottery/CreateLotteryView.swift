@@ -30,13 +30,6 @@ struct CreateLotteryView: View {
         Spacer()
         createButton
             .navigationTitle("New lottery")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-            }
             .alert(isPresented: $viewModel.showValidationAlert) {
                 Alert(title: Text("Enter with a name for the lottery"))
             }

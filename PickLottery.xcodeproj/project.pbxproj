@@ -13,6 +13,9 @@
 		340BB3AA299355C000B336AA /* CreateLotteryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3A9299355C000B336AA /* CreateLotteryViewModelTests.swift */; };
 		340BB3B4299355C000B336AA /* PickLotteryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3B3299355C000B336AA /* PickLotteryUITests.swift */; };
 		340BB3B6299355C000B336AA /* PickLotteryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3B5299355C000B336AA /* PickLotteryUITestsLaunchTests.swift */; };
+		34218A772A60FCB100CECADE /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34218A762A60FCB100CECADE /* JSONLoader.swift */; };
+		34218A792A60FD0500CECADE /* lotterySuggestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 34218A782A60FD0500CECADE /* lotterySuggestions.json */; };
+		34218A7B2A6106B600CECADE /* LotterySuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34218A7A2A6106B600CECADE /* LotterySuggestion.swift */; };
 		343D2CA229A05407006ECD38 /* LotteryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343D2CA129A05407006ECD38 /* LotteryListView.swift */; };
 		343D2CA429A05479006ECD38 /* Lottery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343D2CA329A05479006ECD38 /* Lottery.swift */; };
 		343D2CA629A056DE006ECD38 /* LotteryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343D2CA529A056DE006ECD38 /* LotteryCellView.swift */; };
@@ -71,6 +74,9 @@
 		340BB3AF299355C000B336AA /* PickLotteryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PickLotteryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		340BB3B3299355C000B336AA /* PickLotteryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLotteryUITests.swift; sourceTree = "<group>"; };
 		340BB3B5299355C000B336AA /* PickLotteryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLotteryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		34218A762A60FCB100CECADE /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
+		34218A782A60FD0500CECADE /* lotterySuggestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lotterySuggestions.json; sourceTree = "<group>"; };
+		34218A7A2A6106B600CECADE /* LotterySuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySuggestion.swift; sourceTree = "<group>"; };
 		343D2CA129A05407006ECD38 /* LotteryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryListView.swift; sourceTree = "<group>"; };
 		343D2CA329A05479006ECD38 /* Lottery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottery.swift; sourceTree = "<group>"; };
 		343D2CA529A056DE006ECD38 /* LotteryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryCellView.swift; sourceTree = "<group>"; };
@@ -155,6 +161,7 @@
 				34D967C929C01FB4006D2559 /* Persistence */,
 				3462932829D6637F00471C7A /* Scenes */,
 				340BB397299355BF00B336AA /* Assets.xcassets */,
+				34218A782A60FD0500CECADE /* lotterySuggestions.json */,
 				340BB393299355BE00B336AA /* PickLotteryApp.swift */,
 				340BB399299355BF00B336AA /* Preview Content */,
 			);
@@ -208,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				3460F9DE29C2A28D00A40BD6 /* Color+Extensions.swift */,
+				34218A762A60FCB100CECADE /* JSONLoader.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -226,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				343D2CA329A05479006ECD38 /* Lottery.swift */,
+				34218A7A2A6106B600CECADE /* LotterySuggestion.swift */,
 				348EB98B29EB200B0043AFD7 /* LotteryIllustration.swift */,
 			);
 			path = Domain;
@@ -430,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				340BB39B299355BF00B336AA /* Preview Assets.xcassets in Resources */,
+				34218A792A60FD0500CECADE /* lotterySuggestions.json in Resources */,
 				340BB398299355BF00B336AA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,6 +465,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34218A7B2A6106B600CECADE /* LotterySuggestion.swift in Sources */,
 				34C62A0A29A822FF003D9B54 /* LotteryDetailView.swift in Sources */,
 				34C0F0A529BAC475009EBFC8 /* LotteryStore.swift in Sources */,
 				348EB98E29EB21200043AFD7 /* CreateLotteryViewModel.swift in Sources */,
@@ -475,6 +486,7 @@
 				340BB394299355BE00B336AA /* PickLotteryApp.swift in Sources */,
 				34F45F8B2A5E4A7800761903 /* AddLotteryViewModel.swift in Sources */,
 				3460F9DF29C2A28D00A40BD6 /* Color+Extensions.swift in Sources */,
+				34218A772A60FCB100CECADE /* JSONLoader.swift in Sources */,
 				346C37D2299F0FB2000F993C /* LotteryEntryCell.swift in Sources */,
 				34F45F892A5E474200761903 /* LotterySuggestionsCellView.swift in Sources */,
 				346C37D0299F0F2F000F993C /* LotteryEntriesView.swift in Sources */,

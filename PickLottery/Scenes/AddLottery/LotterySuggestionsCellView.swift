@@ -10,15 +10,6 @@ struct LotterySuggestionsCellView: View {
     }
     
     var body: some View {
-        Button {
-            dismiss()
-            // TODO: Add item to the main lottery list
-        } label: {
-            cellContent
-        }
-    }
-    
-    var cellContent: some View {
         ZStack {
             RoundedRectangle(cornerSize: .init(width: 16, height: 16))
                 .stroke(backgroundColor, lineWidth: 0.5)

@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Regular Dice",
+        "description": "Roll a 6 sided dice.",
+        "illustration": "🎲",
+        "color": "ABABAF",
+        "raffle_mode": 0,
+        "entries": [
+            {"name": "1"}, {"name": "2"}, {"name": "3"}, {"name": "4"}, {"name": "5"}, {"name": "6"}
+            
+        ]
+    },
+    {
+        "name": "Week days",
+        "description": "Randomlly choses a day of the week.",
+        "illustration": "📆",
+        "color": "ABABAF",
+        "raffle_mode": 0,
+        "entries": [
+            {"name": "Monday"},
+            {"name": "Tuesday"},
+            {"name": "Wednesday"},
+            {"name": "Thursday"},
+            {"name": "Friday"},
+            {"name": "Saturday"},
+            {"name": "Sunday"}
+        ]
+    }
+]

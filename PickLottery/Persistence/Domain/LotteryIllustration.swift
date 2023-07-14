@@ -1,7 +1,7 @@
 import Foundation
 
 extension Lottery {
-    enum Illustration: String, CaseIterable, Identifiable {
+    enum Illustration: String, CaseIterable, Identifiable, Decodable {
         case callendar = "📆"
         case dice = "🎲"
         case gift = "🎁"

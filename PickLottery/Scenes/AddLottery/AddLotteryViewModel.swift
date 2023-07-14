@@ -1,12 +1,22 @@
 import Foundation
 
 final class AddLotteryViewModel: ObservableObject {
-    @Published var suggestions: [Lottery] = [
-        .init(name: "Test 1", description: "Bla bla bla", illustration: .book),
-        .init(name: "Test 2", description: "Bla bla bla", illustration: .clock),
-        .init(name: "Test 3", description: "Bla bla bla", illustration: .fruit)
-    ]
+    var lotteryStore: LotteryStorageProvider
     
+    @Published var suggestions: [Lottery] = {
+        let lotterySuggestions: [LotterySuggestion] = JSONLoader.load(
+            fileName: "lotterySuggestions",
+            keyDecodingStrategy: .convertFromSnakeCase
+        )
+        
+        return lotterySuggestions.map(\.lottery)
+    }()
     
+    func addLottery(_ newLottery: Lottery) {
+        lotteryStore.addLottery(newLottery)
+    }
     
+    init(lotteryStore: LotteryStorageProvider) {
+        self.lotteryStore = lotteryStore
+    }
 }
