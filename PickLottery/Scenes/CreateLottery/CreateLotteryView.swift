@@ -5,7 +5,7 @@ struct CreateLotteryView: View {
         case name
     }
     
-    @Environment(\.dismiss) var dismiss
+    @Binding var isPresented: Bool
     @EnvironmentObject var lotteryStore: LotteryStore
     
     @StateObject var viewModel: CreateLotteryViewModel
@@ -89,7 +89,7 @@ struct CreateLotteryView: View {
     var createButton: some View {
         Button("Create"){
             viewModel.createLottery()
-            dismiss()
+            isPresented = false
         }
         .buttonStyle(PrimaryButtonStyle())
     }
@@ -98,7 +98,7 @@ struct CreateLotteryView: View {
 struct CreateLotteryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            CreateLotteryView(viewModel: .init(lotteryStore: LotteryStore.preview))
+            CreateLotteryView(isPresented: .constant(true), viewModel: .init(lotteryStore: LotteryStore.preview))
         }
     }
 }

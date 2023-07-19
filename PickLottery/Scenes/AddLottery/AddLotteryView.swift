@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AddLotteryView: View {
-    @Environment(\.dismiss) var dismiss
+    @Binding var isPresented: Bool
     @EnvironmentObject var lotteryStore: LotteryStore
     @StateObject var viewModel: AddLotteryViewModel
     
@@ -14,7 +14,7 @@ struct AddLotteryView: View {
             Spacer()
             
             NavigationLink("Criar") {
-                CreateLotteryView(viewModel: .init(lotteryStore: lotteryStore))
+                CreateLotteryView(isPresented: $isPresented, viewModel: .init(lotteryStore: lotteryStore))
             }
             .buttonStyle(PrimaryButtonStyle())
         }
@@ -22,7 +22,7 @@ struct AddLotteryView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("Cancel") {
-                    dismiss()
+                    isPresented = false
                 }
             }
         }
@@ -40,7 +40,7 @@ struct AddLotteryView: View {
                     ForEach(viewModel.suggestions) { suggestion in
                         LotterySuggestionsCellView(lottery: suggestion)
                             .onTapGesture {
-                                dismiss()
+                                isPresented = false
                                 viewModel.addLottery(suggestion)
                             }
                     }
@@ -53,7 +53,7 @@ struct AddLotteryView: View {
 struct SugestionsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            AddLotteryView(viewModel: AddLotteryViewModel(lotteryStore: LotteryStore.preview))
+            AddLotteryView(isPresented: .constant(true), viewModel: AddLotteryViewModel(lotteryStore: LotteryStore.preview))
         }
     }
 }
