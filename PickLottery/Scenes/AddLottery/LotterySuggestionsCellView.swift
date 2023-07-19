@@ -29,7 +29,7 @@ struct LotterySuggestionsCellView: View {
                 
                 if let description = lottery.description {
                     Text(description)
-                        .multilineTextAlignment(.leading)
+                        .multilineTextAlignment(.center)
                         .foregroundColor(.black)
                         .font(.caption)
                 }

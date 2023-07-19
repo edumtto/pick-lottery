@@ -3,7 +3,7 @@
         "name": "Regular Dice",
         "description": "Roll a 6 sided dice.",
         "illustration": "🎲",
-        "color": "ABABAF",
+        "color": "787171",
         "raffle_mode": 0,
         "entries": [
             {"name": "1"}, {"name": "2"}, {"name": "3"}, {"name": "4"}, {"name": "5"}, {"name": "6"}
@@ -14,7 +14,7 @@
         "name": "Week days",
         "description": "Randomlly choses a day of the week.",
         "illustration": "📆",
-        "color": "ABABAF",
+        "color": "29c446",
         "raffle_mode": 0,
         "entries": [
             {"name": "Monday"},
@@ -24,6 +24,40 @@
             {"name": "Friday"},
             {"name": "Saturday"},
             {"name": "Sunday"}
+        ]
+    },
+    {
+        "name": "Ice breaker",
+        "description": "Questions to break the ice and start a conversation.",
+        "illustration": "🧊",
+        "color": "3136bd",
+        "raffle_mode": 0,
+        "entries": [
+            {"name": "What's something you're really passionate about?"},
+            {"name": "If you could have any superpower, what would it be?"},
+            {"name": "What's the best book you've read recently?"},
+            {"name": "What's your favorite type of cuisine?"},
+            {"name": "If you could visit any country in the world, where would you go?"},
+            {"name": "What's your favorite hobby?"},
+            {"name": "If you could have dinner with any historical figure, who would it be?"},
+            {"name": "What's the most memorable trip you've ever taken?"},
+            {"name": "What's your favorite movie and why?"},
+            {"name": "If you could switch lives with any fictional character, who would it be?"},
+            {"name": "What's the most interesting thing you've learned recently?"},
+            {"name": "If you could learn any skill, what would it be?"},
+            {"name": "What's your favorite outdoor activity?"},
+            {"name": "If you could only eat one food for the rest of your life, what would it be?"},
+            {"name": "What's your favorite thing to do on a lazy day?"},
+            {"name": "If you could have any job in the world, what would it be?"},
+            {"name": "What's the best concert you've ever been to?"},
+            {"name": "If you could time travel to any period in history, which would you choose?"},
+            {"name": "What's your favorite thing about your hometown?"},
+            {"name": "What's the best gift you've ever received?"},
+            {"name": "If you could have any animal as a pet, what would it be?"},
+            {"name": "What's your favorite board game or card game?"},
+            {"name": "If you could have any car, which would you choose?"},
+            {"name": "What's your favorite type of music?"},
+            {"name": "If you could live in any fictional world, which would you choose?"}
         ]
     }
 ]
