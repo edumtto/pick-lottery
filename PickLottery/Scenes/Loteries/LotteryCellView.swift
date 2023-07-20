@@ -13,10 +13,10 @@ struct LotteryCellView: View {
             LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
         } label: {
             ZStack {
-                RoundedRectangle(cornerSize: .init(width: 16, height: 16))
+                RoundedRectangle(cornerSize: .init(width: 8, height: 8))
                     .stroke(backgroundColor, lineWidth: 0.5)
-                    .background(backgroundColor.opacity(0.2))
-                    .cornerRadius(16)
+                    .background(backgroundColor.brightness(0.2))
+                    .cornerRadius(8)
                     .padding(2)
                 
                 HStack {

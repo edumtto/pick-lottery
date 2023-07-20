@@ -3,7 +3,7 @@
         "name": "Regular Dice",
         "description": "Roll a 6 sided dice.",
         "illustration": "🎲",
-        "color": "787171",
+        "color": "e5b0a7",
         "raffle_mode": 0,
         "entries": [
             {"name": "1"}, {"name": "2"}, {"name": "3"}, {"name": "4"}, {"name": "5"}, {"name": "6"}
@@ -14,7 +14,7 @@
         "name": "Week days",
         "description": "Randomlly choses a day of the week.",
         "illustration": "📆",
-        "color": "29c446",
+        "color": "ade7a8",
         "raffle_mode": 0,
         "entries": [
             {"name": "Monday"},
@@ -30,7 +30,7 @@
         "name": "Ice breaker",
         "description": "Questions to break the ice and start a conversation.",
         "illustration": "🧊",
-        "color": "3136bd",
+        "color": "aee8cf",
         "raffle_mode": 0,
         "entries": [
             {"name": "What's something you're really passionate about?"},

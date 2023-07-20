@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
-        Text("Create")
+        configuration.label
             .foregroundColor(.white)
             .font(.headline)
             .frame(maxWidth: .infinity, minHeight: 40)

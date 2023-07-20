@@ -13,7 +13,7 @@ struct AddLotteryView: View {
                 .padding()
             Spacer()
             
-            NavigationLink("Criar") {
+            NavigationLink("Create lottery") {
                 CreateLotteryView(isPresented: $isPresented, viewModel: .init(lotteryStore: lotteryStore))
             }
             .buttonStyle(PrimaryButtonStyle())

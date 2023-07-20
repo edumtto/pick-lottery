@@ -96,7 +96,7 @@ struct LotteryDetailView: View {
                     .padding()
             }
         }
-        .background(viewModel.color.opacity(0.1))
+        .background(viewModel.color.brightness(0.2).ignoresSafeArea())
     }
     
     var raffleButton: some View {
