@@ -7,9 +7,17 @@ final class LotteryDetailViewModelTests: XCTestCase {
     private var lotteryStore: LotteryStoreSpy!
     private let lotteryMock: LotteryMO = .example
     
+    private func raffle() {
+        let expectation = XCTestExpectation(description: "add result called")
+        sut.raffleButtonAction {
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
     override func setUpWithError() throws {
         lotteryStore = LotteryStoreSpy()
-        sut = LotteryDetailViewModel(lottery: lotteryMock, lotteryStore: lotteryStore)
+        sut = LotteryDetailViewModel(lottery: lotteryMock, lotteryStore: lotteryStore, addResultDelay: .seconds(.zero))
     }
 
     override func tearDownWithError() throws {
@@ -43,10 +51,25 @@ final class LotteryDetailViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         
         let addedLotteryCall = try XCTUnwrap(lotteryStore.addResultCalls.last)
-        let addedLottey = addedLotteryCall.lottery
+        let addedLottery = addedLotteryCall.lottery
         let selectedEntry = addedLotteryCall.entry
         
-        XCTAssert(addedLottey.entries.contains(selectedEntry))
+        XCTAssert(addedLottery.entries.contains(selectedEntry))
+    }
+    
+    func testRaffleButtonAction_WhensRuleIsNoRepetition_ShouldAddADifferenResultEachTime() throws {
+        sut.presentRaffleAnimation = false
+        
+        raffle()
+        raffle()
+        raffle()
+        raffle()
+        raffle()
+        
+        let addedEntries = lotteryStore.addResultCalls.map(\.entry)
+        let numDifferentEntries = Set(addedEntries).count
+        
+        XCTAssertEqual(numDifferentEntries, 6)
     }
     
     func testClearResults() {

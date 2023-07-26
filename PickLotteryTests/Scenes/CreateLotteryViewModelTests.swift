@@ -1,7 +1,7 @@
-import XCTest
 import Foundation
 @testable import PickLottery
 import SwiftUI
+import XCTest
 
 final class CreateLotteryViewModelTests: XCTestCase {
     private var sut: CreateLotteryViewModel!
@@ -16,7 +16,6 @@ final class CreateLotteryViewModelTests: XCTestCase {
         sut = nil
         lotteryStore = nil
     }
-    
     
     func testCreateLottery_whenNameInputEmpty_shouldShowValidationAlert() {
         sut.name = ""

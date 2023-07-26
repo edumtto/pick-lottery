@@ -8,7 +8,7 @@ public class LotteryMO: NSManagedObject {
         let fetchRequest: NSFetchRequest<LotteryMO> = LotteryMO.fetchRequest()
         fetchRequest.fetchLimit = 1
         let results = try! context.fetch(fetchRequest)
-        return results.first!
+        return results[1]
     }
 }
 

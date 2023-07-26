@@ -3,6 +3,8 @@ import SwiftUI
 
 final class LotteryDetailViewModel: ObservableObject {
     let lotteryStore: LotteryStorageProvider
+    let addResultDelay: DispatchTimeInterval
+    
     @Published var lottery: LotteryMO
     @Published var animate: Bool = false
     @Published var presentRaffleAnimation = false
@@ -35,9 +37,14 @@ final class LotteryDetailViewModel: ObservableObject {
         (Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom).description
     }
     
-    init(lottery: LotteryMO, lotteryStore: LotteryStorageProvider) {
+    init(
+        lottery: LotteryMO,
+        lotteryStore: LotteryStorageProvider,
+        addResultDelay: DispatchTimeInterval = .seconds(1)
+    ) {
         self.lottery = lottery
         self.lotteryStore = lotteryStore
+        self.addResultDelay = addResultDelay
         isResultsEmpty = lottery.results.count == 0
     }
     
@@ -47,7 +54,7 @@ final class LotteryDetailViewModel: ObservableObject {
         let selectedEntry = raffleRandomEntry()
         selectedLotteryEntry = selectedEntry
         presentRaffleAnimation.toggle()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + addResultDelay) {
             self.lotteryStore.addResult(id: .init(), date: Date(), entry: selectedEntry, in: self.lottery)
             completion()
         }
