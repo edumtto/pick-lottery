@@ -68,7 +68,7 @@ final class LotteryDetailViewModel: ObservableObject {
         let raffleMode = Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom
         
         switch raffleMode {
-        case .balancedVictories:
+        case .avoidRepetition:
             var biggerVictoryNumber: UInt = 0
             entries.forEach { entry in
                 if entry.wins > biggerVictoryNumber {

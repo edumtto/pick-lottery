@@ -5,20 +5,20 @@ final class Lottery: Identifiable, ObservableObject {
     enum RaffleMode: Int16, Identifiable, Codable {
         case fullRandom = 0
         case weightedEntries = 1
-        case balancedVictories = 2
+        case avoidRepetition = 2
         
-        static let options: [Self] = [.fullRandom, .weightedEntries, .balancedVictories]
+        static let options: [Self] = [.fullRandom, .weightedEntries, .avoidRepetition]
         
         var id: Self { self }
         
         var description: String {
             switch self {
             case .fullRandom:
-                return "Default rule"
+                return "Default"
             case .weightedEntries:
-                return "Weighted entries"
-            case .balancedVictories:
-                return "Non repetition"
+                return "Weighted"
+            case .avoidRepetition:
+                return "No repetition"
             }
         }
     }
