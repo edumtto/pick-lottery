@@ -15,6 +15,8 @@ extension Lottery {
         case fruit = "🍎"
         case book = "📚"
         case ice = "🧊"
+        case clover = "🍀"
+        case cactus = "🌵"
         
         var id: String {
             rawValue
