@@ -5,8 +5,6 @@ struct AddLotteryView: View {
     @EnvironmentObject var lotteryStore: LotteryStore
     @StateObject var viewModel: AddLotteryViewModel
     
-    private let twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
-    
     var body: some View {
         VStack {
             suggestionsView
@@ -36,7 +34,7 @@ struct AddLotteryView: View {
                 Spacer()
             }
             ScrollView {
-                LazyVGrid(columns: twoColumnGrid, spacing: 8) {
+                LazyVStack {
                     ForEach(viewModel.suggestions) { suggestion in
                         LotterySuggestionsCellView(lottery: suggestion)
                             .onTapGesture {

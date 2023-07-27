@@ -7,12 +7,18 @@ struct LotteryListView: View {
     @State var newLotteryName = ""
     @FetchRequest(sortDescriptors: []) var lotteries: FetchedResults<LotteryMO>
     
+    private let twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVStack {
+                LazyVGrid(columns: twoColumnGrid, spacing: 8) {
                     ForEach(lotteries) { lottery in
-                        LotteryCellView(lottery: lottery)
+                        NavigationLink {
+                            LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
+                        } label: {
+                            LotteryCellView(lottery: lottery)
+                        }
                     }
                 }
             }

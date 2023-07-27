@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct LotterySuggestionsCellView: View {
-    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var lotteryStore: LotteryStore
     let lottery: Lottery
     
@@ -17,22 +16,31 @@ struct LotterySuggestionsCellView: View {
                 .cornerRadius(8)
                 .padding(2)
             
-            VStack {
+            HStack {
                 if let emojiText = lottery.illustration?.rawValue {
                     Text(emojiText)
                         .font(.largeTitle)
                 }
-                
-                Text(lottery.name)
-                    .foregroundColor(.black)
-                    .font(.headline)
-                
-                if let description = lottery.description {
-                    Text(description)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
-                        .font(.caption)
+                VStack {
+                    HStack {
+                        Text(lottery.name)
+                            .multilineTextAlignment(.leading)
+                            .foregroundColor(.black)
+                            .font(.headline)
+                        Spacer()
+                    }
+                    if let description = lottery.description {
+                        HStack {
+                            Text(description)
+                                .multilineTextAlignment(.leading)
+                                .foregroundColor(.black)
+                                .font(.caption)
+                            Spacer()
+                        }
+                    }
                 }
+                Image(systemName: "plus")
+                    .foregroundColor(backgroundColor)
             }
             .padding(12)
         }
@@ -44,7 +52,7 @@ struct LotterySuggestionsCellView_Previews: PreviewProvider {
         let entries: [Lottery.Entry] = [1, 2, 3, 4, 5, 6].map { Lottery.Entry.init(String($0)) }
         return Lottery(name: "Dice", description: "Roll a tradicional six face dice", illustration: .dice, entries: entries, results: .init())
     }
-    
+
     static var previews: some View {
         LotterySuggestionsCellView(lottery: lottery)
     }
