@@ -77,16 +77,25 @@ final class LotteryDetailViewModel: ObservableObject {
         switch raffleMode {
         case .avoidRepetition:
             var biggerVictoryNumber: UInt = 0
+            var lowerVictoryNumber: UInt = .max
+            
             entries.forEach { entry in
                 if entry.wins > biggerVictoryNumber {
                     biggerVictoryNumber = UInt(entry.wins)
                 }
+                if entry.wins < lowerVictoryNumber {
+                    lowerVictoryNumber = UInt(entry.wins)
+                }
             }
             
-            for i in 0..<numberOfEntries {
-                let entry = entries[i]
-                if entry.wins < biggerVictoryNumber {
-                    entryIndexes.append(i)
+            if lowerVictoryNumber == biggerVictoryNumber {
+                entryIndexes = [Int](0..<numberOfEntries)
+            } else {
+                for i in 0..<numberOfEntries {
+                    let entry = entries[i]
+                    if entry.wins < biggerVictoryNumber {
+                        entryIndexes.append(i)
+                    }
                 }
             }
             
