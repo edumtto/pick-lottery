@@ -11,7 +11,7 @@ struct LotterySuggestionsCellView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerSize: .init(width: 8, height: 8))
-                .stroke(backgroundColor, lineWidth: 0.5)
+                .stroke(backgroundColor, lineWidth: 2)
                 .background(backgroundColor.brightness(0.2))
                 .cornerRadius(8)
                 .padding(2)

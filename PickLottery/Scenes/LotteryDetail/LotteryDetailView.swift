@@ -69,7 +69,7 @@ struct LotteryDetailView: View {
     var raffleDescription: some View {
         VStack {
             Divider()
-                .frame(height: 0.5)
+                .frame(height: 2)
                 .overlay(viewModel.color)
             
             HStack {
