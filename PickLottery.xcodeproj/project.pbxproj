@@ -246,12 +246,12 @@
 		3462932829D6637F00471C7A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				346FF1302A4AAE2F009C921D /* AddLottery */,
-				3462932929D6640300471C7A /* CreateEntry */,
-				34C62A0829A82269003D9B54 /* Entries */,
-				346C37CB299F0DA9000F993C /* LotteryDetail */,
 				343D2CA029A053E9006ECD38 /* Loteries */,
+				346FF1302A4AAE2F009C921D /* AddLottery */,
 				3496368629A933AE00CDEFB3 /* CreateLottery */,
+				3462932929D6640300471C7A /* CreateEntry */,
+				346C37CB299F0DA9000F993C /* LotteryDetail */,
+				34C62A0829A82269003D9B54 /* Entries */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";

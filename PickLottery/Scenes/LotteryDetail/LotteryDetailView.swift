@@ -22,7 +22,11 @@ struct LotteryDetailView: View {
         }
         .sheet(isPresented: $viewModel.presentRaffleModeDescription) {
             NavigationStack {
-                Text("Explanation...")
+                Text(viewModel.modeDetailedDescription)
+                    .padding(.leading, 16)
+                    .padding(.trailing, 16)
+                Spacer()
+                    .navigationTitle(viewModel.modeDescription)
             }
             .presentationDetents([.medium])
             .presentationDragIndicator(.visible)

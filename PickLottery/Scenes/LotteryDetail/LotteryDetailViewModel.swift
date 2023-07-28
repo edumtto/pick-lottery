@@ -34,7 +34,15 @@ final class LotteryDetailViewModel: ObservableObject {
     }
     
     var modeDescription: String {
-        (Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom).description
+        raffleMode.description
+    }
+    
+    var modeDetailedDescription: String {
+        raffleMode.detailedDescription
+    }
+    
+    private var raffleMode: Lottery.RaffleMode {
+        Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom
     }
     
     init(
@@ -72,7 +80,6 @@ final class LotteryDetailViewModel: ObservableObject {
     private func raffleRandomEntry() -> LotteryEntryMO {
         let numberOfEntries = lottery.entries.count
         var entryIndexes = [Int]()
-        let raffleMode = Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom
         
         switch raffleMode {
         case .avoidRepetition:
