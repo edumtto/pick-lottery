@@ -21,29 +21,52 @@ class LotteryStore: ObservableObject {
     static var preview: LotteryStore = {
         let storage = LotteryStore(inMemory: true)
         
-        let entries1: [Lottery.Entry] = [
+        let entries0: [Lottery.Entry] = [
             .init("Monday", weight: 1, wins: 0),
             .init("Tuesday", weight: 0, wins: 1),
             .init("Wednesday", weight: 1, wins: 0),
             .init("Thursday", weight: 1.5, wins: 2),
             .init("Friday", weight: 1.5, wins: 2)
         ]
-        let results1: [Lottery.Result] = [
-            .init(entryID: entries1[2].id, date: Date.init(timeIntervalSinceNow: -32)),
-            .init(entryID: entries1[0].id, date: Date())
+        let results0: [Lottery.Result] = [
+            .init(entryID: entries0[2].id, date: Date.init(timeIntervalSinceNow: -32)),
+            .init(entryID: entries0[0].id, date: Date())
         ]
-        let lottery1 = Lottery(name: "Supper Week Lottery", description: "Raffle a random week day", illustration: .callendar, entries: entries1, results: results1,raffleMode: .avoidRepetition)
+        let lottery0 = Lottery(
+            name: "Supper Week Lottery",
+            description: "Raffle a random week day",
+            illustration: .callendar,
+            entries: entries0,
+            results: results0,
+            raffleMode: .avoidRepetition
+        )
         
-        let entries2: [Lottery.Entry] = [1, 2, 3, 4, 5, 6].map { Lottery.Entry.init(String($0)) }
-        let lottery2 = Lottery(name: "Dice", description: "Roll a tradicional six face dice", illustration: .dice, entries: entries2, results: .init())
+        let entries1: [Lottery.Entry] = [1, 2, 3, 4, 5, 6].map { Lottery.Entry.init(String($0)) }
+        let lottery1 = Lottery(
+            name: "Dice",
+            description: "Roll a tradicional six face dice",
+            illustration: .dice,
+            entries: entries1,
+            results: .init()
+        )
         
-        let lottery3 = Lottery(name: "Questions", description: "Pick a question to ask someone", entries: entries2, results: .init())
-        let lottery4 = Lottery(name: "Names", entries: entries1, results: .init())
+        let lottery2 = Lottery(
+            name: "Questions",
+            description: "Pick a question to ask someone",
+            entries: entries1,
+            results: .init()
+        )
         
+        let lottery3 = Lottery(
+            name: "Names",
+            entries: entries1,
+            results: .init()
+        )
+        
+        storage.addLottery(lottery0)
         storage.addLottery(lottery1)
         storage.addLottery(lottery2)
         storage.addLottery(lottery3)
-        storage.addLottery(lottery4)
         
         return storage
     }()

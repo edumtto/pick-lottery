@@ -5,7 +5,7 @@ import XCTest
 final class CreateEntryViewModelTests: XCTestCase {
     private var sut: CreateEntryViewModel!
     private var lotteryStore: LotteryStoreSpy!
-    private let lotteryMock: LotteryMO = .example
+    private let lotteryMock: LotteryMO = .example0
     
     override func setUpWithError() throws {
         lotteryStore = LotteryStoreSpy()

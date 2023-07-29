@@ -53,7 +53,7 @@ struct LotteryDetailView: View {
     
     var raffleResults: some View {
         VStack(alignment: .leading) {
-            Text("Last winners:")
+            Text("Last results:")
                 .font(.headline)
             ScrollView {
 //                if viewModel.lastResults.isEmpty {
