@@ -82,7 +82,7 @@ struct CreateEntryView: View {
 struct CreateEntryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            CreateEntryView(viewModel: .init(lotteryStore: LotteryStore.preview, lottery: .example))
+            CreateEntryView(viewModel: .init(lotteryStore: LotteryStore.preview, lottery: .example0))
         }
     }
 }

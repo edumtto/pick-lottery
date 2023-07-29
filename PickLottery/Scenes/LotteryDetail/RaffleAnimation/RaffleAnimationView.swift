@@ -37,17 +37,32 @@ struct RaffleAnimationView: View {
     
     var body: some View {
         ZStack {
+            Circle()
+                .foregroundColor(winnerAnimation ? targetEntry?.color : .clear)
+                .scaleEffect(winnerAnimation ? 3 : 0)
+
             Text(displayedItem.name)
-                .font(.system(size: winnerAnimation ? 36 : 28))
                 .padding()
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(lineWidth: 1)
-                .stroke(displayedItem.color)
-                .frame(height: 128)
-                .frame(width: UIScreen.main.bounds.width - 32, height: 52)
+                
+                .multilineTextAlignment(.center)
+                .font(.system(size: 42))
+                .scaleEffect(winnerAnimation ? 1 : 0.75)
+                .fontWeight(winnerAnimation ? .bold : .regular)
+                .background(winnerAnimation ? .white : .clear)
+                .cornerRadius(4)
+                .shadow(radius: winnerAnimation ? 8 : 0)
             resultTextView
         }
-        .background(.white)
+        .navigationBarItems(
+            leading:
+                Button("Close") {
+                    dismiss()
+                }.tint(.white),
+            trailing:
+                ShareLink(
+                    item: "The lottery result is \"\(displayedItem.name)\"."
+                ).tint(.white)
+        )
         .onAppear {
             animateRaffle(times: 20, interval: 0.08)
         }
@@ -57,15 +72,18 @@ struct RaffleAnimationView: View {
         VStack {
             Text("Picked:")
                 .font(.title)
+                .foregroundColor(.white)
                 .padding()
             Spacer()
             HStack {
-                ShareLink(item: "The lottery winner is \"\(displayedItem.name)\".")
-                .buttonStyle(.borderedProminent)
-                Button("Close") {
+                Button {
                     dismiss()
+                } label: {
+                    Image(systemName: "chevron.compact.down")
+                        .scaleEffect(2)
+                        .tint(.white)
                 }
-                .buttonStyle(.bordered)
+
             }
         }
         .opacity(winnerAnimation ? 1 : 0)
@@ -121,13 +139,15 @@ struct RaffleAnimationView: View {
 }
 
 struct RaffleAnimationView_Previews: PreviewProvider {
-    static let entries = LotteryMO.example.entries.allObjects as! [LotteryEntryMO]
+    static let entries = LotteryMO.example0.entries.allObjects as! [LotteryEntryMO]
     
     static var previews: some View {
-        RaffleAnimationView(
-            entries: entries,
-            targetEntry: entries[1],
-            isRaffleAnimationFinished: .constant(false)
-        )
+        NavigationStack {
+            RaffleAnimationView(
+                entries: entries,
+                targetEntry: entries[1],
+                isRaffleAnimationFinished: .constant(false)
+            )
+        }
     }
 }

@@ -13,7 +13,7 @@ struct LotteryDetailView: View {
             raffleDescription
         }
         .sheet(isPresented: $viewModel.presentRaffleAnimation) {
-            ZStack {
+            NavigationStack {
                 RaffleAnimationView(
                     entries: viewModel.entries,
                     targetEntry: viewModel.selectedLotteryEntry,
@@ -135,7 +135,7 @@ struct LotteryDetailView: View {
 struct LotteryDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            LotteryDetailView(viewModel: LotteryDetailViewModel(lottery: .example, lotteryStore: LotteryStore.preview))
+            LotteryDetailView(viewModel: LotteryDetailViewModel(lottery: .example0, lotteryStore: LotteryStore.preview))
         }
     }
 }

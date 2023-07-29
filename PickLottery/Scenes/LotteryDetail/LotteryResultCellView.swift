@@ -18,7 +18,7 @@ struct LotteryResultCellView: View {
 struct LotteryResultCellView_Previews: PreviewProvider {
     static var previews: some View {
         LotteryResultCellView(
-            result: LotteryMO.example.results.allObjects[0] as! LotteryResultMO
+            result: LotteryMO.example0.results.allObjects[0] as! LotteryResultMO
         )
         .previewLayout(.sizeThatFits)
     }

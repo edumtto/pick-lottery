@@ -41,7 +41,7 @@ struct LotteryEditView_Previews: PreviewProvider {
         NavigationStack {
             LotteryEntriesView(
                 viewModel: .init(
-                    lottery: .constant(.example),
+                    lottery: .constant(.example0),
                     lotteryStore: LotteryStore.preview
                 )
             )

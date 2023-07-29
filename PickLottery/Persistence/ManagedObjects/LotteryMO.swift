@@ -3,7 +3,15 @@ import CoreData
 
 @objc(LotteryMO)
 public class LotteryMO: NSManagedObject {
-    static var example: LotteryMO {
+    static var example0: LotteryMO {
+        let context = LotteryStore.preview.container.viewContext
+        let fetchRequest: NSFetchRequest<LotteryMO> = LotteryMO.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        let results = try! context.fetch(fetchRequest)
+        return results.first!
+    }
+    
+    static var example1: LotteryMO {
         let context = LotteryStore.preview.container.viewContext
         let fetchRequest: NSFetchRequest<LotteryMO> = LotteryMO.fetchRequest()
         fetchRequest.fetchLimit = 1

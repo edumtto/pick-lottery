@@ -41,7 +41,7 @@ struct LotteryCellView: View {
 
 struct LotteryCellView_Previews: PreviewProvider {
     static var previews: some View {
-        LotteryCellView(lottery: .example)
+        LotteryCellView(lottery: .example0)
             .previewLayout(.fixed(width: 350, height: 100))
             .padding()
     }
