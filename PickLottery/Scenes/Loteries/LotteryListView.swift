@@ -12,14 +12,10 @@ struct LotteryListView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: twoColumnGrid, spacing: 8) {
-                    ForEach(lotteries) { lottery in
-                        NavigationLink {
-                            LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
-                        } label: {
-                            LotteryCellView(lottery: lottery)
-                        }
-                    }
+                if lotteries.isEmpty {
+                    emptyState
+                } else {
+                    lotteryGrid
                 }
             }
             .padding()
@@ -40,10 +36,35 @@ struct LotteryListView: View {
             }
         }
     }
+    
+    private var lotteryGrid: some View {
+        LazyVGrid(columns: twoColumnGrid, spacing: 8) {
+            ForEach(lotteries) { lottery in
+                NavigationLink {
+                    LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
+                } label: {
+                    LotteryCellView(lottery: lottery)
+                }
+            }
+        }
+    }
+    
+    private var emptyState: some View {
+        VStack {
+            Spacer()
+            HStack{
+                Text("Nothing here! Tap in the")
+                Image(systemName: "plus.app")
+                Text("icon")
+            }
+            Text("to add or create a new lottery.")
+        }
+        .foregroundColor(.gray)
+    }
 }
 
 struct LotteryList_Previews: PreviewProvider {
-    static let storage = LotteryStore.preview
+    static let storage = LotteryStore(inMemory: true) //LotteryStore.preview
     
     static var previews: some View {
         LotteryListView()

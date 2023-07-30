@@ -43,7 +43,7 @@ struct RaffleAnimationView: View {
 
             Text(displayedItem.name)
                 .padding()
-                
+                .foregroundColor(.black)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 42))
                 .scaleEffect(winnerAnimation ? 1 : 0.75)
@@ -83,7 +83,6 @@ struct RaffleAnimationView: View {
                         .scaleEffect(2)
                         .tint(.white)
                 }
-
             }
         }
         .opacity(winnerAnimation ? 1 : 0)
