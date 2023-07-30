@@ -53,11 +53,17 @@ struct LotteryDetailView: View {
     
     var raffleResults: some View {
         VStack(alignment: .leading) {
-            Text("Last results:")
-                .font(.headline)
+            HStack {
+                Text("Last results:")
+                    .font(.headline)
+                Spacer()
+            }
+            
+                
             ScrollView {
 //                if viewModel.lastResults.isEmpty {
 //                    Text("No results yet! Tap \"Raffle\" to run the lottery.")
+//                        .foregroundColor(.gray)
 //                } else {
                     LazyVStack {
                         ForEach(viewModel.lastResults) { result in

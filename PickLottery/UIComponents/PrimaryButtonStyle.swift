@@ -3,7 +3,7 @@ import SwiftUI
 struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(.white)
+            .foregroundColor(.whiteText)
             .font(.headline)
             .frame(maxWidth: .infinity, minHeight: 40)
             .background(Color.accentColor)

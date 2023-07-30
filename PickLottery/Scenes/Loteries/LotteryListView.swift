@@ -64,7 +64,7 @@ struct LotteryListView: View {
 }
 
 struct LotteryList_Previews: PreviewProvider {
-    static let storage = LotteryStore(inMemory: true) //LotteryStore.preview
+    static let storage = LotteryStore.preview
     
     static var previews: some View {
         LotteryListView()
