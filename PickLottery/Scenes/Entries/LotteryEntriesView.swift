@@ -10,6 +10,15 @@ struct LotteryEntriesView: View {
             }
             .onDelete(perform: viewModel.deleteItems)
         }
+        .scrollContentBackground(.hidden)
+        
+        .listRowSeparatorTint(viewModel.color, edges: .all)
+        .background(
+            viewModel.color
+                .brightness(0.2)
+                .ignoresSafeArea()
+        
+        )
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()

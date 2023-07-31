@@ -10,7 +10,9 @@ struct LotteryResultCellView: View {
                 .foregroundColor(result.entry.color)
             Text(result.entry.name)
             Spacer()
-            Text(result.date.formatted(date: .abbreviated, time: .shortened))
+            Text(result.date.formatted(.relative(presentation: .numeric)))
+                .foregroundColor(.gray)
+            //formatted(date: .abbreviated, time: .shortened))
         }
     }
 }

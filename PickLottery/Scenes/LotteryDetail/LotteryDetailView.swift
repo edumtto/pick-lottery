@@ -7,11 +7,22 @@ struct LotteryDetailView: View {
     @StateObject var viewModel: LotteryDetailViewModel
     
     var body: some View {
-        VStack {
-            raffleResults
-            Spacer()
-            raffleDescription
+        ZStack {
+            VStack {
+                raffleDescription
+                Spacer()
+                raffleResults
+            }
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    raffleButton
+                        .padding()
+                }
+            }
         }
+        
         .sheet(isPresented: $viewModel.presentRaffleAnimation) {
             NavigationStack {
                 RaffleAnimationView(
@@ -58,53 +69,44 @@ struct LotteryDetailView: View {
                     .font(.headline)
                 Spacer()
             }
-            
-                
+            .padding()
             ScrollView {
-//                if viewModel.lastResults.isEmpty {
-//                    Text("No results yet! Tap \"Raffle\" to run the lottery.")
-//                        .foregroundColor(.gray)
-//                } else {
-                    LazyVStack {
-                        ForEach(viewModel.lastResults) { result in
-                            LotteryResultCellView(result: result)
-                        }
+                LazyVStack {
+                    ForEach(viewModel.lastResults) { result in
+                        LotteryResultCellView(result: result)
                     }
-//                }
+                }
+                .padding(.leading)
+                .padding(.trailing)
             }
         }
-        .padding()
     }
     
     var raffleDescription: some View {
         VStack {
-            Divider()
-                .frame(height: 2)
-                .overlay(viewModel.color)
-            
             HStack {
-                VStack(alignment: .leading) {
-                    NavigationLink {
-                        LotteryEntriesView(
-                            viewModel: .init(
-                                lottery: $viewModel.lottery,
-                                lotteryStore: lotteryStore
-                            )
-                        )
-                    } label: {
-                        rafflePropertyLabel(title: "Entries", description: String(viewModel.lottery.entries.count))
-                    }
-                    
-                    Button {
-                        viewModel.presentRaffleModeDescription.toggle()
-                    } label: {
-                        rafflePropertyLabel(title: "Mode", description: viewModel.modeDescription)
-                    }
+                Button {
+                    viewModel.presentRaffleModeDescription.toggle()
+                } label: {
+                    propertyLabel(title: viewModel.modeDescription, illustration: "exclamationmark.circle")
                 }
-                .padding()
-                raffleButton
-                    .padding()
+                
+                NavigationLink {
+                    LotteryEntriesView(
+                        viewModel: .init(
+                            lottery: $viewModel.lottery,
+                            lotteryStore: lotteryStore
+                        )
+                    )
+                } label: {
+                    propertyLabel(title: String(viewModel.lottery.entries.count), illustration: "list.triangle")
+                }
+                Spacer()
             }
+            .padding()
+            Divider()
+                .frame(height: 1)
+                .overlay(viewModel.color)
         }
         .background(viewModel.color.brightness(0.2).ignoresSafeArea())
     }
@@ -119,22 +121,27 @@ struct LotteryDetailView: View {
                 .frame(minWidth: 70, minHeight: 70)
                 .background(Color.accentColor)
                 .cornerRadius(16)
-            
         })
+        .shadow(color: .white, radius: 16)
         .disabled(viewModel.lottery.entries.count == .zero)
     }
     
-    func rafflePropertyLabel(title: String, description: String) -> some View {
-            HStack {
-                Text(title + ":")
-                    .foregroundColor(.black)
-                Text(description)
-                    .foregroundColor(Color.accentColor)
-                    .fontWeight(.medium)
-                    .underline()
-                    .padding(2)
-                Spacer()
-            }
+    func propertyLabel(title: String, illustration: String) -> some View {
+        HStack {
+            Image(systemName: illustration)
+            Text(title)
+                .foregroundColor(.gray)
+                .fontWeight(.medium)
+                .padding(2)
+                .cornerRadius(8)
+        }
+        .padding(8)
+        .background(.white)
+        .cornerRadius(16)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(viewModel.color, lineWidth: 1)
+        )
     }
 }
 

@@ -8,6 +8,10 @@ final class LotteryEntriesViewModel: ObservableObject {
     @Published var updateView = true
     @Published var showCreateEntry = false
     
+    var color: Color {
+        Color(hex: lottery.hexColor) ?? Color.primary
+    }
+    
     var entries: [LotteryEntryMO] {
         Array(lottery.entries)
             .compactMap { $0 as? LotteryEntryMO }
