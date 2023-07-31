@@ -141,6 +141,7 @@ extension LotteryStore: LotteryStorageProvider {
     }
     
     func removeLottery(_ lottery: LotteryMO) {
+        print(lottery.debugDescription)
         lottery.results.forEach { context.delete($0 as! LotteryResultMO) }
         lottery.entries.forEach { context.delete($0 as! LotteryEntryMO) }
         context.delete(lottery)
