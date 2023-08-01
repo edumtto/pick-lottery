@@ -83,9 +83,9 @@ class LotteryStore: ObservableObject {
         }
         
         container.loadPersistentStores { description, error in
-            print(description)
+            debugPrint(description)
             if let error = error {
-                print("Core Data failed to load: \(error.localizedDescription)")
+                debugPrint("Core Data failed to load: \(error.localizedDescription)")
             }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
@@ -93,15 +93,15 @@ class LotteryStore: ObservableObject {
     
     private func saveContext() {
         guard context.hasChanges else {
-            print("No context changes to save")
+            debugPrint("No context changes to save")
             return
         }
         
         do {
             try context.save()
-            print("Context saved")
+            debugPrint("Context saved")
         } catch let error as NSError {
-            print("Error saving context: \(error) description: \(error.userInfo)")
+            debugPrint("Error saving context: \(error) description: \(error.userInfo)")
         }
     }
     
@@ -110,10 +110,10 @@ class LotteryStore: ObservableObject {
         fetchRequest.predicate = NSPredicate(format: "id = %@", id.uuidString)
         do {
             let results = try context.fetch(fetchRequest)
-            print("Context loaded")
+            debugPrint("Context loaded")
             return results.first
         } catch let error as NSError {
-            print("Fetch entry error: \(error) description: \(error.userInfo)")
+            debugPrint("Fetch entry error: \(error) description: \(error.userInfo)")
         }
         return nil
     }
@@ -141,7 +141,7 @@ extension LotteryStore: LotteryStorageProvider {
     }
     
     func removeLottery(_ lottery: LotteryMO) {
-        print(lottery.debugDescription)
+        debugPrint(lottery.debugDescription)
         lottery.results.forEach { context.delete($0 as! LotteryResultMO) }
         lottery.entries.forEach { context.delete($0 as! LotteryEntryMO) }
         context.delete(lottery)

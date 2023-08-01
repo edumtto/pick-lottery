@@ -17,7 +17,7 @@ struct PrimaryButtonStyle: ButtonStyle {
 struct PrimaryButtonStyle_Previews: PreviewProvider {
     static var previews: some View {
         Button("Create") {
-            print("created")
+            debugPrint("created")
         }
         .buttonStyle(PrimaryButtonStyle())
     }
