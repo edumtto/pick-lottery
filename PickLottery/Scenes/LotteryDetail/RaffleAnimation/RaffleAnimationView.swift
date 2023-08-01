@@ -1,5 +1,6 @@
 import SwiftUI
 import Foundation
+import AVFoundation
 
 fileprivate struct RaffleItem: Identifiable {
     let id: UUID
@@ -35,6 +36,8 @@ struct RaffleAnimationView: View {
     @State private var displayedItem: RaffleItem = .init()
     @State private var timer: Timer?
     @State private var winnerAnimation = false
+    
+    private let audioPlayer = AudioPlayer(sound: "pick-92276", type: "mp3")
     
     var body: some View {
         ZStack {
@@ -114,6 +117,8 @@ struct RaffleAnimationView: View {
     }
     
     private func endAnimation() {
+        audioPlayer?.play()
+        
         timer?.invalidate()
         timer = nil
         if let targetEntry = targetEntry, displayedItem.id != targetEntry.id {
@@ -140,6 +145,28 @@ struct RaffleAnimationView: View {
             nextEntryIndex = 0
         }
         return entry
+    }
+}
+
+struct AudioPlayer {
+    let audioPlayer: AVAudioPlayer
+    
+    init?(sound: String, type: String) {
+        guard let path = Bundle.main.path(forResource: sound, ofType: type) else {
+            debugPrint("Wrong path for \(sound).\(type)")
+            return nil
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+        } catch {
+            debugPrint(error)
+            return nil
+        }
+    }
+    
+    func play() {
+        audioPlayer.play()
     }
 }
 

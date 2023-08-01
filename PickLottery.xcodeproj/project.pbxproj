@@ -16,6 +16,7 @@
 		34218A772A60FCB100CECADE /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34218A762A60FCB100CECADE /* JSONLoader.swift */; };
 		34218A792A60FD0500CECADE /* lotterySuggestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 34218A782A60FD0500CECADE /* lotterySuggestions.json */; };
 		34218A7B2A6106B600CECADE /* LotterySuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34218A7A2A6106B600CECADE /* LotterySuggestion.swift */; };
+		34240EB12A797DA000045260 /* pick-92276.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34240EB02A797DA000045260 /* pick-92276.mp3 */; };
 		342AD27F2A70CB8500C83544 /* LotteryDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342AD27E2A70CB8500C83544 /* LotteryDetailViewModelTests.swift */; };
 		343D2CA229A05407006ECD38 /* LotteryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343D2CA129A05407006ECD38 /* LotteryListView.swift */; };
 		343D2CA429A05479006ECD38 /* Lottery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343D2CA329A05479006ECD38 /* Lottery.swift */; };
@@ -78,6 +79,7 @@
 		34218A762A60FCB100CECADE /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		34218A782A60FD0500CECADE /* lotterySuggestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lotterySuggestions.json; sourceTree = "<group>"; };
 		34218A7A2A6106B600CECADE /* LotterySuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySuggestion.swift; sourceTree = "<group>"; };
+		34240EB02A797DA000045260 /* pick-92276.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "pick-92276.mp3"; sourceTree = "<group>"; };
 		342AD27E2A70CB8500C83544 /* LotteryDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDetailViewModelTests.swift; sourceTree = "<group>"; };
 		343D2CA129A05407006ECD38 /* LotteryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryListView.swift; sourceTree = "<group>"; };
 		343D2CA329A05479006ECD38 /* Lottery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lottery.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		340BB392299355BE00B336AA /* PickLottery */ = {
 			isa = PBXGroup;
 			children = (
+				34240EAF2A797D9200045260 /* Resources */,
 				34A6A1F929E1DDCA00B9964D /* UIComponents */,
 				3460F9DB29C2A22400A40BD6 /* Helpers */,
 				34D967C929C01FB4006D2559 /* Persistence */,
@@ -194,6 +197,14 @@
 				340BB3B5299355C000B336AA /* PickLotteryUITestsLaunchTests.swift */,
 			);
 			path = PickLotteryUITests;
+			sourceTree = "<group>";
+		};
+		34240EAF2A797D9200045260 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				34240EB02A797DA000045260 /* pick-92276.mp3 */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		343D2CA029A053E9006ECD38 /* Loteries */ = {
@@ -443,6 +454,7 @@
 			files = (
 				340BB39B299355BF00B336AA /* Preview Assets.xcassets in Resources */,
 				34218A792A60FD0500CECADE /* lotterySuggestions.json in Resources */,
+				34240EB12A797DA000045260 /* pick-92276.mp3 in Resources */,
 				340BB398299355BF00B336AA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
