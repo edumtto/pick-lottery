@@ -22,7 +22,6 @@ struct LotteryDetailView: View {
                 }
             }
         }
-        
         .sheet(isPresented: $viewModel.presentRaffleAnimation) {
             NavigationStack {
                 RaffleAnimationView(
@@ -51,9 +50,7 @@ struct LotteryDetailView: View {
                     Button {
                         dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                            //withAnimation {
-                                viewModel.deleteLottery()
-                            //}
+                            viewModel.deleteLottery()
                         }
                     } label: {
                         Label("Delete lottery", systemImage: "trash")
@@ -110,7 +107,7 @@ struct LotteryDetailView: View {
                 .frame(height: 1)
                 .overlay(viewModel.color)
         }
-        .background(viewModel.color.brightness(0.2).ignoresSafeArea())
+        .background(viewModel.color.opacity(0.6).ignoresSafeArea())
     }
     
     var raffleButton: some View {
@@ -124,7 +121,7 @@ struct LotteryDetailView: View {
                 .background(Color.accentColor)
                 .cornerRadius(16)
         })
-        .shadow(color: .white, radius: 16)
+        .shadow(color: .whiteText, radius: 16)
         .disabled(viewModel.lottery.entries.count == .zero)
     }
     

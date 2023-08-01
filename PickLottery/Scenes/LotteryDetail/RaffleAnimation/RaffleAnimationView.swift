@@ -24,6 +24,7 @@ fileprivate struct RaffleItem: Identifiable {
 
 struct RaffleAnimationView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
     
     let entries: [LotteryEntryMO]
     let targetEntry: LotteryEntryMO?
@@ -43,9 +44,10 @@ struct RaffleAnimationView: View {
 
             Text(displayedItem.name)
                 .padding()
-                .foregroundColor(.black)
+                
                 .multilineTextAlignment(.center)
                 .font(.system(size: 42))
+                .foregroundColor(fontColor)
                 .scaleEffect(winnerAnimation ? 1 : 0.75)
                 .fontWeight(winnerAnimation ? .bold : .regular)
                 .background(winnerAnimation ? .white : .clear)
@@ -68,7 +70,11 @@ struct RaffleAnimationView: View {
         }
     }
     
-    var resultTextView: some View {
+    private var fontColor: Color {
+        colorScheme == .dark && !winnerAnimation ? .white : .black
+    }
+    
+    private var resultTextView: some View {
         VStack {
             Text("Picked:")
                 .font(.title)
@@ -89,7 +95,7 @@ struct RaffleAnimationView: View {
         .padding()
     }
     
-    func animateRaffle(times: Int, interval: Double) {
+    private func animateRaffle(times: Int, interval: Double) {
         if times <= 1 {
             endAnimation()
             return

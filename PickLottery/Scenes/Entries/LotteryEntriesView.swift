@@ -13,12 +13,7 @@ struct LotteryEntriesView: View {
         .scrollContentBackground(.hidden)
         
         .listRowSeparatorTint(viewModel.color, edges: .all)
-        .background(
-            viewModel.color
-                .brightness(0.2)
-                .ignoresSafeArea()
-        
-        )
+        .background(viewModel.color.opacity(0.6).ignoresSafeArea())
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
