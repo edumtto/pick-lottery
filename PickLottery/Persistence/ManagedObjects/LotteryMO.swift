@@ -27,7 +27,7 @@ extension LotteryMO {
 
     
     @NSManaged public var hexColor: String
-    @NSManaged public var id: UUID
+    @NSManaged public var id: UUID?
     @NSManaged public var name: String
     @NSManaged public var descriptionText: String?
     @NSManaged public var illustration: String?

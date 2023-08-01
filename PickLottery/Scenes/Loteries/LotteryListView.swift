@@ -5,7 +5,9 @@ struct LotteryListView: View {
     @EnvironmentObject var lotteryStore: LotteryStore
     @State var presentCreateAlert = false
     @State var newLotteryName = ""
-    @FetchRequest(sortDescriptors: []) var lotteries: FetchedResults<LotteryMO>
+    
+    @FetchRequest(sortDescriptors: [.init(keyPath: \LotteryMO.name, ascending: true)], animation: .default)
+    private var lotteries: FetchedResults<LotteryMO>
     
     private let twoColumnGrid = [GridItem(.flexible()), GridItem(.flexible())]
     

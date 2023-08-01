@@ -51,9 +51,9 @@ struct LotteryDetailView: View {
                     Button {
                         dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                            withAnimation {
+                            //withAnimation {
                                 viewModel.deleteLottery()
-                            }
+                            //}
                         }
                     } label: {
                         Label("Delete lottery", systemImage: "trash")
