@@ -166,7 +166,6 @@
 				34D967C929C01FB4006D2559 /* Persistence */,
 				3462932829D6637F00471C7A /* Scenes */,
 				340BB397299355BF00B336AA /* Assets.xcassets */,
-				34218A782A60FD0500CECADE /* lotterySuggestions.json */,
 				340BB393299355BE00B336AA /* PickLotteryApp.swift */,
 				340BB399299355BF00B336AA /* Preview Content */,
 			);
@@ -202,6 +201,7 @@
 		34240EAF2A797D9200045260 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				34218A782A60FD0500CECADE /* lotterySuggestions.json */,
 				34240EB02A797DA000045260 /* pick-92276.mp3 */,
 			);
 			path = Resources;

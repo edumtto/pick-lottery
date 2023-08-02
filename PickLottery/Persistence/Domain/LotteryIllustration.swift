@@ -13,10 +13,14 @@ extension Lottery {
         case cards = "♠️"
         case gambing = "🎰"
         case fruit = "🍎"
-        case book = "📚"
+        case books = "📚"
         case ice = "🧊"
         case clover = "🍀"
         case cactus = "🌵"
+        case question = "❓"
+        case book = "📕"
+        case coin = "🪙"
+        case ball = "🎱"
         
         var id: String {
             rawValue

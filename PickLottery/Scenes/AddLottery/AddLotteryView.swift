@@ -8,8 +8,8 @@ struct AddLotteryView: View {
     var body: some View {
         VStack {
             suggestionsView
-                .padding()
-            Spacer()
+                .padding(.leading)
+                .padding(.trailing)
             
             NavigationLink("New lottery") {
                 CreateLotteryView(isPresented: $isPresented, viewModel: .init(lotteryStore: lotteryStore))
