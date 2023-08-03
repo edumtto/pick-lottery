@@ -13,7 +13,6 @@ struct PrimaryButtonStyle: ButtonStyle {
     }
 }
 
-
 struct PrimaryButtonStyle_Previews: PreviewProvider {
     static var previews: some View {
         Button("Create") {

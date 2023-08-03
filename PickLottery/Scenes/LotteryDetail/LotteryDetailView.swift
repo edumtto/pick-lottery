@@ -114,7 +114,7 @@ struct LotteryDetailView: View {
         Button(action: {
             viewModel.raffleButtonAction()
         }, label: {
-            Text("Raffle")
+            Text("Draw")
                 .font(.headline)
                 .foregroundColor(.white)
                 .frame(minWidth: 70, minHeight: 70)

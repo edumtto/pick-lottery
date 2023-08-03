@@ -8,8 +8,6 @@ struct AddLotteryView: View {
     var body: some View {
         VStack {
             suggestionsView
-                .padding(.leading)
-                .padding(.trailing)
             
             NavigationLink("New lottery") {
                 CreateLotteryView(isPresented: $isPresented, viewModel: .init(lotteryStore: lotteryStore))
@@ -33,6 +31,8 @@ struct AddLotteryView: View {
                     .font(.title2)
                 Spacer()
             }
+            .padding(.leading)
+            .padding(.trailing)
             ScrollView {
                 LazyVStack {
                     ForEach(viewModel.suggestions) { suggestion in
@@ -43,6 +43,8 @@ struct AddLotteryView: View {
                             }
                     }
                 }
+                .padding(.leading)
+                .padding(.trailing)
             }
         }
     }
