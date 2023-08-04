@@ -23,7 +23,7 @@
     },
     {
         "name": "Magic 8 ball",
-        "description": "Randomlly choses a day of the week.",
+        "description": "Pick an answer for a yes-no question.",
         "illustration": "🎱",
         "color": "aff4d1",
         "raffle_mode": 0,

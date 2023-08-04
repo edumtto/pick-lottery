@@ -3,6 +3,10 @@ import SwiftUI
 struct LotteryResultCellView: View {
     let result: LotteryResultMO
     
+    var dateTime: String {
+        result.date.formatted(.relative(presentation: .numeric))
+    }
+    
     var body: some View {
         HStack {
             Circle()
@@ -10,7 +14,7 @@ struct LotteryResultCellView: View {
                 .foregroundColor(result.entry.color)
             Text(result.entry.name)
             Spacer()
-            Text(result.date.formatted(.relative(presentation: .numeric)))
+            Text(dateTime)
                 .foregroundColor(.gray)
             //formatted(date: .abbreviated, time: .shortened))
         }
