@@ -3,8 +3,13 @@ import SwiftUI
 struct LotteryResultCellView: View {
     let result: LotteryResultMO
     
-    var dateTime: String {
-        result.date.formatted(.relative(presentation: .numeric))
+    private var dateTime: String {
+        if Calendar.current.isDateInToday(result.date) {
+            return result.date.formatted(date: .omitted, time: .shortened)
+        } else {
+            return result.date.formatted(date: .abbreviated, time: .omitted)
+        }
+       
     }
     
     var body: some View {

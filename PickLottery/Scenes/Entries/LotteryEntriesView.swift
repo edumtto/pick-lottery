@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LotteryEntriesView: View {
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var viewModel: LotteryEntriesViewModel
     
     var body: some View {
@@ -13,7 +14,7 @@ struct LotteryEntriesView: View {
         .scrollContentBackground(.hidden)
         
         .listRowSeparatorTint(viewModel.color, edges: .all)
-        .background(viewModel.color.opacity(0.6).ignoresSafeArea())
+        .background(viewModel.color.brightness(backgroundBrighness).ignoresSafeArea())
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
@@ -37,6 +38,10 @@ struct LotteryEntriesView: View {
                 )
             }
         }
+    }
+    
+    private var backgroundBrighness: Double {
+        colorScheme == .dark ? -0.2 : 0.2
     }
 }
 

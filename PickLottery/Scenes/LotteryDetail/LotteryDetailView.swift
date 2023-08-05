@@ -4,6 +4,7 @@ import Combine
 struct LotteryDetailView: View {
     @EnvironmentObject var lotteryStore: LotteryStore
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var viewModel: LotteryDetailViewModel
     
     var body: some View {
@@ -61,7 +62,7 @@ struct LotteryDetailView: View {
         .navigationTitle(viewModel.lottery.name)
     }
     
-    var raffleResults: some View {
+    private var raffleResults: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Last results:")
@@ -81,7 +82,7 @@ struct LotteryDetailView: View {
         }
     }
     
-    var raffleDescription: some View {
+    private var raffleDescription: some View {
         VStack {
             HStack {
                 Button {
@@ -107,10 +108,18 @@ struct LotteryDetailView: View {
                 .frame(height: 1)
                 .overlay(viewModel.color)
         }
-        .background(viewModel.color.opacity(0.6).ignoresSafeArea())
+        .background(
+            viewModel.color
+            .brightness(backgroundBrighness)
+            .ignoresSafeArea()
+        )
     }
     
-    var raffleButton: some View {
+    private var backgroundBrighness: Double {
+        colorScheme == .dark ? -0.2 : 0.2
+    }
+    
+    private var raffleButton: some View {
         Button(action: {
             viewModel.raffleButtonAction()
         }, label: {
@@ -125,7 +134,7 @@ struct LotteryDetailView: View {
         .disabled(viewModel.lottery.entries.count == .zero)
     }
     
-    func propertyLabel(title: String, illustration: String) -> some View {
+    private func propertyLabel(title: String, illustration: String) -> some View {
         HStack {
             Image(systemName: illustration)
             Text(title)
