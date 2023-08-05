@@ -17,7 +17,7 @@ struct LotterySuggestionsCellView: View {
                 .padding(2)
             
             HStack {
-                if let emojiText = lottery.illustration?.rawValue {
+                if let emojiText = lottery.illustration {
                     Text(emojiText)
                         .font(.largeTitle)
                 }
@@ -50,7 +50,7 @@ struct LotterySuggestionsCellView: View {
 struct LotterySuggestionsCellView_Previews: PreviewProvider {
     static var lottery: Lottery {
         let entries: [Lottery.Entry] = [1, 2, 3, 4, 5, 6].map { Lottery.Entry.init(String($0)) }
-        return Lottery(name: "Dice", description: "Roll a tradicional six face dice", illustration: .dice, entries: entries, results: .init())
+        return Lottery(name: "Dice", description: "Roll a tradicional six face dice", illustration: "🎲", entries: entries, results: .init())
     }
 
     static var previews: some View {

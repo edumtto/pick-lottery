@@ -22,6 +22,7 @@
 		343D2CA629A056DE006ECD38 /* LotteryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343D2CA529A056DE006ECD38 /* LotteryCellView.swift */; };
 		34524DCC2A7E9FAA00A3D163 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34524DCB2A7E9FAA00A3D163 /* AudioPlayer.swift */; };
 		34524DCE2A7EA62900A3D163 /* pick-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34524DCD2A7EA62900A3D163 /* pick-sound.mp3 */; };
+		34524DD12A7EACAB00A3D163 /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 34524DD02A7EACAB00A3D163 /* MCEmojiPicker */; };
 		3460F9DF29C2A28D00A40BD6 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460F9DE29C2A28D00A40BD6 /* Color+Extensions.swift */; };
 		3462932B29D6641300471C7A /* CreateEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3462932A29D6641300471C7A /* CreateEntryView.swift */; };
 		3462932D29D664FA00471C7A /* CreateEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3462932C29D664FA00471C7A /* CreateEntryViewModel.swift */; };
@@ -117,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34524DD12A7EACAB00A3D163 /* MCEmojiPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +364,9 @@
 			dependencies = (
 			);
 			name = PickLottery;
+			packageProductDependencies = (
+				34524DD02A7EACAB00A3D163 /* MCEmojiPicker */,
+			);
 			productName = PickLottery;
 			productReference = 340BB390299355BE00B336AA /* PickLottery.app */;
 			productType = "com.apple.product-type.application";
@@ -435,6 +440,7 @@
 			);
 			mainGroup = 340BB387299355BE00B336AA;
 			packageReferences = (
+				34524DCF2A7EACAB00A3D163 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
 			);
 			productRefGroup = 340BB391299355BE00B336AA /* Products */;
 			projectDirPath = "";
@@ -843,6 +849,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		34524DCF2A7EACAB00A3D163 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		34524DD02A7EACAB00A3D163 /* MCEmojiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34524DCF2A7EACAB00A3D163 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
+			productName = MCEmojiPicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		34C0F0A629BAC555009EBFC8 /* LotteryDataModel.xcdatamodeld */ = {

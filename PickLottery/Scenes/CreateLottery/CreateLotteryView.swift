@@ -1,3 +1,4 @@
+import MCEmojiPicker
 import SwiftUI
 
 struct CreateLotteryView: View {
@@ -8,6 +9,7 @@ struct CreateLotteryView: View {
     @Binding var isPresented: Bool
     @EnvironmentObject var lotteryStore: LotteryStore
     
+    @State var emojiPickerIsPresented: Bool = false
     @StateObject var viewModel: CreateLotteryViewModel
     @FocusState private var focusedField: FocusedField?
     
@@ -61,11 +63,16 @@ struct CreateLotteryView: View {
     }
     
     var emojiInput: some View {
-        Picker(viewModel.emoji, selection: $viewModel.emoji) {
-            ForEach(viewModel.illustrations) {
-                Text($0.rawValue)
-            }
+        Button {
+            emojiPickerIsPresented.toggle()
+        } label: {
+            Text(viewModel.emoji)
+                .font(.title)
         }
+        .emojiPicker(
+            isPresented: $emojiPickerIsPresented,
+            selectedEmoji: $viewModel.emoji
+        )
     }
     
     var colorInput: some View {

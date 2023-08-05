@@ -35,7 +35,7 @@ class LotteryStore: ObservableObject {
         let lottery0 = Lottery(
             name: "Supper Week Lottery",
             description: "Raffle a random week day",
-            illustration: .callendar,
+            illustration: "📅",
             entries: entries0,
             results: results0,
             raffleMode: .avoidRepetition
@@ -45,7 +45,7 @@ class LotteryStore: ObservableObject {
         let lottery1 = Lottery(
             name: "Dice",
             description: "Roll a tradicional six face dice",
-            illustration: .dice,
+            illustration: "🎲",
             entries: entries1,
             results: .init()
         )
@@ -125,7 +125,7 @@ extension LotteryStore: LotteryStorageProvider {
         lotteryMO.id = lottery.id
         lotteryMO.name = lottery.name
         lotteryMO.descriptionText = lottery.description
-        lotteryMO.illustration = lottery.illustration?.rawValue
+        lotteryMO.illustration = lottery.illustration
         lotteryMO.hexColor = lottery.color
         lotteryMO.raffleMode = lottery.raffleMode.rawValue
         let entiesList = lottery.entries.map { entry in
