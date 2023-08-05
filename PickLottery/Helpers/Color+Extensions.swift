@@ -4,15 +4,6 @@ import SwiftUI
 extension Color {
     static let primary = Color("Primary")
     static let whiteDynamic = Color("WhiteDynamic")
-    static let navBarDynamic = Color("NavBarDynamic")
-
-    static var confettiRandom: Color {
-        .init(
-            hue: Double.random(in: 0...1),
-            saturation: Double.random(in: 0.2...0.5),
-            brightness: Double.random(in: 0.5...1)
-        )
-    }
     
     static var lotteryRandom: Color {
         .init(
