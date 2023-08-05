@@ -47,8 +47,10 @@ struct LotteryDetailView: View {
         .toolbar {
             ToolbarItem {
                 Menu("Options") {
-                    Button("Clear results") {
+                    Button {
                         viewModel.clearResults()
+                    } label: {
+                        Label("Clear results", systemImage: "eraser")
                     }
                     Button {
                         dismiss()
