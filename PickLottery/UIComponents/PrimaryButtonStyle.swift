@@ -3,10 +3,10 @@ import SwiftUI
 struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(.whiteText)
+            .foregroundColor(.whiteDynamic)
             .font(.headline)
             .frame(maxWidth: .infinity, minHeight: 40)
-            .background(Color.accentColor)
+            .background(Color.primary)
             .opacity(configuration.isPressed ? 0.6 : 1)
             .cornerRadius(8)
             .padding()

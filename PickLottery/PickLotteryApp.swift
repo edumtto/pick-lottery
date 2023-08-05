@@ -9,7 +9,9 @@ struct PickLotteryApp: App {
             LotteryListView()
                 .environmentObject(lotteryStore)
                 .environment(\.managedObjectContext, lotteryStore.container.viewContext)
+                .accentColor(.navBarDynamic)
         }
+        
     }
 }
 

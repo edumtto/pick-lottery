@@ -2,11 +2,9 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    static let accent = Color.accentColor
-    static let whiteText = Color("WhiteText")
-//    static let primary = Color("PrimaryColor")
-//    static let secondary = Color("SecondaryColor")
-//    static let tertiary = Color("TertiaryColor")
+    static let primary = Color("Primary")
+    static let whiteDynamic = Color("WhiteDynamic")
+    static let navBarDynamic = Color("NavBarDynamic")
 
     static var confettiRandom: Color {
         .init(

@@ -47,7 +47,7 @@ struct CreateLotteryView: View {
     var descriptionInput: some View {
         TextField("Description (opcional)", text: $viewModel.description)
             .textFieldStyle(
-                PrimaryTextFieldStyle(strokeColor: viewModel.description.isEmpty ? Color.gray : Color.accentColor)
+                PrimaryTextFieldStyle(strokeColor: viewModel.description.isEmpty ? Color.gray : Color.primary)
             )
     }
     
@@ -77,7 +77,7 @@ struct CreateLotteryView: View {
         VStack(alignment: .leading) {
             TextField("Entries (opcional)", text: $viewModel.entriesDescription, axis: .vertical)
                 .textFieldStyle(
-                    PrimaryTextFieldStyle(strokeColor: viewModel.entriesDescription.isEmpty ? Color.gray : Color.accentColor)
+                    PrimaryTextFieldStyle(strokeColor: viewModel.entriesDescription.isEmpty ? Color.gray : Color.primary)
                 )
                 .textInputAutocapitalization(.never)
             Text("  Ex: John, Mary, San ...")

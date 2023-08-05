@@ -36,6 +36,7 @@ struct LotteryEntriesView: View {
                         lottery: viewModel.lottery
                     )
                 )
+                .accentColor(.navBarDynamic)
             }
         }
     }

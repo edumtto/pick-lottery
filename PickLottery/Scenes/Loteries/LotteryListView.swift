@@ -34,6 +34,7 @@ struct LotteryListView: View {
             .sheet(isPresented: $presentCreateAlert) {
                 NavigationStack {
                     AddLotteryView(isPresented: $presentCreateAlert, viewModel: AddLotteryViewModel(lotteryStore: lotteryStore))
+                        .accentColor(.navBarDynamic)
                 }
             }
         }

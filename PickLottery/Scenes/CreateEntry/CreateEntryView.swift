@@ -51,7 +51,7 @@ struct CreateEntryView: View {
                 .padding(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 2)
-                        .stroke(Color.accentColor, lineWidth: 1)
+                        .stroke(Color.primary, lineWidth: 1)
                 )
         }
     }

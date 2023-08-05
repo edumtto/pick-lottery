@@ -127,16 +127,17 @@ struct LotteryDetailView: View {
                 .font(.headline)
                 .foregroundColor(.white)
                 .frame(minWidth: 70, minHeight: 70)
-                .background(Color.accentColor)
+                .background(Color.primary)
                 .cornerRadius(16)
         })
-        .shadow(color: .whiteText, radius: 16)
+        .shadow(color: .whiteDynamic, radius: 16)
         .disabled(viewModel.lottery.entries.count == .zero)
     }
     
     private func propertyLabel(title: String, illustration: String) -> some View {
         HStack {
             Image(systemName: illustration)
+                .tint(.primary)
             Text(title)
                 .foregroundColor(.gray)
                 .fontWeight(.medium)
