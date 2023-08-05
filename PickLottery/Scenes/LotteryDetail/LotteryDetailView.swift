@@ -26,7 +26,7 @@ struct LotteryDetailView: View {
         .sheet(isPresented: $viewModel.presentRaffleAnimation) {
             if let selectedEntry = viewModel.selectedLotteryEntry {
                 NavigationStack {
-                    RaffleAnimationView(
+                    DefaultRaffleAnimationView(
                         entries: viewModel.entries,
                         targetEntry: selectedEntry,
                         isRaffleAnimationFinished: $viewModel.isRaffleAnimationFinished)

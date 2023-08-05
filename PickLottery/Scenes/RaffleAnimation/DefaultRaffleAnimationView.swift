@@ -23,7 +23,7 @@ fileprivate struct RaffleItem: Identifiable {
     }
 }
 
-struct RaffleAnimationView: View {
+struct DefaultRaffleAnimationView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     
@@ -86,10 +86,6 @@ struct RaffleAnimationView: View {
     
     private var resultTextView: some View {
         VStack {
-            Text("Picked:")
-                .font(.title)
-                .foregroundColor(.white)
-                .padding()
             Spacer()
             HStack {
                 Button {
@@ -165,12 +161,12 @@ struct RaffleAnimationView: View {
     }
 }
 
-struct RaffleAnimationView_Previews: PreviewProvider {
+struct DefaultRaffleAnimationView_Previews: PreviewProvider {
     static let entries = LotteryMO.example0.entries.allObjects as! [LotteryEntryMO]
     
     static var previews: some View {
         NavigationStack {
-            RaffleAnimationView(
+            DefaultRaffleAnimationView(
                 entries: entries,
                 targetEntry: entries[1],
                 isRaffleAnimationFinished: .constant(false)
