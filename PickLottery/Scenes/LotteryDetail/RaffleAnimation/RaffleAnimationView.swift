@@ -37,7 +37,7 @@ struct RaffleAnimationView: View {
     @State private var timer: Timer?
     @State private var winnerAnimation = false
     
-    private let audioPlayer = AudioPlayer(sound: "pick-92276", type: "mp3")
+    private let audioPlayer = AudioPlayer(sound: .pick)
     private let voiceSynthesizer = AVSpeechSynthesizer()
     
     var body: some View {

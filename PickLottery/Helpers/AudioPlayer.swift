@@ -1,16 +1,24 @@
 import AVFoundation
 
 struct AudioPlayer {
-    let audioPlayer: AVAudioPlayer
+    enum Sound: String {
+        case pick = "pick-sound"
+        
+        var type: String {
+            "mp3"
+        }
+    }
     
-    init?(sound: String, type: String) {
-        guard let path = Bundle.main.path(forResource: sound, ofType: type) else {
-            debugPrint("Wrong path for \(sound).\(type)")
+    let player: AVAudioPlayer
+    
+    init?(sound: Sound) {
+        guard let path = Bundle.main.path(forResource: sound.rawValue, ofType: sound.type) else {
+            debugPrint("Wrong path for \(sound.rawValue).\(sound.type)")
             return nil
         }
         
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
         } catch {
             debugPrint(error)
             return nil
@@ -18,6 +26,6 @@ struct AudioPlayer {
     }
     
     func play() {
-        audioPlayer.play()
+        player.play()
     }
 }
