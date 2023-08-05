@@ -1,6 +1,6 @@
-import SwiftUI
-import Foundation
 import AVFoundation
+import Foundation
+import SwiftUI
 
 fileprivate struct RaffleItem: Identifiable {
     let id: UUID
@@ -28,7 +28,7 @@ struct RaffleAnimationView: View {
     @Environment(\.colorScheme) var colorScheme
     
     let entries: [LotteryEntryMO]
-    let targetEntry: LotteryEntryMO?
+    let targetEntry: LotteryEntryMO
     
     @Binding var isRaffleAnimationFinished: Bool
     
@@ -38,11 +38,12 @@ struct RaffleAnimationView: View {
     @State private var winnerAnimation = false
     
     private let audioPlayer = AudioPlayer(sound: "pick-92276", type: "mp3")
+    private let voiceSynthesizer = AVSpeechSynthesizer()
     
     var body: some View {
         ZStack {
             Circle()
-                .foregroundColor(winnerAnimation ? targetEntry?.color : .clear)
+                .foregroundColor(winnerAnimation ? targetEntry.color : .clear)
                 .scaleEffect(winnerAnimation ? 3 : 0)
 
             Text(displayedItem.name)
@@ -75,6 +76,12 @@ struct RaffleAnimationView: View {
     
     private var fontColor: Color {
         colorScheme == .dark && !winnerAnimation ? .white : .black
+    }
+    
+    private var voiceUtterance: AVSpeechUtterance {
+        let utterance = AVSpeechUtterance(string: targetEntry.name)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        return utterance
     }
     
     private var resultTextView: some View {
@@ -117,17 +124,27 @@ struct RaffleAnimationView: View {
     }
     
     private func endAnimation() {
+        // Sound effect
         audioPlayer?.play()
         
         timer?.invalidate()
         timer = nil
-        if let targetEntry = targetEntry, displayedItem.id != targetEntry.id {
+        if displayedItem.id != targetEntry.id {
             displayedItem = .init(targetEntry)
         }
         withAnimation {
             winnerAnimation = true
         }
+        
         isRaffleAnimationFinished = true
+        
+        // Text do speech        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + .milliseconds(600),
+            execute: .init(block: {
+            voiceSynthesizer.speak(voiceUtterance)
+            })
+        )
     }
     
     private func moveOneItem() {
@@ -145,28 +162,6 @@ struct RaffleAnimationView: View {
             nextEntryIndex = 0
         }
         return entry
-    }
-}
-
-struct AudioPlayer {
-    let audioPlayer: AVAudioPlayer
-    
-    init?(sound: String, type: String) {
-        guard let path = Bundle.main.path(forResource: sound, ofType: type) else {
-            debugPrint("Wrong path for \(sound).\(type)")
-            return nil
-        }
-        
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-        } catch {
-            debugPrint(error)
-            return nil
-        }
-    }
-    
-    func play() {
-        audioPlayer.play()
     }
 }
 

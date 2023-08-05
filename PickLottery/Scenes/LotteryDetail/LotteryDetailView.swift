@@ -24,11 +24,13 @@ struct LotteryDetailView: View {
             }
         }
         .sheet(isPresented: $viewModel.presentRaffleAnimation) {
-            NavigationStack {
-                RaffleAnimationView(
-                    entries: viewModel.entries,
-                    targetEntry: viewModel.selectedLotteryEntry,
-                    isRaffleAnimationFinished: $viewModel.isRaffleAnimationFinished)
+            if let selectedEntry = viewModel.selectedLotteryEntry {
+                NavigationStack {
+                    RaffleAnimationView(
+                        entries: viewModel.entries,
+                        targetEntry: selectedEntry,
+                        isRaffleAnimationFinished: $viewModel.isRaffleAnimationFinished)
+                }
             }
         }
         .sheet(isPresented: $viewModel.presentRaffleModeDescription) {
