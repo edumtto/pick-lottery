@@ -82,7 +82,7 @@
             {"name": "La Luna\n(The moon)"},
             {"name": "El Cotorro\n(The Parrot)"},
             {"name": "La Borracho\n(The Drunk)"},
-            {"name": "El Negrito\n(Little Black Person)"},
+            {"name": "El Negrito\n(The Black Man)"},
             {"name": "El Corazon\n(The Heart)"},
             {"name": "La Sandia\n(The Watermelon)"},
             {"name": "El Tambor\n(The Drum)"},
@@ -135,6 +135,23 @@
             {"name": "O 61"}, {"name": "O 62"}, {"name": "O 63"}, {"name": "O 64"}, {"name": "O 65"},
             {"name": "O 66"}, {"name": "O 67"}, {"name": "O 68"}, {"name": "O 69"}, {"name": "O 70"},
             {"name": "O 71"}, {"name": "O 72"}, {"name": "O 73"}, {"name": "O 74"}, {"name": "O 75"}
+        ]
+    },
+    {
+        "name": "Spin the arrow",
+        "description": "Chose between 8 directions.",
+        "illustration": "↗️",
+        "color": "c7aec7",
+        "raffle_mode": 0,
+        "entries": [
+            {"name": "→"},
+            {"name": "↘"},
+            {"name": "↓"},
+            {"name": "↙"},
+            {"name": "←"},
+            {"name": "↖"},
+            {"name": "↑"},
+            {"name": "↗"}
         ]
     },
     {
