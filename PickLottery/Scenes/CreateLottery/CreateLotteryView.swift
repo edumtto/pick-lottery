@@ -25,6 +25,8 @@ struct CreateLotteryView: View {
                     colorInput
                 }
                     .padding(.bottom)
+                    .gesture(selectorTapGesture, including: .all)
+                
                 entriesInput
             }
             .padding()
@@ -40,6 +42,16 @@ struct CreateLotteryView: View {
             }
     }
     
+    private var selectorTapGesture: some Gesture {
+        TapGesture()
+            .onEnded {
+                UIApplication.shared.connectedScenes
+                    .compactMap { ($0 as? UIWindowScene)?.keyWindow }
+                    .last?
+                    .endEditing(true)
+            }
+    }
+    
     var nameInput: some View {
         TextField("Name", text: $viewModel.name)
             .textFieldStyle(PrimaryTextFieldStyle())
@@ -47,19 +59,29 @@ struct CreateLotteryView: View {
     }
     
     var descriptionInput: some View {
-        TextField("Description (opcional)", text: $viewModel.description)
+        TextField("Description", text: $viewModel.description)
+            //.textFieldStyle(PrimaryTextFieldStyle())
             .textFieldStyle(
                 PrimaryTextFieldStyle(strokeColor: viewModel.description.isEmpty ? Color.gray : Color.primary)
             )
     }
     
     var modeInput: some View {
-        Picker("Raffle mode", selection: $viewModel.raffleMode) {
-            ForEach(viewModel.raffleModes) {
-                Text($0.description)
+        HStack {
+            Picker("Raffle mode", selection: $viewModel.raffleMode) {
+                ForEach(viewModel.raffleModes) {
+                    Text($0.description)
+                }
             }
+            
         }
-        .frame(minWidth: 100)
+        .frame(minWidth: 120, minHeight: 34)
+        .padding(.top, 4)
+        .padding(.bottom, 4)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.gray, lineWidth: 1)
+        )
     }
     
     var emojiInput: some View {
@@ -73,16 +95,30 @@ struct CreateLotteryView: View {
             isPresented: $emojiPickerIsPresented,
             selectedEmoji: $viewModel.emoji
         )
+        .frame(minWidth: 34, minHeight: 34)
+        .padding(4)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.gray, lineWidth: 1)
+        )
     }
     
     var colorInput: some View {
         ColorPicker("", selection: $viewModel.color, supportsOpacity: false)
-            .frame(width: 38)
+            .frame(width: 34, height: 34)
+            .padding(.top, 4)
+            .padding(.trailing, 8)
+            .padding(.bottom, 4)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(.gray, lineWidth: 1)
+            )
     }
     
     var entriesInput: some View {
         VStack(alignment: .leading) {
-            TextField("Entries (opcional)", text: $viewModel.entriesDescription, axis: .vertical)
+            TextField("Entries (comma-separared)", text: $viewModel.entriesDescription, axis: .vertical)
+                //.textFieldStyle(PrimaryTextFieldStyle())
                 .textFieldStyle(
                     PrimaryTextFieldStyle(strokeColor: viewModel.entriesDescription.isEmpty ? Color.gray : Color.primary)
                 )
@@ -94,7 +130,7 @@ struct CreateLotteryView: View {
     }
     
     var createButton: some View {
-        Button("Create"){
+        Button("Create") {
             viewModel.createLottery()
             isPresented = false
         }

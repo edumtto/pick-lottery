@@ -5,7 +5,7 @@ struct PrimaryTextFieldStyle: TextFieldStyle {
     
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
-            .frame(minHeight: 38)
+            .frame(minHeight: 32)
             .padding(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
