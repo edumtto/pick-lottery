@@ -110,7 +110,9 @@ struct CreateLotteryView: View {
     var createButton: some View {
         Button("Create") {
             viewModel.createLottery()
-            isPresented = false
+            if !viewModel.showValidationAlert {
+                isPresented = false
+            }
         }
         .buttonStyle(PrimaryButtonStyle())
     }
