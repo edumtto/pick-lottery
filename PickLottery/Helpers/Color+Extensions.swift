@@ -11,8 +11,8 @@ extension Color {
             .map {
                 Color(
                     hue: $0,
-                    saturation: 0.4,
-                    brightness: 0.7
+                    saturation: 0.3,
+                    brightness: 0.9
                 )
             }
     }
