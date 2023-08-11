@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import EmojiPicker
 
 final class CreateLotteryViewModel: ObservableObject {
     var lotteryStore: LotteryStorageProvider
@@ -7,7 +8,7 @@ final class CreateLotteryViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var description: String = ""
     @Published var color: Color = .lotteryRandom
-    @Published var emoji: String = Lottery.randomIllustration
+    @Published var emoji: Emoji? = .init(value: Lottery.randomIllustration, name: "")
     @Published var raffleMode: Lottery.RaffleMode = .fullRandom
     @Published var entriesDescription: String = ""
     @Published var showValidationAlert = false
@@ -32,7 +33,7 @@ final class CreateLotteryViewModel: ObservableObject {
         let newLottery = Lottery(
             name: name,
             description: description,
-            illustration: emoji,
+            illustration: emoji?.value ?? "🎲",
             entries: entries,
             color: color,
             raffleMode: raffleMode

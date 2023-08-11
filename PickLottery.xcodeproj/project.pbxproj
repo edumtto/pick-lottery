@@ -36,6 +36,7 @@
 		3496368829A933D600CDEFB3 /* CreateLotteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496368729A933D600CDEFB3 /* CreateLotteryView.swift */; };
 		34A6A1FB29E1DDFA00B9964D /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6A1FA29E1DDFA00B9964D /* PrimaryButtonStyle.swift */; };
 		34A6A1FD29E1DFF100B9964D /* PrimaryTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6A1FC29E1DFF100B9964D /* PrimaryTextFieldStyle.swift */; };
+		34B0ED132A859748006B27F7 /* EmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 34B0ED122A859748006B27F7 /* EmojiPicker */; };
 		34C0F0A529BAC475009EBFC8 /* LotteryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0F0A429BAC475009EBFC8 /* LotteryStore.swift */; };
 		34C0F0A829BAC555009EBFC8 /* LotteryDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 34C0F0A629BAC555009EBFC8 /* LotteryDataModel.xcdatamodeld */; };
 		34C62A0A29A822FF003D9B54 /* LotteryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C62A0929A822FF003D9B54 /* LotteryDetailView.swift */; };
@@ -45,6 +46,7 @@
 		34D967C329C018E2006D2559 /* LotteryEntryMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D967C129C018E2006D2559 /* LotteryEntryMO.swift */; };
 		34D967C729C01905006D2559 /* LotteryResultMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D967C529C01905006D2559 /* LotteryResultMO.swift */; };
 		34E1C13B29EF87AB0033D41E /* LotteryStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E1C13A29EF87AB0033D41E /* LotteryStoreSpy.swift */; };
+		34E8A0922A85D19E00C64D0B /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E8A0912A85D19E00C64D0B /* ColorPickerView.swift */; };
 		34F45F892A5E474200761903 /* LotterySuggestionsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F45F882A5E474200761903 /* LotterySuggestionsCellView.swift */; };
 		34F45F8B2A5E4A7800761903 /* AddLotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F45F8A2A5E4A7800761903 /* AddLotteryViewModel.swift */; };
 		34F9ECC329F0B5250064E331 /* CreateEntryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F9ECC229F0B5250064E331 /* CreateEntryViewModelTests.swift */; };
@@ -108,6 +110,7 @@
 		34D967C129C018E2006D2559 /* LotteryEntryMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryEntryMO.swift; sourceTree = "<group>"; };
 		34D967C529C01905006D2559 /* LotteryResultMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResultMO.swift; sourceTree = "<group>"; };
 		34E1C13A29EF87AB0033D41E /* LotteryStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryStoreSpy.swift; sourceTree = "<group>"; };
+		34E8A0912A85D19E00C64D0B /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		34F45F882A5E474200761903 /* LotterySuggestionsCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySuggestionsCellView.swift; sourceTree = "<group>"; };
 		34F45F8A2A5E4A7800761903 /* AddLotteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLotteryViewModel.swift; sourceTree = "<group>"; };
 		34F9ECC229F0B5250064E331 /* CreateEntryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEntryViewModelTests.swift; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34524DD12A7EACAB00A3D163 /* MCEmojiPicker in Frameworks */,
+				34B0ED132A859748006B27F7 /* EmojiPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +236,7 @@
 				3460F9DE29C2A28D00A40BD6 /* Color+Extensions.swift */,
 				34218A762A60FCB100CECADE /* JSONLoader.swift */,
 				34524DCB2A7E9FAA00A3D163 /* AudioPlayer.swift */,
+				34E8A0912A85D19E00C64D0B /* ColorPickerView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -366,6 +371,7 @@
 			name = PickLottery;
 			packageProductDependencies = (
 				34524DD02A7EACAB00A3D163 /* MCEmojiPicker */,
+				34B0ED122A859748006B27F7 /* EmojiPicker */,
 			);
 			productName = PickLottery;
 			productReference = 340BB390299355BE00B336AA /* PickLottery.app */;
@@ -441,6 +447,7 @@
 			mainGroup = 340BB387299355BE00B336AA;
 			packageReferences = (
 				34524DCF2A7EACAB00A3D163 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
+				34B0ED112A859747006B27F7 /* XCRemoteSwiftPackageReference "EmojiPicker" */,
 			);
 			productRefGroup = 340BB391299355BE00B336AA /* Products */;
 			projectDirPath = "";
@@ -512,6 +519,7 @@
 				346C37D2299F0FB2000F993C /* LotteryEntryCell.swift in Sources */,
 				34F45F892A5E474200761903 /* LotterySuggestionsCellView.swift in Sources */,
 				346C37D0299F0F2F000F993C /* LotteryEntriesView.swift in Sources */,
+				34E8A0922A85D19E00C64D0B /* ColorPickerView.swift in Sources */,
 				347E753D29CA69A900C30392 /* LotteryDetailViewModel.swift in Sources */,
 				346FF1322A4AAEB2009C921D /* AddLotteryView.swift in Sources */,
 				348EB98C29EB200B0043AFD7 /* LotteryIllustration.swift in Sources */,
@@ -859,6 +867,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		34B0ED112A859747006B27F7 /* XCRemoteSwiftPackageReference "EmojiPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kelvas09/EmojiPicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -866,6 +882,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 34524DCF2A7EACAB00A3D163 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
 			productName = MCEmojiPicker;
+		};
+		34B0ED122A859748006B27F7 /* EmojiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34B0ED112A859747006B27F7 /* XCRemoteSwiftPackageReference "EmojiPicker" */;
+			productName = EmojiPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -5,12 +5,20 @@ extension Color {
     static let primary = Color("Primary")
     static let whiteDynamic = Color("WhiteDynamic")
     
+    static var lotteryPallete: [Color] {
+        [Int](1...21)
+            .map { Double($0) / 20.0 }
+            .map {
+                Color(
+                    hue: $0,
+                    saturation: 0.4,
+                    brightness: 0.7
+                )
+            }
+    }
+    
     static var lotteryRandom: Color {
-        .init(
-            hue: Double.random(in: 0...1),
-            saturation: Double.random(in: 0.2...0.3),
-            brightness: Double.random(in: 0.8...1)
-        )
+        Color.lotteryPallete[Int.random(in: 0..<20)]
     }
     
     static var entryRandom: Color {

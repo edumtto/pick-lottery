@@ -1,3 +1,4 @@
+import EmojiPicker
 import MCEmojiPicker
 import SwiftUI
 
@@ -9,27 +10,25 @@ struct CreateLotteryView: View {
     @Binding var isPresented: Bool
     @EnvironmentObject var lotteryStore: LotteryStore
     
-    @State var emojiPickerIsPresented: Bool = false
     @StateObject var viewModel: CreateLotteryViewModel
     @FocusState private var focusedField: FocusedField?
     
     var body: some View {
-        ScrollView {
-            VStack {
+        Form {
+            Section() {
                 nameInput
                 descriptionInput
-                    .padding(.bottom)
-                HStack {
-                    modeInput
-                    emojiInput
-                    colorInput
-                }
-                    .padding(.bottom)
-                    .gesture(selectorTapGesture, including: .all)
-                
+                modeInput
+            }
+            
+            Section("Entries") {
                 entriesInput
             }
-            .padding()
+            
+            Section("Appearance") {
+                emojiInput
+                colorInput
+            }
         }
         Spacer()
         createButton
@@ -37,94 +36,73 @@ struct CreateLotteryView: View {
             .alert(isPresented: $viewModel.showValidationAlert) {
                 Alert(title: Text("Enter with a name for the lottery"))
             }
-            .onAppear {
-                focusedField = .name
-            }
+//            .onAppear {
+//                focusedField = .name
+//            }
     }
     
-    private var selectorTapGesture: some Gesture {
-        TapGesture()
-            .onEnded {
-                UIApplication.shared.connectedScenes
-                    .compactMap { ($0 as? UIWindowScene)?.keyWindow }
-                    .last?
-                    .endEditing(true)
-            }
-    }
+//    private var selectorTapGesture: some Gesture {
+//        TapGesture()
+//            .onEnded {
+//                UIApplication.shared.connectedScenes
+//                    .compactMap { ($0 as? UIWindowScene)?.keyWindow }
+//                    .last?
+//                    .endEditing(true)
+//            }
+//    }
     
     var nameInput: some View {
         TextField("Name", text: $viewModel.name)
-            .textFieldStyle(PrimaryTextFieldStyle())
             .focused($focusedField, equals: .name)
     }
     
     var descriptionInput: some View {
-        TextField("Description", text: $viewModel.description)
-            //.textFieldStyle(PrimaryTextFieldStyle())
-            .textFieldStyle(
-                PrimaryTextFieldStyle(strokeColor: viewModel.description.isEmpty ? Color.gray : Color.primary)
-            )
+        TextField("Description (optional)", text: $viewModel.description)
     }
     
     var modeInput: some View {
-        HStack {
-            Picker("Raffle mode", selection: $viewModel.raffleMode) {
-                ForEach(viewModel.raffleModes) {
-                    Text($0.description)
-                }
+        Picker("Raffle mode", selection: $viewModel.raffleMode) {
+            ForEach(viewModel.raffleModes) {
+                Text($0.description)
             }
-            
         }
-        .frame(minWidth: 120, minHeight: 34)
-        .padding(.top, 4)
-        .padding(.bottom, 4)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(.gray, lineWidth: 1)
-        )
     }
     
     var emojiInput: some View {
-        Button {
-            emojiPickerIsPresented.toggle()
-        } label: {
-            Text(viewModel.emoji)
-                .font(.title)
+        LabeledContent("Illustration") {
+            NavigationLink {
+                EmojiPickerView(selectedEmoji: $viewModel.emoji, selectedColor: .accentColor)
+                    .navigationTitle("Illustrations")
+                
+            } label: {
+                HStack {
+                    Spacer()
+                    Text(viewModel.emoji?.value ?? "")
+                        .font(.title)
+                }
+            }
         }
-        .emojiPicker(
-            isPresented: $emojiPickerIsPresented,
-            selectedEmoji: $viewModel.emoji
-        )
-        .frame(minWidth: 34, minHeight: 34)
-        .padding(4)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(.gray, lineWidth: 1)
-        )
     }
     
     var colorInput: some View {
-        ColorPicker("", selection: $viewModel.color, supportsOpacity: false)
-            .frame(width: 34, height: 34)
-            .padding(.top, 4)
-            .padding(.trailing, 8)
-            .padding(.bottom, 4)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(.gray, lineWidth: 1)
-            )
+        LabeledContent("Color") {
+            NavigationLink {
+                ColorPickerView(colors: Color.lotteryPallete, selectedColor: $viewModel.color)
+            } label: {
+                HStack {
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 8)
+                        .frame(width: 32, height: 32)
+                        .foregroundColor(viewModel.color)
+                }
+            }
+        }
     }
     
     var entriesInput: some View {
         VStack(alignment: .leading) {
-            TextField("Entries (comma-separared)", text: $viewModel.entriesDescription, axis: .vertical)
-                //.textFieldStyle(PrimaryTextFieldStyle())
-                .textFieldStyle(
-                    PrimaryTextFieldStyle(strokeColor: viewModel.entriesDescription.isEmpty ? Color.gray : Color.primary)
-                )
+            TextField("John, Mary, San ... (optional)", text: $viewModel.entriesDescription, axis: .vertical)
                 .textInputAutocapitalization(.never)
-            Text("  Ex: John, Mary, San ...")
-                .font(.caption)
         }
         
     }
