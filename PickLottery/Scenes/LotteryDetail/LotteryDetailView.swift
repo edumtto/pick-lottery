@@ -13,14 +13,7 @@ struct LotteryDetailView: View {
                 raffleDescription
                 Spacer()
                 raffleResults
-            }
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    raffleButton
-                        .padding()
-                }
+                raffleButton
             }
         }
         .sheet(isPresented: $viewModel.presentRaffleAnimation) {
@@ -69,11 +62,13 @@ struct LotteryDetailView: View {
     private var raffleResults: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Last results:")
+                Text("Result board")
+                    .padding()
                     .font(.headline)
                 Spacer()
             }
-            .padding()
+            .background(viewModel.color.opacity(0.5))
+            
             ScrollView {
                 LazyVStack {
                     ForEach(viewModel.lastResults) { result in
@@ -84,6 +79,13 @@ struct LotteryDetailView: View {
                 .padding(.trailing)
             }
         }
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(viewModel.color, lineWidth: 2)
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding(.leading)
+        .padding(.trailing)
     }
     
     private var raffleDescription: some View {
@@ -107,16 +109,9 @@ struct LotteryDetailView: View {
                 }
                 Spacer()
             }
-            .padding()
-            Divider()
-                .frame(height: 1)
-                .overlay(viewModel.color)
+            .padding(.leading)
+            .padding(.trailing)
         }
-        .background(
-            viewModel.color
-            .brightness(backgroundBrighness)
-            .ignoresSafeArea()
-        )
     }
     
     private var backgroundBrighness: Double {
@@ -124,18 +119,10 @@ struct LotteryDetailView: View {
     }
     
     private var raffleButton: some View {
-        Button(action: {
+        Button("Draw") {
             viewModel.raffleButtonAction()
-        }, label: {
-            Text("Draw")
-                .font(.headline)
-                .foregroundColor(.white)
-                .frame(minWidth: 70, minHeight: 70)
-                .background(Color.primary)
-                .cornerRadius(16)
-        })
-        .shadow(color: .whiteDynamic, radius: 16)
-        .disabled(viewModel.lottery.entries.count == .zero)
+        }
+        .buttonStyle(PrimaryButtonStyle(backgroundColor: viewModel.color))
     }
     
     private func propertyLabel(title: String, illustration: String) -> some View {
@@ -151,10 +138,6 @@ struct LotteryDetailView: View {
         .padding(8)
         .background(.white)
         .cornerRadius(16)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(viewModel.color, lineWidth: 1)
-        )
     }
 }
 
