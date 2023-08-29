@@ -10,7 +10,7 @@ struct LotterySuggestion: Decodable {
     let name: String
     let description: String?
     let illustration: Lottery.Illustration?
-    let color: String
+    let color: Int
     let raffleMode: Lottery.RaffleMode?
     let entries: [Entry]
     
@@ -21,15 +21,23 @@ struct LotterySuggestion: Decodable {
         }
     }
     
-    
     var lottery: Lottery {
         .init(
             name: name,
             description: description,
             illustration: illustration,
             entries: lotteryEntries,
-            color: Color(hex: color) ?? .lotteryRandom,
+            color: colorCodeToPallete(color),
             raffleMode: raffleMode ?? .fullRandom
         )
+    }
+    
+    private func colorCodeToPallete(_ code: Int) -> Color {
+        if code < Color.lotteryPallete.count {
+            return Color.lotteryPallete[color]
+        } else {
+            return Color.lotteryPallete[0]
+        }
+        
     }
 }

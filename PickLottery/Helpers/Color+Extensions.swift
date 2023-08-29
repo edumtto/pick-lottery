@@ -6,13 +6,13 @@ extension Color {
     static let whiteDynamic = Color("WhiteDynamic")
     
     static var lotteryPallete: [Color] {
-        [Int](1...21)
-            .map { Double($0) / 20.0 }
+        [Int](0...24)
+            .map { Double($0) / 24.0 }
             .map {
                 Color(
                     hue: $0,
-                    saturation: 0.3,
-                    brightness: 0.9
+                    saturation: 0.6,
+                    brightness: 0.7
                 )
             }
     }
@@ -94,14 +94,14 @@ extension Color {
 
 
 struct RandomColor_Previews: PreviewProvider {
-    static func itemView() -> some View {
+    static func itemView(_ color: Color) -> some View {
         HStack {
             Circle()
                 .frame(width: 12, height: 12)
                 .foregroundColor(Color.entryRandom)
-            Text("Text goes here")
-                .padding()
-                .background(Color.lotteryRandom)
+            Text(color.toHex() ?? "")
+                .padding(2)
+                .background(color)
         }
     }
     
@@ -109,9 +109,9 @@ struct RandomColor_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            VStack {
-                ForEach(0..<11) { _ in
-                    itemView()
+            LazyVStack {
+                ForEach(Color.lotteryPallete, id: \.hashValue) { color in
+                    itemView(color)
                 }
             }
             .previewDisplayName("Random colors")

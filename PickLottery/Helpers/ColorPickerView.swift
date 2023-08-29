@@ -3,7 +3,7 @@ import SwiftUI
 struct ColorPickerView: View {
     @Environment(\.dismiss) var dismiss
     
-    private let twoColumnGrid = [
+    private let columnGrid = [
         GridItem(.adaptive(minimum: 48, maximum: 48))
     ]
     
@@ -12,7 +12,7 @@ struct ColorPickerView: View {
     
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: twoColumnGrid, spacing: 8) {
+            LazyVGrid(columns: columnGrid, spacing: 8) {
                 ForEach(colors, id: \.hashValue) { color in
                     Button {
                         selectedColor = color

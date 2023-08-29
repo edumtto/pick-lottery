@@ -12,35 +12,38 @@ struct LotterySuggestionsCellView: View {
         ZStack {
             RoundedRectangle(cornerSize: .init(width: 8, height: 8))
                 .stroke(backgroundColor, lineWidth: 2)
-                .background(backgroundColor.brightness(0.2))
-                .cornerRadius(8)
+                .background(backgroundColor)
+                .cornerRadius(16)
                 .padding(2)
             
             HStack {
                 if let emojiText = lottery.illustration {
                     Text(emojiText)
                         .font(.largeTitle)
+                        .shadow(color: .white, radius: 1)
                 }
                 VStack {
                     HStack {
                         Text(lottery.name)
                             .multilineTextAlignment(.leading)
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .font(.headline)
+                            .shadow(radius: 1)
                         Spacer()
                     }
                     if let description = lottery.description {
                         HStack {
                             Text(description)
                                 .multilineTextAlignment(.leading)
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)
                                 .font(.caption)
+                                .shadow(radius: 1)
                             Spacer()
                         }
                     }
                 }
                 Image(systemName: "plus")
-                    .foregroundColor(backgroundColor)
+                    .foregroundColor(.white)
             }
             .padding(12)
         }

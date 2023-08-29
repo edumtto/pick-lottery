@@ -14,7 +14,6 @@ struct LotteryEntriesView: View {
         .scrollContentBackground(.hidden)
         
         .listRowSeparatorTint(viewModel.color, edges: .all)
-        .background(viewModel.color.brightness(backgroundBrighness).ignoresSafeArea())
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()

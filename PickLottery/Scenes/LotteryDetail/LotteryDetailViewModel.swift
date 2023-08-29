@@ -41,6 +41,17 @@ final class LotteryDetailViewModel: ObservableObject {
         raffleMode.detailedDescription
     }
     
+    var drawButtonTitle: String {
+        if isEntriesEmpty {
+            return "Register entries"
+        }
+        return "Draw"
+    }
+    
+    var isEntriesEmpty: Bool {
+        lottery.entries.anyObject() == nil
+    }
+    
     private var raffleMode: Lottery.RaffleMode {
         Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom
     }
@@ -57,6 +68,10 @@ final class LotteryDetailViewModel: ObservableObject {
     }
     
     func raffleButtonAction(completion: @escaping () -> Void = {}) {
+        if isEntriesEmpty {
+            presentEntryEditor = true
+            return
+        }
         isRaffleAnimationFinished = false
         
         let selectedEntry = raffleRandomEntry()

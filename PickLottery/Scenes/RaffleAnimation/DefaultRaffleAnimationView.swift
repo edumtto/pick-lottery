@@ -23,7 +23,11 @@ fileprivate struct RaffleItem: Identifiable {
     }
 }
 
-struct DefaultRaffleAnimationView: View {
+protocol RaffleAnimationView {
+    var isRaffleAnimationFinished: Bool { get set }
+}
+
+struct DefaultRaffleAnimationView: View, RaffleAnimationView {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     

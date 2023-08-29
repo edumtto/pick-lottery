@@ -13,28 +13,35 @@ struct LotteryCellView: View {
         ZStack {
             RoundedRectangle(cornerSize: .init(width: 8, height: 8))
                 .stroke(backgroundColor, lineWidth: 2)
-                .background(backgroundColor.brightness(0.2))
-                .cornerRadius(8)
-                .padding(2)
+                .background(backgroundColor)
+                .cornerRadius(16)
+                
             
-            VStack {
+            VStack(spacing: 4) {
                 if let emojiText = lottery.illustration {
                     Text(emojiText)
                         .font(.largeTitle)
+                        .shadow(color: .white, radius: 1)
+                        .padding(.top, 8)
                 }
                 
                 Text(lottery.name)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .font(.headline)
+                    .shadow(radius: 1)
+                    .padding(.bottom, 8)
+                    
                 
-                if let description = lottery.descriptionText {
-                    Text(description)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
-                        .font(.caption)
-                }
+//                if let description = lottery.descriptionText {
+//                    Text(description)
+//                        .multilineTextAlignment(.center)
+//                        .foregroundColor(.white)
+//                        .font(.caption)
+//                        .shadow(radius: 1)
+//                        .padding(.top, 4)
+//                }
             }
-            .padding(12)
+            .padding(8)
         }
     }
 }

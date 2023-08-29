@@ -3,7 +3,7 @@
         "name": "Dice",
         "description": "Roll a regular 6 sided dice.",
         "illustration": "🎲",
-        "color": "e6b5a1",
+        "color": 3,
         "raffle_mode": 0,
         "entries": [
             {"name": "1"}, {"name": "2"}, {"name": "3"}, {"name": "4"}, {"name": "5"}, {"name": "6"}
@@ -14,7 +14,7 @@
         "name": "Coin",
         "description": "Flip a coin to get heads or tails.",
         "illustration": "🪙",
-        "color": "e5a1d1",
+        "color": 5,
         "raffle_mode": 0,
         "entries": [
             {"name": "Heads"}, {"name": "Tails"}
@@ -25,7 +25,7 @@
         "name": "Magic 8 ball",
         "description": "Pick an answer for a yes-no question.",
         "illustration": "🎱",
-        "color": "c4a1e5",
+        "color": 7,
         "raffle_mode": 0,
         "entries": [
             {"name": "It is certain"},
@@ -54,7 +54,7 @@
         "name": "La loteria",
         "description": "Picks a card from the mexican loteria.",
         "illustration": "🌵",
-        "color": "d9e4a1",
+        "color": 9,
         "raffle_mode": 2,
         "entries": [
             {"name": "El Gallo\n(The Rooster)"},
@@ -117,7 +117,7 @@
         "name": "Bingo",
         "description": "Generates numbers for a bingo game of 75 numbers.",
         "illustration": "🍀",
-        "color": "c2e5a1",
+        "color": 11,
         "raffle_mode": 2,
         "entries": [
             {"name": "B 1"}, {"name": "B 2"}, {"name": "B 3"}, {"name": "B 4"}, {"name": "B 5"},
@@ -141,7 +141,7 @@
         "name": "Spin the arrow",
         "description": "Chose between 8 directions.",
         "illustration": "↗️",
-        "color": "afe5a1",
+        "color": 13,
         "raffle_mode": 0,
         "entries": [
             {"name": "→"},
@@ -158,7 +158,7 @@
         "name": "Ice breaker",
         "description": "Questions to break the ice and start a conversation.",
         "illustration": "🧊",
-        "color": "a1d1e4",
+        "color": 15,
         "raffle_mode": 0,
         "entries": [
             {"name": "What's something you're really passionate about?"},
@@ -192,7 +192,7 @@
         "name": "Guess the word",
         "description": "Pick one between 150 words to guess.",
         "illustration": "❓",
-        "color": "a2e5a8",
+        "color": 17,
         "raffle_mode": 2,
         "entries": [
             {"name": "Airplane"},
@@ -351,7 +351,7 @@
         "name": "Week days",
         "description": "Randomlly choses a day of the week.",
         "illustration": "📆",
-        "color": "a2e5e5",
+        "color": 20,
         "raffle_mode": 0,
         "entries": [
             {"name": "Monday"},

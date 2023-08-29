@@ -60,14 +60,20 @@ struct LotteryDetailView: View {
     }
     
     private var raffleResults: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             HStack {
+                Spacer()
                 Text("Result board")
-                    .padding()
                     .font(.headline)
+                    .foregroundColor(viewModel.color)
+                    .padding(8)
                 Spacer()
             }
-            .background(viewModel.color.opacity(0.5))
+            //.background(viewModel.color.opacity(0.1))
+            
+            Divider()
+                .frame(height: 1)
+                .background(viewModel.color)
             
             ScrollView {
                 LazyVStack {
@@ -78,6 +84,7 @@ struct LotteryDetailView: View {
                 .padding(.leading)
                 .padding(.trailing)
             }
+            .padding(.top)
         }
         .background(
             RoundedRectangle(cornerRadius: 16)
@@ -90,6 +97,14 @@ struct LotteryDetailView: View {
     
     private var raffleDescription: some View {
         VStack {
+            if let description = viewModel.lottery.descriptionText {
+                HStack {
+                    Text(description)
+                    Spacer()
+                }
+                .padding(.bottom)
+            }
+            
             HStack {
                 Button {
                     viewModel.presentRaffleModeDescription.toggle()
@@ -109,9 +124,10 @@ struct LotteryDetailView: View {
                 }
                 Spacer()
             }
-            .padding(.leading)
-            .padding(.trailing)
         }
+        .padding(.leading)
+        .padding(.trailing)
+        .padding(.bottom)
     }
     
     private var backgroundBrighness: Double {
@@ -119,10 +135,24 @@ struct LotteryDetailView: View {
     }
     
     private var raffleButton: some View {
-        Button("Draw") {
-            viewModel.raffleButtonAction()
+        VStack {
+            if viewModel.isEntriesEmpty {
+                NavigationLink("Register entries") {
+                    LotteryEntriesView(
+                        viewModel: .init(
+                            lottery: $viewModel.lottery,
+                            lotteryStore: lotteryStore
+                        )
+                    )
+                }
+                .buttonStyle(PrimaryButtonStyle(backgroundColor: viewModel.color))
+            } else {
+                Button(viewModel.drawButtonTitle) {
+                    viewModel.raffleButtonAction()
+                }
+                .buttonStyle(PrimaryButtonStyle(backgroundColor: viewModel.color))
+            }
         }
-        .buttonStyle(PrimaryButtonStyle(backgroundColor: viewModel.color))
     }
     
     private func propertyLabel(title: String, illustration: String) -> some View {
@@ -135,7 +165,7 @@ struct LotteryDetailView: View {
                 .padding(2)
                 .cornerRadius(8)
         }
-        .padding(8)
+        .padding(4)
         .background(.white)
         .cornerRadius(16)
     }

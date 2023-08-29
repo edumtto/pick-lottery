@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "mcemojipicker",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/izyumkin/MCEmojiPicker",
-      "state" : {
-        "revision" : "d77f5c693cc1aa7c57c5bfb15ca01a76b84f1cc7",
-        "version" : "1.2.1"
-      }
-    },
-    {
       "identity" : "smile",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onmyway133/Smile",

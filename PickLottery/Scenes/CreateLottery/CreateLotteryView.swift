@@ -1,5 +1,4 @@
 import EmojiPicker
-import MCEmojiPicker
 import SwiftUI
 
 struct CreateLotteryView: View {

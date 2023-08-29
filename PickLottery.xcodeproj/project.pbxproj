@@ -22,7 +22,6 @@
 		343D2CA629A056DE006ECD38 /* LotteryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343D2CA529A056DE006ECD38 /* LotteryCellView.swift */; };
 		34524DCC2A7E9FAA00A3D163 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34524DCB2A7E9FAA00A3D163 /* AudioPlayer.swift */; };
 		34524DCE2A7EA62900A3D163 /* pick-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34524DCD2A7EA62900A3D163 /* pick-sound.mp3 */; };
-		34524DD12A7EACAB00A3D163 /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 34524DD02A7EACAB00A3D163 /* MCEmojiPicker */; };
 		3460F9DF29C2A28D00A40BD6 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460F9DE29C2A28D00A40BD6 /* Color+Extensions.swift */; };
 		3462932B29D6641300471C7A /* CreateEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3462932A29D6641300471C7A /* CreateEntryView.swift */; };
 		3462932D29D664FA00471C7A /* CreateEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3462932C29D664FA00471C7A /* CreateEntryViewModel.swift */; };
@@ -34,6 +33,7 @@
 		348EB98C29EB200B0043AFD7 /* LotteryIllustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348EB98B29EB200B0043AFD7 /* LotteryIllustration.swift */; };
 		348EB98E29EB21200043AFD7 /* CreateLotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348EB98D29EB21200043AFD7 /* CreateLotteryViewModel.swift */; };
 		3496368829A933D600CDEFB3 /* CreateLotteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3496368729A933D600CDEFB3 /* CreateLotteryView.swift */; };
+		34A64F722A8B1C4A008C5A18 /* BallRaffleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A64F712A8B1C4A008C5A18 /* BallRaffleAnimationView.swift */; };
 		34A6A1FB29E1DDFA00B9964D /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6A1FA29E1DDFA00B9964D /* PrimaryButtonStyle.swift */; };
 		34A6A1FD29E1DFF100B9964D /* PrimaryTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6A1FC29E1DFF100B9964D /* PrimaryTextFieldStyle.swift */; };
 		34B0ED132A859748006B27F7 /* EmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 34B0ED122A859748006B27F7 /* EmojiPicker */; };
@@ -99,6 +99,7 @@
 		348EB98B29EB200B0043AFD7 /* LotteryIllustration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryIllustration.swift; sourceTree = "<group>"; };
 		348EB98D29EB21200043AFD7 /* CreateLotteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLotteryViewModel.swift; sourceTree = "<group>"; };
 		3496368729A933D600CDEFB3 /* CreateLotteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLotteryView.swift; sourceTree = "<group>"; };
+		34A64F712A8B1C4A008C5A18 /* BallRaffleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallRaffleAnimationView.swift; sourceTree = "<group>"; };
 		34A6A1FA29E1DDFA00B9964D /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		34A6A1FC29E1DFF100B9964D /* PrimaryTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextFieldStyle.swift; sourceTree = "<group>"; };
 		34C0F0A429BAC475009EBFC8 /* LotteryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryStore.swift; sourceTree = "<group>"; };
@@ -121,7 +122,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34524DD12A7EACAB00A3D163 /* MCEmojiPicker in Frameworks */,
 				34B0ED132A859748006B27F7 /* EmojiPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				3462932E29D6658600471C7A /* DefaultRaffleAnimationView.swift */,
+				34A64F712A8B1C4A008C5A18 /* BallRaffleAnimationView.swift */,
 			);
 			path = RaffleAnimation;
 			sourceTree = "<group>";
@@ -370,7 +371,6 @@
 			);
 			name = PickLottery;
 			packageProductDependencies = (
-				34524DD02A7EACAB00A3D163 /* MCEmojiPicker */,
 				34B0ED122A859748006B27F7 /* EmojiPicker */,
 			);
 			productName = PickLottery;
@@ -446,7 +446,6 @@
 			);
 			mainGroup = 340BB387299355BE00B336AA;
 			packageReferences = (
-				34524DCF2A7EACAB00A3D163 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
 				34B0ED112A859747006B27F7 /* XCRemoteSwiftPackageReference "EmojiPicker" */,
 			);
 			productRefGroup = 340BB391299355BE00B336AA /* Products */;
@@ -501,6 +500,7 @@
 				3496368829A933D600CDEFB3 /* CreateLotteryView.swift in Sources */,
 				34C62A0C29A827CD003D9B54 /* LotteryResultCellView.swift in Sources */,
 				34C0F0A829BAC555009EBFC8 /* LotteryDataModel.xcdatamodeld in Sources */,
+				34A64F722A8B1C4A008C5A18 /* BallRaffleAnimationView.swift in Sources */,
 				34D967C729C01905006D2559 /* LotteryResultMO.swift in Sources */,
 				34A6A1FB29E1DDFA00B9964D /* PrimaryButtonStyle.swift in Sources */,
 				34D182CE29F1F37D00B40E9A /* LotteryEntriesViewModel.swift in Sources */,
@@ -688,16 +688,17 @@
 				DEVELOPMENT_TEAM = AJQACMRS4Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.PickLottery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -720,16 +721,17 @@
 				DEVELOPMENT_TEAM = AJQACMRS4Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.PickLottery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -859,14 +861,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		34524DCF2A7EACAB00A3D163 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		34B0ED112A859747006B27F7 /* XCRemoteSwiftPackageReference "EmojiPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Kelvas09/EmojiPicker.git";
@@ -878,11 +872,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		34524DD02A7EACAB00A3D163 /* MCEmojiPicker */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 34524DCF2A7EACAB00A3D163 /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
-			productName = MCEmojiPicker;
-		};
 		34B0ED122A859748006B27F7 /* EmojiPicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 34B0ED112A859747006B27F7 /* XCRemoteSwiftPackageReference "EmojiPicker" */;
