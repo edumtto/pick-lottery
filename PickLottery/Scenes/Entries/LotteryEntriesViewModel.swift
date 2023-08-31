@@ -9,7 +9,7 @@ final class LotteryEntriesViewModel: ObservableObject {
     @Published var showCreateEntry = false
     
     var color: Color {
-        Color(hex: lottery.hexColor) ?? Color.primary
+        Color(hex: lottery.hexColor) ?? Color.accentColor
     }
     
     var entries: [LotteryEntryMO] {

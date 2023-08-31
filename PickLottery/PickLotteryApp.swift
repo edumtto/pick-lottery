@@ -10,7 +10,6 @@ struct PickLotteryApp: App {
                 .environmentObject(lotteryStore)
                 .environment(\.managedObjectContext, lotteryStore.container.viewContext)
         }
-        
     }
 }
 

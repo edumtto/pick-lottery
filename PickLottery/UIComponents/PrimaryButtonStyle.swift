@@ -14,7 +14,7 @@ struct PrimaryButtonStyle: ButtonStyle {
             .padding()
     }
     
-    init(backgroundColor: Color = Color.primary) {
+    init(backgroundColor: Color = Color.accentColor) {
         self.backgroundColor = backgroundColor
     }
 }

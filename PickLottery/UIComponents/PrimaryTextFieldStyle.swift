@@ -13,7 +13,7 @@ struct PrimaryTextFieldStyle: TextFieldStyle {
             )
     }
     
-    init(strokeColor: Color = .primary) {
+    init(strokeColor: Color = .accentColor) {
         self.strokeColor = strokeColor
     }
 }

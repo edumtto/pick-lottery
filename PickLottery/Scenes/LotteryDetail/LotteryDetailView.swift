@@ -158,7 +158,7 @@ struct LotteryDetailView: View {
     private func propertyLabel(title: String, illustration: String) -> some View {
         HStack {
             Image(systemName: illustration)
-                .tint(.primary)
+                .tint(.accentColor)
             Text(title)
                 .foregroundColor(.gray)
                 .fontWeight(.medium)
@@ -166,8 +166,6 @@ struct LotteryDetailView: View {
                 .cornerRadius(8)
         }
         .padding(4)
-        .background(.white)
-        .cornerRadius(16)
     }
 }
 

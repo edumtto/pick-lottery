@@ -2,8 +2,8 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    static let primary = Color("Primary")
     static let whiteDynamic = Color("WhiteDynamic")
+    static let blackDynamic = Color("BlackDynamic")
     
     static var lotteryPallete: [Color] {
         [Int](0...24)

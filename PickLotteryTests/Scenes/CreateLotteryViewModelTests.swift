@@ -21,7 +21,7 @@ final class CreateLotteryViewModelTests: XCTestCase {
         sut.name = ""
         sut.description = "My first lottery"
         sut.color = .gray
-        sut.emoji = "callendar"
+        sut.emoji = .init(value: "📅", name: "calendar")
         sut.raffleMode = .weightedEntries
         sut.entriesDescription = "john, cyntia"
         sut.showValidationAlert = false
@@ -35,7 +35,7 @@ final class CreateLotteryViewModelTests: XCTestCase {
         sut.name = "My Lottery"
         sut.description = "My first lottery"
         sut.color = .gray
-        sut.emoji = "callendar"
+        sut.emoji = .init(value: "📅", name: "calendar")
         sut.raffleMode = .weightedEntries
         sut.entriesDescription = "john, cyntia"
         sut.showValidationAlert = false

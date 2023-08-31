@@ -1,18 +1,21 @@
 import SwiftUI
 
 struct LotterySuggestionsCellView: View {
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var lotteryStore: LotteryStore
     let lottery: Lottery
     
     private var backgroundColor: Color {
-        Color(hex: lottery.color) ?? .primary
+        Color(hex: lottery.color) ?? .gray
     }
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerSize: .init(width: 8, height: 8))
-                .stroke(backgroundColor, lineWidth: 2)
-                .background(backgroundColor)
+            RoundedRectangle(cornerSize: .init(width: 16, height: 16))
+                .stroke(backgroundColor, lineWidth: 0.4)
+                .background(
+                    backgroundColor.brightness(0.2).opacity(0.5)
+                )
                 .cornerRadius(16)
                 .padding(2)
             
@@ -20,30 +23,28 @@ struct LotterySuggestionsCellView: View {
                 if let emojiText = lottery.illustration {
                     Text(emojiText)
                         .font(.largeTitle)
-                        .shadow(color: .white, radius: 1)
+                        .shadow(color: .white, radius: 0.5)
                 }
                 VStack {
                     HStack {
                         Text(lottery.name)
                             .multilineTextAlignment(.leading)
-                            .foregroundColor(.white)
+                            .foregroundColor(.blackDynamic)
                             .font(.headline)
-                            .shadow(radius: 1)
                         Spacer()
                     }
                     if let description = lottery.description {
                         HStack {
                             Text(description)
                                 .multilineTextAlignment(.leading)
-                                .foregroundColor(.white)
+                                .foregroundColor(.blackDynamic)
                                 .font(.caption)
-                                .shadow(radius: 1)
                             Spacer()
                         }
                     }
                 }
                 Image(systemName: "plus")
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
             }
             .padding(12)
         }

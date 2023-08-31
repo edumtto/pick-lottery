@@ -27,7 +27,7 @@ extension LotteryEntryMO {
     @NSManaged public var results: NSSet?
 
     var color: Color {
-        Color(hex: hexColor) ?? Color.primary
+        Color(hex: hexColor) ?? Color.accentColor
     }
 }
 

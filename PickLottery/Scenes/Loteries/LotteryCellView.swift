@@ -1,47 +1,42 @@
 import SwiftUI
 
 struct LotteryCellView: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var lotteryStore: LotteryStore
     let lottery: LotteryMO
     
     private var backgroundColor: Color {
-        Color(hex: lottery.hexColor) ?? .primary
+        Color(hex: lottery.hexColor) ?? .gray
     }
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerSize: .init(width: 8, height: 8))
-                .stroke(backgroundColor, lineWidth: 2)
-                .background(backgroundColor)
+            RoundedRectangle(cornerSize: .init(width: 16, height: 16))
+                .stroke(backgroundColor, lineWidth: 0.4)
+                .background(
+                    backgroundColor.brightness(0.2).opacity(0.5)
+                )
                 .cornerRadius(16)
                 
             
-            VStack(spacing: 4) {
+            HStack(alignment: .center) {
                 if let emojiText = lottery.illustration {
                     Text(emojiText)
                         .font(.largeTitle)
-                        .shadow(color: .white, radius: 1)
-                        .padding(.top, 8)
+                        .shadow(color: .whiteDynamic, radius: 1)
                 }
                 
                 Text(lottery.name)
-                    .foregroundColor(.white)
+                    .foregroundColor(.blackDynamic)
                     .font(.headline)
-                    .shadow(radius: 1)
-                    .padding(.bottom, 8)
+                    .shadow(color: .whiteDynamic, radius: 0.5)
                     
-                
-//                if let description = lottery.descriptionText {
-//                    Text(description)
-//                        .multilineTextAlignment(.center)
-//                        .foregroundColor(.white)
-//                        .font(.caption)
-//                        .shadow(radius: 1)
-//                        .padding(.top, 4)
-//                }
             }
-            .padding(8)
+            .padding(.top, 16)
+            .padding(.bottom, 16)
+            .padding(.leading, 8)
+            .padding(.trailing, 8)
         }
     }
 }

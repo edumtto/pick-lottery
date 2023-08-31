@@ -30,7 +30,7 @@ final class LotteryDetailViewModel: ObservableObject {
     }
     
     var color: Color {
-        Color(hex: lottery.hexColor) ?? Color.primary
+        Color(hex: lottery.hexColor) ?? Color.accentColor
     }
     
     var modeDescription: String {

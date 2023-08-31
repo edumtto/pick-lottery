@@ -9,7 +9,7 @@ struct LotteryListView: View {
     @FetchRequest(sortDescriptors: [.init(keyPath: \LotteryMO.name, ascending: true)], animation: .default)
     private var lotteries: FetchedResults<LotteryMO>
     
-    private let twoColumnGrid = [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)]
+    private let twoColumnGrid = [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)]
     
     var body: some View {
         NavigationStack {
@@ -40,7 +40,7 @@ struct LotteryListView: View {
     }
     
     private var lotteryGrid: some View {
-        LazyVGrid(columns: twoColumnGrid, spacing: 16) {
+        LazyVGrid(columns: twoColumnGrid, spacing: 8) {
             ForEach(lotteries) { lottery in
                 NavigationLink {
                     LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
