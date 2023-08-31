@@ -52,6 +52,18 @@ final class LotteryDetailViewModel: ObservableObject {
         lottery.entries.anyObject() == nil
     }
     
+    var entriesAmmountText: String {
+        if isEntriesEmpty {
+            return "No entries"
+        }
+        
+        let n = lottery.entries.count
+        if n == 1 {
+            return "1 entry"
+        }
+        return String(n) + " entries"
+    }
+    
     private var raffleMode: Lottery.RaffleMode {
         Lottery.RaffleMode(rawValue: lottery.raffleMode) ?? .fullRandom
     }

@@ -109,7 +109,9 @@ struct LotteryDetailView: View {
                 Button {
                     viewModel.presentRaffleModeDescription.toggle()
                 } label: {
-                    propertyLabel(title: viewModel.modeDescription, illustration: "exclamationmark.circle")
+                    propertyLabel(
+                        title: viewModel.modeDescription,
+                        illustration: "dice")
                 }
                 
                 NavigationLink {
@@ -120,7 +122,9 @@ struct LotteryDetailView: View {
                         )
                     )
                 } label: {
-                    propertyLabel(title: String(viewModel.lottery.entries.count), illustration: "list.triangle")
+                    propertyLabel(
+                        title: viewModel.entriesAmmountText,
+                        illustration: "list.triangle")
                 }
                 Spacer()
             }

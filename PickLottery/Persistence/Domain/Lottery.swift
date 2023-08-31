@@ -14,11 +14,11 @@ final class Lottery: Identifiable, ObservableObject {
         var description: String {
             switch self {
             case .fullRandom:
-                return "Default mode"
+                return "Default"
             case .weightedEntries:
-                return "Weighted mode"
+                return "Weighted"
             case .avoidRepetition:
-                return "No repetition mode"
+                return "No repetition"
             }
         }
         
