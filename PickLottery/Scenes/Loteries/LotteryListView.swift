@@ -3,32 +3,34 @@ import CoreData
 
 struct LotteryListView: View {
     @EnvironmentObject var lotteryStore: LotteryStore
+    @StateObject var viewModel: LotteryListViewModel
     @State var presentCreateAlert = false
     @State var newLotteryName = ""
     
     @FetchRequest(sortDescriptors: [.init(keyPath: \LotteryMO.name, ascending: true)], animation: .default)
     private var lotteries: FetchedResults<LotteryMO>
     
-    private let twoColumnGrid = [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)]
+    private let oneColumnGrid = [GridItem(.flexible(), spacing: 8)]
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            Group {
                 if lotteries.isEmpty {
                     emptyState
                 } else {
                     lotteryGrid
                 }
             }
-            .padding()
-            .navigationTitle("Lotteries")
+            .navigationTitle("Sets")
             .toolbar {
                 Button(role: .none) {
                     presentCreateAlert = true
                 } label: {
-                    Image(systemName: "plus.app")
-                        .tint(.accentColor)
-                        .font(.title2)
+                    HStack {
+                        Image(systemName: "plus")
+                            .tint(.accentColor)
+                    }
+                    
                 }
             }
             .sheet(isPresented: $presentCreateAlert) {
@@ -40,15 +42,21 @@ struct LotteryListView: View {
     }
     
     private var lotteryGrid: some View {
-        LazyVGrid(columns: twoColumnGrid, spacing: 8) {
-            ForEach(lotteries) { lottery in
-                NavigationLink {
-                    LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
-                } label: {
-                    LotteryCellView(lottery: lottery)
+        List {
+//            Section(header: Text("DEFAULT")) {
+                ForEach(lotteries) { lottery in
+                    NavigationLink {
+                        LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
+                    } label: {
+                        LotteryCellView(lottery: lottery)
+                    }
+                    .listRowSeparator(.hidden)
                 }
-            }
+//            }
+//            .listSectionSpacing(8)
         }
+        .listRowSpacing(4)
+        .listStyle(.plain)
     }
     
     private var emptyState: some View {
@@ -69,7 +77,7 @@ struct LotteryList_Previews: PreviewProvider {
     static let storage = LotteryStore.preview
     
     static var previews: some View {
-        LotteryListView()
+        LotteryListView(viewModel: LotteryListViewModel(lotteryStore: storage))
             .environmentObject(storage)
             .environment(\.managedObjectContext, storage.container.viewContext)
     }

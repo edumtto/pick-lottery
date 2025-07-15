@@ -6,7 +6,7 @@ struct PickLotteryApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LotteryListView()
+            LotteryListView(viewModel:  LotteryListViewModel(lotteryStore: lotteryStore))
                 .environmentObject(lotteryStore)
                 .environment(\.managedObjectContext, lotteryStore.container.viewContext)
         }
