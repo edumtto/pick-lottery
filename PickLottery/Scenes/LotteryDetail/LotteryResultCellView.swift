@@ -14,9 +14,9 @@ struct LotteryResultCellView: View {
     
     var body: some View {
         HStack {
-            Circle()
-                .frame(width: 10)
-                .foregroundColor(result.entry.color)
+//            Circle()
+//                .frame(width: 10)
+//                .foregroundColor(result.entry.color)
             Text(result.entry.name)
             Spacer()
             Text(dateTime)

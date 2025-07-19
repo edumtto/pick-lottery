@@ -28,27 +28,18 @@ struct CreateLotteryView: View {
                 emojiInput
                 colorInput
             }
+            
         }
+        .tint(.accentColor)
+        .scrollContentBackground(.hidden)
         Spacer()
         createButton
-            .navigationTitle("New lottery")
+            .navigationTitle("New Set")
             .alert(isPresented: $viewModel.showValidationAlert) {
                 Alert(title: Text("Enter with a name for the lottery"))
             }
-//            .onAppear {
-//                focusedField = .name
-//            }
     }
     
-//    private var selectorTapGesture: some Gesture {
-//        TapGesture()
-//            .onEnded {
-//                UIApplication.shared.connectedScenes
-//                    .compactMap { ($0 as? UIWindowScene)?.keyWindow }
-//                    .last?
-//                    .endEditing(true)
-//            }
-//    }
     
     var nameInput: some View {
         TextField("Name", text: $viewModel.name)
@@ -60,7 +51,7 @@ struct CreateLotteryView: View {
     }
     
     var modeInput: some View {
-        Picker("Raffle mode", selection: $viewModel.raffleMode) {
+        Picker("Raffle Mode", selection: $viewModel.raffleMode) {
             ForEach(viewModel.raffleModes) {
                 Text($0.description)
             }
@@ -68,7 +59,7 @@ struct CreateLotteryView: View {
     }
     
     var emojiInput: some View {
-        LabeledContent("Illustration") {
+        LabeledContent("Icon") {
             NavigationLink {
                 EmojiPickerView(selectedEmoji: $viewModel.emoji, selectedColor: .accentColor)
                     .navigationTitle("Illustrations")
@@ -100,7 +91,7 @@ struct CreateLotteryView: View {
     
     var entriesInput: some View {
         VStack(alignment: .leading) {
-            TextField("John, Mary, San ... (optional)", text: $viewModel.entriesDescription, axis: .vertical)
+            TextField("John, Mary, San ...", text: $viewModel.entriesDescription, axis: .vertical)
                 .textInputAutocapitalization(.never)
         }
         

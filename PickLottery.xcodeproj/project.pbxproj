@@ -13,6 +13,7 @@
 		340BB3AA299355C000B336AA /* CreateLotteryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3A9299355C000B336AA /* CreateLotteryViewModelTests.swift */; };
 		340BB3B4299355C000B336AA /* PickLotteryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3B3299355C000B336AA /* PickLotteryUITests.swift */; };
 		340BB3B6299355C000B336AA /* PickLotteryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340BB3B5299355C000B336AA /* PickLotteryUITestsLaunchTests.swift */; };
+		341758B02E2B4F9F00ADD8D3 /* CreateSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341758AF2E2B4F9A00ADD8D3 /* CreateSetView.swift */; };
 		34218A772A60FCB100CECADE /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34218A762A60FCB100CECADE /* JSONLoader.swift */; };
 		34218A792A60FD0500CECADE /* lotterySuggestions.json in Resources */ = {isa = PBXBuildFile; fileRef = 34218A782A60FD0500CECADE /* lotterySuggestions.json */; };
 		34218A7B2A6106B600CECADE /* LotterySuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34218A7A2A6106B600CECADE /* LotterySuggestion.swift */; };
@@ -80,6 +81,7 @@
 		340BB3AF299355C000B336AA /* PickLotteryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PickLotteryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		340BB3B3299355C000B336AA /* PickLotteryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLotteryUITests.swift; sourceTree = "<group>"; };
 		340BB3B5299355C000B336AA /* PickLotteryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickLotteryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		341758AF2E2B4F9A00ADD8D3 /* CreateSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSetView.swift; sourceTree = "<group>"; };
 		34218A762A60FCB100CECADE /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		34218A782A60FD0500CECADE /* lotterySuggestions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = lotterySuggestions.json; sourceTree = "<group>"; };
 		34218A7A2A6106B600CECADE /* LotterySuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySuggestion.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 		3496368629A933AE00CDEFB3 /* CreateLottery */ = {
 			isa = PBXGroup;
 			children = (
+				341758AF2E2B4F9A00ADD8D3 /* CreateSetView.swift */,
 				3496368729A933D600CDEFB3 /* CreateLotteryView.swift */,
 				348EB98D29EB21200043AFD7 /* CreateLotteryViewModel.swift */,
 			);
@@ -512,6 +515,7 @@
 				3462932B29D6641300471C7A /* CreateEntryView.swift in Sources */,
 				34D967C329C018E2006D2559 /* LotteryEntryMO.swift in Sources */,
 				3462932D29D664FA00471C7A /* CreateEntryViewModel.swift in Sources */,
+				341758B02E2B4F9F00ADD8D3 /* CreateSetView.swift in Sources */,
 				343D2CA629A056DE006ECD38 /* LotteryCellView.swift in Sources */,
 				34524DCC2A7E9FAA00A3D163 /* AudioPlayer.swift in Sources */,
 				343D2CA229A05407006ECD38 /* LotteryListView.swift in Sources */,

@@ -39,7 +39,7 @@ struct LotteryDetailView: View {
         }
         .toolbar {
             ToolbarItem {
-                Menu("Options") {
+                Menu {
                     Button {
                         viewModel.clearResults()
                     } label: {
@@ -53,6 +53,9 @@ struct LotteryDetailView: View {
                     } label: {
                         Label("Delete lottery", systemImage: "trash")
                     }
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .tint(.accentColor)
                 }
             }
         }
@@ -61,38 +64,21 @@ struct LotteryDetailView: View {
     
     private var raffleResults: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Spacer()
-                Text("Result board")
-                    .font(.headline)
-                    .foregroundColor(viewModel.color)
-                    .padding(8)
-                Spacer()
-            }
-            //.background(viewModel.color.opacity(0.1))
-            
-            Divider()
-                .frame(height: 1)
-                .background(viewModel.color)
-            
-            ScrollView {
-                LazyVStack {
-                    ForEach(viewModel.lastResults) { result in
-                        LotteryResultCellView(result: result)
-                    }
+            List {
+                ForEach(viewModel.lastResults) { result in
+                    LotteryResultCellView(result: result)
                 }
-                .padding(.leading)
-                .padding(.trailing)
             }
-            .padding(.top)
+            .listStyle(.plain)
         }
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(viewModel.color, lineWidth: 2)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .padding(.leading)
-        .padding(.trailing)
+//        .background(
+//            RoundedRectangle(cornerRadius: 16)
+//                .stroke(viewModel.color, lineWidth: 2)
+//        )
+//        .clipShape(RoundedRectangle(cornerRadius: 16))
+//        .padding(.leading)
+//        .padding(.trailing)
+        .padding(.top)
     }
     
     private var raffleDescription: some View {
@@ -139,7 +125,7 @@ struct LotteryDetailView: View {
     }
     
     private var raffleButton: some View {
-        VStack {
+        Group {
             if viewModel.isEntriesEmpty {
                 NavigationLink("Register entries") {
                     LotteryEntriesView(
@@ -149,12 +135,12 @@ struct LotteryDetailView: View {
                         )
                     )
                 }
-                .buttonStyle(PrimaryButtonStyle(backgroundColor: viewModel.color))
+                .buttonStyle(PrimaryButtonStyle(backgroundColor: .accentColor))
             } else {
                 Button(viewModel.drawButtonTitle) {
                     viewModel.raffleButtonAction()
                 }
-                .buttonStyle(PrimaryButtonStyle(backgroundColor: viewModel.color))
+                .buttonStyle(PrimaryButtonStyle(backgroundColor: .accentColor))
             }
         }
     }
@@ -162,14 +148,20 @@ struct LotteryDetailView: View {
     private func propertyLabel(title: String, illustration: String) -> some View {
         HStack {
             Image(systemName: illustration)
-                .tint(.accentColor)
+                .tint(.gray)
             Text(title)
-                .foregroundColor(.gray)
+                .tint(.gray)
                 .fontWeight(.medium)
                 .padding(2)
                 .cornerRadius(8)
         }
         .padding(4)
+        .font(.footnote)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+//                .inset(by: 0.5)
+                .stroke(.black, lineWidth: 0.5)
+        )
     }
 }
 

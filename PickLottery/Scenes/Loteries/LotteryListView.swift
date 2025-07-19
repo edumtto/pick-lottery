@@ -26,16 +26,13 @@ struct LotteryListView: View {
                 Button(role: .none) {
                     presentCreateAlert = true
                 } label: {
-                    HStack {
-                        Image(systemName: "plus")
-                            .tint(.accentColor)
-                    }
-                    
+                    Image(systemName: "plus")
+                        .tint(.accentColor)
                 }
             }
             .sheet(isPresented: $presentCreateAlert) {
                 NavigationStack {
-                    AddLotteryView(isPresented: $presentCreateAlert, viewModel: AddLotteryViewModel(lotteryStore: lotteryStore))
+                    CreateLotteryView(isPresented: $presentCreateAlert, viewModel: .init(lotteryStore: lotteryStore))
                 }
             }
         }
