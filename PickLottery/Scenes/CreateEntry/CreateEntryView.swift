@@ -15,7 +15,7 @@ struct CreateEntryView: View {
                 HStack(alignment: .center) {
                     TextField("Entry name", text: $viewModel.name)
                         .textFieldStyle(PrimaryTextFieldStyle())
-                    colorInput
+//                    colorInput
                 }
                 weightInput
             }
