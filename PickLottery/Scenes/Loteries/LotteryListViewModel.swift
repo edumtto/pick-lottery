@@ -3,7 +3,7 @@ import Foundation
 final class LotteryListViewModel: ObservableObject {
     var lotteryStore: LotteryStorageProvider
     
-    @Published var suggestions: [Lottery] = {
+    @Published var defaultLotterySets: [Lottery] = {
         let lotterySuggestions: [LotterySuggestion] = JSONLoader.load(
             fileName: "lotterySuggestions",
             keyDecodingStrategy: .convertFromSnakeCase

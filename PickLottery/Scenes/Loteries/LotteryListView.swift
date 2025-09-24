@@ -14,13 +14,16 @@ struct LotteryListView: View {
     
     var body: some View {
         NavigationStack {
-            Group {
+            List {
                 if lotteries.isEmpty {
-                    emptyState
+                    defaultSets
                 } else {
-                    lotteryGrid
+                    customSets
+                    defaultSets
                 }
             }
+            .listRowSpacing(4)
+//            .listStyle(.plain)
             .navigationTitle("Sets")
             .toolbar {
                 Button(role: .none) {
@@ -38,35 +41,32 @@ struct LotteryListView: View {
         }
     }
     
-    private var lotteryGrid: some View {
-        List {
-//            Section(header: Text("DEFAULT")) {
+    private var customSets: some View {
+            Section(header: Text("CUSTOM")) {
                 ForEach(lotteries) { lottery in
                     NavigationLink {
                         LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
                     } label: {
-                        LotteryCellView(lottery: lottery)
+                        LotteryCellView(emoji: lottery.illustration, name: lottery.name, description: lottery.descriptionText)
                     }
                     .listRowSeparator(.hidden)
                 }
-//            }
-//            .listSectionSpacing(8)
-        }
-        .listRowSpacing(4)
-        .listStyle(.plain)
+            }
     }
     
-    private var emptyState: some View {
-        VStack {
-            Spacer()
-            HStack{
-                Text("Nothing here! Tap in the")
-                Image(systemName: "plus.app")
-                Text("icon")
+    private var defaultSets: some View {
+            Section(header: Text("DEFAULT")) {
+                ForEach(viewModel.defaultLotterySets) { lottery in
+                    NavigationLink {
+//                        LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
+                        Text("aaa")
+                    } label: {
+                        LotteryCellView(emoji: lottery.illustration, name: lottery.name, description: lottery.description)
+                    }
+                    .listRowSeparator(.hidden)
+                }
             }
-            Text("to add or create a new lottery.")
-        }
-        .foregroundColor(.gray)
+
     }
 }
 
