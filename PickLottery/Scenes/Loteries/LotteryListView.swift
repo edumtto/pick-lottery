@@ -14,16 +14,13 @@ struct LotteryListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
+            Group {
                 if lotteries.isEmpty {
-                    defaultSets
+                    emptyState
                 } else {
-                    customSets
-                    defaultSets
+                    lotteryGrid
                 }
             }
-            .listRowSpacing(4)
-//            .listStyle(.plain)
             .navigationTitle("Sets")
             .toolbar {
                 Button(role: .none) {
@@ -41,32 +38,35 @@ struct LotteryListView: View {
         }
     }
     
-    private var customSets: some View {
-            Section(header: Text("CUSTOM")) {
+    private var lotteryGrid: some View {
+        List {
+//            Section(header: Text("DEFAULT")) {
                 ForEach(lotteries) { lottery in
                     NavigationLink {
                         LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
                     } label: {
-                        LotteryCellView(emoji: lottery.illustration, name: lottery.name, description: lottery.descriptionText)
+                        LotteryCellView(lottery: lottery)
                     }
                     .listRowSeparator(.hidden)
                 }
-            }
+//            }
+//            .listSectionSpacing(8)
+        }
+        .listRowSpacing(4)
+        .listStyle(.plain)
     }
     
-    private var defaultSets: some View {
-            Section(header: Text("DEFAULT")) {
-                ForEach(viewModel.defaultLotterySets) { lottery in
-                    NavigationLink {
-//                        LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
-                        Text("aaa")
-                    } label: {
-                        LotteryCellView(emoji: lottery.illustration, name: lottery.name, description: lottery.description)
-                    }
-                    .listRowSeparator(.hidden)
-                }
+    private var emptyState: some View {
+        VStack {
+            Spacer()
+            HStack{
+                Text("Nothing here! Tap in the")
+                Image(systemName: "plus.app")
+                Text("icon")
             }
-
+            Text("to add or create a new lottery.")
+        }
+        .foregroundColor(.gray)
     }
 }
 
