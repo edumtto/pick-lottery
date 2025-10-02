@@ -14,7 +14,7 @@ struct AddLotteryView: View {
             }
             .buttonStyle(PrimaryButtonStyle())
         }
-        .navigationTitle("Add lottery")
+        .navigationTitle("Suggestions")
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button("Cancel") {
@@ -26,15 +26,7 @@ struct AddLotteryView: View {
     
     var suggestionsView: some View {
         VStack {
-            HStack {
-                Text("Suggestions:")
-                    .font(.title2)
-                Spacer()
-            }
-            .padding(.leading)
-            .padding(.trailing)
-            ScrollView {
-                LazyVStack {
+                List {
                     ForEach(viewModel.suggestions) { suggestion in
                         LotterySuggestionsCellView(lottery: suggestion)
                             .onTapGesture {
@@ -43,9 +35,7 @@ struct AddLotteryView: View {
                             }
                     }
                 }
-                .padding(.leading)
-                .padding(.trailing)
-            }
+                .listRowSpacing(8)
         }
     }
 }

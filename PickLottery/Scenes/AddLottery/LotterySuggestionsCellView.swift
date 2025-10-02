@@ -5,50 +5,37 @@ struct LotterySuggestionsCellView: View {
     @EnvironmentObject var lotteryStore: LotteryStore
     let lottery: Lottery
     
-    private var backgroundColor: Color {
-        Color(hex: lottery.color) ?? .gray
-    }
-    
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerSize: .init(width: 16, height: 16))
-                .stroke(backgroundColor, lineWidth: 0.4)
-                .background(
-                    backgroundColor.brightness(0.2).opacity(0.5)
-                )
-                .cornerRadius(16)
-                .padding(2)
+//        ZStack {
+//            RoundedRectangle(cornerSize: .init(width: 16, height: 16))
+//                .stroke(Color.black, lineWidth: 0.4)
+//                .cornerRadius(16)
+//                .padding(2)
             
-            HStack {
+            HStack(alignment: .center) {
                 if let emojiText = lottery.illustration {
                     Text(emojiText)
                         .font(.largeTitle)
-                        .shadow(color: .white, radius: 0.5)
                 }
-                VStack {
-                    HStack {
-                        Text(lottery.name)
-                            .multilineTextAlignment(.leading)
-                            .foregroundColor(.blackDynamic)
-                            .font(.headline)
-                        Spacer()
-                    }
+                VStack(alignment: .leading) {
+                    Text(lottery.name)
+                        .foregroundColor(.blackDynamic)
+                        .font(.headline)
+                        .shadow(color: .whiteDynamic, radius: 0.5)
                     if let description = lottery.description {
-                        HStack {
-                            Text(description)
-                                .multilineTextAlignment(.leading)
-                                .foregroundColor(.blackDynamic)
-                                .font(.caption)
-                            Spacer()
-                        }
+                        Text(description)
+                            .foregroundColor(.secondary)
+                            .font(.footnote)
                     }
+                    
+                    //                    .foregroundColor(.black)
                 }
+                Spacer()
                 Image(systemName: "plus")
-                    .foregroundColor(.black)
             }
-            .padding(12)
+//            .padding()
         }
-    }
+//    }
 }
 
 struct LotterySuggestionsCellView_Previews: PreviewProvider {
@@ -58,6 +45,13 @@ struct LotterySuggestionsCellView_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        LotterySuggestionsCellView(lottery: lottery)
+        VStack {
+            LotterySuggestionsCellView(lottery: lottery)
+            LotterySuggestionsCellView(lottery: lottery)
+            LotterySuggestionsCellView(lottery: lottery)
+            LotterySuggestionsCellView(lottery: lottery)
+            Spacer()
+        }
+      
     }
 }
