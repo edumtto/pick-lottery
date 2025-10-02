@@ -5,13 +5,14 @@ struct PrimaryButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .padding()
             .foregroundColor(.whiteDynamic)
             .font(.headline)
-            .frame(maxWidth: .infinity, minHeight: 44)
+            .frame(minWidth: 160, minHeight: 40)
             .background(backgroundColor)
             .opacity(configuration.isPressed ? 0.6 : 1)
             .cornerRadius(16)
-            .padding()
+            
     }
     
     init(backgroundColor: Color = Color.accentColor) {

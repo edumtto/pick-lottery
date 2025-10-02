@@ -71,25 +71,18 @@ struct LotteryDetailView: View {
             }
             .listStyle(.plain)
         }
-//        .background(
-//            RoundedRectangle(cornerRadius: 16)
-//                .stroke(viewModel.color, lineWidth: 2)
-//        )
-//        .clipShape(RoundedRectangle(cornerRadius: 16))
-//        .padding(.leading)
-//        .padding(.trailing)
         .padding(.top)
     }
     
     private var raffleDescription: some View {
         VStack {
-            if let description = viewModel.lottery.descriptionText {
-                HStack {
-                    Text(description)
-                    Spacer()
-                }
-                .padding(.bottom)
-            }
+//            if let description = viewModel.lottery.descriptionText {
+//                HStack {
+//                    Text(description)
+//                    Spacer()
+//                }
+//                .padding(.bottom)
+//            }
             
             HStack {
                 Button {

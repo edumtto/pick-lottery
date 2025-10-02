@@ -40,20 +40,16 @@ struct LotteryListView: View {
     
     private var lotteryGrid: some View {
         List {
-//            Section(header: Text("DEFAULT")) {
-                ForEach(lotteries) { lottery in
-                    NavigationLink {
-                        LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
-                    } label: {
-                        LotteryCellView(lottery: lottery)
-                    }
-                    .listRowSeparator(.hidden)
+            ForEach(lotteries) { lottery in
+                NavigationLink {
+                    LotteryDetailView(viewModel: .init(lottery: lottery, lotteryStore: lotteryStore))
+                } label: {
+                    LotteryCellView(lottery: lottery)
                 }
-//            }
-//            .listSectionSpacing(8)
+                .listRowSeparator(.hidden)
+            }
         }
-        .listRowSpacing(4)
-        .listStyle(.plain)
+        .listRowSpacing(8)
     }
     
     private var emptyState: some View {
