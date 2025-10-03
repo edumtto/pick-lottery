@@ -6,13 +6,30 @@ struct AddLotteryView: View {
     @StateObject var viewModel: AddLotteryViewModel
     
     var body: some View {
-        VStack {
-            suggestionsView
-            
-            NavigationLink("New lottery") {
-                CreateLotteryView(isPresented: $isPresented, viewModel: .init(lotteryStore: lotteryStore))
+        ZStack {
+            if #available(iOS 17.0, *) {
+                suggestionsView
+                    .safeAreaPadding(.bottom, 100)
+                    .scrollContentBackground(.hidden)
+            } else {
+                suggestionsView
+                    .padding(.bottom, 100)
+                    .scrollContentBackground(.hidden)
             }
-            .buttonStyle(PrimaryButtonStyle())
+            
+            // Floating button container
+            VStack {
+                Spacer()
+                
+                NavigationLink("New lottery") {
+                    CreateLotteryView(isPresented: $isPresented, viewModel: .init(lotteryStore: lotteryStore))
+                }
+                .buttonStyle(PrimaryButtonStyle())
+                .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 4)
+                .padding(.trailing, 16)
+            }
+            .padding(.bottom, 24)
+            
         }
         .navigationTitle("Suggestions")
         .toolbar {
@@ -26,16 +43,16 @@ struct AddLotteryView: View {
     
     var suggestionsView: some View {
         VStack {
-                List {
-                    ForEach(viewModel.suggestions) { suggestion in
-                        LotterySuggestionsCellView(lottery: suggestion)
-                            .onTapGesture {
-                                isPresented = false
-                                viewModel.addLottery(suggestion)
-                            }
-                    }
+            List {
+                ForEach(viewModel.suggestions) { suggestion in
+                    LotterySuggestionsCellView(lottery: suggestion)
+                        .onTapGesture {
+                            isPresented = false
+                            viewModel.addLottery(suggestion)
+                        }
                 }
-                .listRowSpacing(8)
+            }
+            .listRowSpacing(8)
         }
     }
 }
