@@ -7,15 +7,9 @@ struct AddLotteryView: View {
     
     var body: some View {
         ZStack {
-            if #available(iOS 17.0, *) {
-                suggestionsView
-                    .safeAreaPadding(.bottom, 100)
-                    .scrollContentBackground(.hidden)
-            } else {
-                suggestionsView
-                    .padding(.bottom, 100)
-                    .scrollContentBackground(.hidden)
-            }
+            suggestionsView
+                .safeAreaPadding(.bottom, 100)
+                .scrollContentBackground(.hidden)
             
             // Floating button container
             VStack {

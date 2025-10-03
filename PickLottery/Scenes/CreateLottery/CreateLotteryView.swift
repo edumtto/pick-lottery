@@ -13,31 +13,49 @@ struct CreateLotteryView: View {
     @FocusState private var focusedField: FocusedField?
     
     var body: some View {
+        ZStack {
+            formView
+                .safeAreaPadding(.bottom, 100)
+                .background(Color(UIColor.secondarySystemBackground))
+                .tint(.accentColor)
+                .scrollContentBackground(.hidden)
+            
+            VStack {
+                Spacer()
+                
+                createButton
+                    .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 4)
+                    .padding(.trailing, 16)
+            }
+            .padding(.bottom, 24)
+        }
+        
+        .navigationTitle("New Lottery")
+        .alert(isPresented: $viewModel.showValidationAlert) {
+            Alert(title: Text("Enter with a name for the lottery"))
+        }
+    }
+    
+    var formView: some View {
         Form {
-            Section() {
+            Section("") {
                 nameInput
                 descriptionInput
+            }
+            
+            Section("") {
                 modeInput
+            }
+            
+            Section("") {
+                emojiInput
             }
             
             Section("Entries") {
                 entriesInput
             }
-            
-            Section("Appearance") {
-                emojiInput
-                colorInput
-            }
-            
         }
-        .tint(.accentColor)
-        .scrollContentBackground(.hidden)
-        Spacer()
-        createButton
-            .navigationTitle("New Set")
-            .alert(isPresented: $viewModel.showValidationAlert) {
-                Alert(title: Text("Enter with a name for the lottery"))
-            }
+        .listSectionSpacing(8)
     }
     
     
@@ -91,8 +109,18 @@ struct CreateLotteryView: View {
     
     var entriesInput: some View {
         VStack(alignment: .leading) {
-            TextField("John, Mary, San ...", text: $viewModel.entriesDescription, axis: .vertical)
-                .textInputAutocapitalization(.never)
+            ZStack(alignment: .topLeading) {
+                if viewModel.entriesDescription.isEmpty {
+                    Text("Type one entry per line")
+                        .foregroundColor(Color(UIColor.placeholderText))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 10)
+                }
+                TextEditor(text: $viewModel.entriesDescription)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled(true)
+                    .frame(minHeight: 120)
+            }
         }
         
     }

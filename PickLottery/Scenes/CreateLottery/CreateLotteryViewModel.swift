@@ -24,7 +24,7 @@ final class CreateLotteryViewModel: ObservableObject {
         }
 
         let entries: [Lottery.Entry] = entriesDescription
-            .components(separatedBy: ",")
+            .components(separatedBy: "\n")
             .compactMap {
                 let entryName = $0.trimmingCharacters(in: CharacterSet(charactersIn: " "))
                 return entryName.isEmpty ? nil : Lottery.Entry(entryName)
