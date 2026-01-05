@@ -61,6 +61,7 @@ struct LotteryListView: View {
                 Text("icon")
             }
             Text("to add or create a new lottery.")
+            Spacer()
         }
         .foregroundColor(.gray)
     }
